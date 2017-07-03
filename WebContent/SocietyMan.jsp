@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body style="text-align:center;">
-	<div id="getphoto" style="width:600px;height:300px;background:lightgrey;margin:0 auto;"></div>
+	<div id="getphoto"  style="width:500px;height:300px;background:lightgrey;margin:10px;display:inline-block"></div>
+	<div id="getidcard"  style="width:500px;height:300px;background:grey;margin:10px;display:inline-block"></div>
 	<div><button onclick="location.href='waiting.jsp'">拍照认证</button></div>
 </body>
 </html>

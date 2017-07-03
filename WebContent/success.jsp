@@ -6,8 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body style="text-align:center;">
-	<div id="getphoto" style="width:600px;height:300px;background:lightgrey;margin:0 auto;"></div>
-	<div><button onclick="location.href='waiting.jsp'">拍照认证</button></div>
+<body>
+
 </body>
 </html>
