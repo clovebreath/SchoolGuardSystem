@@ -19,21 +19,36 @@
     <![endif]-->
 </head>
 <body>		
+
+<%! String name="小张";
+	String note="破坏学校花花草草，被驱逐";
+	String contactPerson="小王";
+	String contactPositon="园艺工";
+	String contactPhone="13256758888";
+%>
 <div class="container">
 	<div class="row clearfix">
-		<div class="col-md-12 column">
-			<div class="jumbotron">
-				<h1>
-					欢迎来到阳光小学！
-				</h1>
-				<p>
-					请选择自己的身份，开始验证。
-				</p>
-				<p>
-					 <a class="btn btn-primary btn-large" href="SchoolMan.jsp">学生教职工</a>
-					 <a class="btn btn-primary btn-large" href="SocietyMan.jsp">家长</a>
-				</p>
+		<div class="col-md-2 column">
+		</div>
+		<div class="col-md-8 column" style="margin-top:60px;">
+			<div class="row clearfix">
+				<div class="col-md-4 column">
+					<img alt="140x140" src="imgs/0.jpg" class="img-rounded" />
+				</div>
+				<div class="col-md-8 column">
+					<ul class="list-unstyled">
+						<li>
+							姓名：<%= name %>
+						</li>
+						<li>
+							认证结果：<strong>不许入内！</strong>
+						</li>
+					</ul>
+					<button class="btn btn-primary btn-block">确定</button>
+				</div>
 			</div>
+		</div>
+		<div class="col-md-2 column">
 		</div>
 	</div>
 </div>

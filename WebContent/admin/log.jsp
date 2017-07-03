@@ -9,9 +9,7 @@
 </head>
 <body>
 	<div style="border:yellow solid">
-	<% Random random = new Random();
-	   int res=random.nextInt(5);
-	   String name="lili";
+	<% String name="lili";
 	   String classes="sannianerban";
 	   String position="teacher";
 	   String stuname="zhangsan";
@@ -26,6 +24,7 @@
 		  	<p>position:<%= position %></p>	
 		  	<p>您尚未预约，正在联系老师中。。。。</p>
 		  </div>
+		  <button>返回</button>
 	</div>
 </body>
 </html>

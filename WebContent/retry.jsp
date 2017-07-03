@@ -18,22 +18,25 @@
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>		
+<body>	
 <div class="container">
 	<div class="row clearfix">
-		<div class="col-md-12 column">
+		<div class="col-md-2 column">
+		</div>
+		<div class="col-md-8 column">
 			<div class="jumbotron">
 				<h1>
-					欢迎来到阳光小学！
+					失败！
 				</h1>
 				<p>
-					请选择自己的身份，开始验证。
+					认证失败，请确认身份证是您本人的身份证，并重新面对摄像头拍照。
 				</p>
 				<p>
-					 <a class="btn btn-primary btn-large" href="SchoolMan.jsp">学生教职工</a>
-					 <a class="btn btn-primary btn-large" href="SocietyMan.jsp">家长</a>
+					 <a class="btn btn-primary btn-block" href="index.jsp">确定</a>
 				</p>
 			</div>
+		</div>
+		<div class="col-md-2 column">
 		</div>
 	</div>
 </div>

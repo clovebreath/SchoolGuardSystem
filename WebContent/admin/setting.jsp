@@ -18,24 +18,8 @@
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>		
-<div class="container">
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-			<div class="jumbotron">
-				<h1>
-					欢迎来到阳光小学！
-				</h1>
-				<p>
-					请选择自己的身份，开始验证。
-				</p>
-				<p>
-					 <a class="btn btn-primary btn-large" href="SchoolMan.jsp">学生教职工</a>
-					 <a class="btn btn-primary btn-large" href="SocietyMan.jsp">家长</a>
-				</p>
-			</div>
-		</div>
-	</div>
-</div>
+<body>
+	
+    <button type="button" class="btn btn-lg btn-primary" onclick="location.href='index.jsp'">返回</button>
 </body>
 </html>
