@@ -30,7 +30,7 @@
 						请先刷身份证，待身份证消息读取成功后，点击拍照按钮进行拍照认证。
 					</p>
 					<p>
-						 <a class="btn btn-primary btn-block" href="#">返回</a>
+						 <a class="btn btn-primary btn-block" href="index.jsp">返回</a>
 					</p>
 				</div>
 			</div>
