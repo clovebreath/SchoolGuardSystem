@@ -18,24 +18,31 @@
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>		
-<div class="container">
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-			<div class="jumbotron">
-				<h1>
-					欢迎来到阳光小学！
-				</h1>
-				<p>
-					请选择自己的身份，开始验证。
-				</p>
-				<p>
-					 <a class="btn btn-primary btn-large" href="SchoolMan.jsp">学生教职工</a>
-					 <a class="btn btn-primary btn-large" href="SocietyMan.jsp">家长</a>
-				</p>
+<body>	
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-4 column">
+				<div class="jumbotron">
+					<h2>
+						说明：
+					</h2>
+					<p>
+						请先刷身份证，待身份证消息读取成功后，点击拍照按钮进行拍照认证。
+					</p>
+					<p>
+						 <a class="btn btn-primary btn-block" href="index.jsp">返回</a>
+					</p>
+				</div>
 			</div>
+			<div class="col-md-4 column">
+				<div id="getphoto" style="width:auto;height:250px;background:lightgrey;margin:0px;"></div>
+				<button type="button" class="btn btn-default btn-block" onclick="location.href='waiting.jsp'">拍照认证</button>
+			</div>
+			<div class="col-md-4 column">
+				<div id="getidcard" style="width:auto;height:250px;background:lightgrey;margin:0px;"></div>
+				<button type="button" class="btn btn-default btn-block" onclick="location.href='waiting.jsp'">读取信息</button>
+			</div>		
 		</div>
-	</div>
-</div>
+	</div>	
 </body>
 </html>

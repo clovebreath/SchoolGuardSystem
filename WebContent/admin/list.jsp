@@ -18,24 +18,37 @@
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>		
-<div class="container">
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-			<div class="jumbotron">
-				<h1>
-					欢迎来到阳光小学！
-				</h1>
-				<p>
-					请选择自己的身份，开始验证。
-				</p>
-				<p>
-					 <a class="btn btn-primary btn-large" href="SchoolMan.jsp">学生教职工</a>
-					 <a class="btn btn-primary btn-large" href="SocietyMan.jsp">家长</a>
-				</p>
-			</div>
-		</div>
-	</div>
-</div>
+<body>
+	<table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Larry</td>
+          <td>the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-lg btn-primary" onclick="location.href='index.jsp'">返回</button>
 </body>
 </html>
