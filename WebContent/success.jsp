@@ -15,21 +15,8 @@
 	   String classes="sannianerban";
 	   String position="teacher";
 	   String stuname="zhangsan";
-	   String teacher="lili";
-	   if(res==0){//教职工允许出入    %> 
-		  <div id="imglog" style="width:150px;height:200px;background:lightgrey;display:inline-block;margin:10px;"></div>
-		  <div id="messages" style="width:450px;height:200px;background:lightgrey;display:inline-block;margin:10px;">
-		    <p>name:<%= name %></p>
-		  	<p>position:<%= position %></p>	
-		  </div>
-	<% }else if(res==1){//学生允许出入 %>
-		  <div id="imglog" style="width:150px;height:200px;background:lightgrey;display:inline-block;margin:10px;"></div>
-		  <div id="messages" style="width:450px;height:200px;background:lightgrey;display:inline-block;margin:10px;">
-		    <p>name:<%= name %></p>
-		  	<p>class:<%= classes %></p>	
-		  	<p>teacher:<%= teacher %></p>	
-		  </div>
-	<% }else if(res==2){//家长允许出入%>
+	   String teacher="lili";    %> 
+
 		  <div id="imglog" style="width:150px;height:200px;background:lightgrey;display:inline-block;margin:10px;"></div>
 		  <div id="messages" style="width:450px;height:200px;background:lightgrey;display:inline-block;margin:10px;">
 		  	<p>name:<%= name %></p>
@@ -37,7 +24,7 @@
 		  	<p>stuname:<%= stuname %></p>	
 		  	<p>teacher:<%= teacher %></p>	
 		  </div>
-	<% }%>	
+
 	</div>
 </body>
 </html>

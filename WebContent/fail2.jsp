@@ -48,7 +48,7 @@
 							姓名：<%= name %>
 						</li>
 						<li>
-							认证结果：<strong>不许入内！</strong>
+							认证结果：<strong>不许离校！</strong>
 						</li>
 					</ul>
 					<button class="btn btn-primary btn-block">确定</button>
