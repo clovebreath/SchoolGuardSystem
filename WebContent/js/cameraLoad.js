@@ -24,7 +24,6 @@ var openDevice = function() {
 var capture = function() {
     document.getElementById("data").value = "";
     stdfcectl.GetFace();
-    newphoto = stdfcectl.GetImageData();
 };
 var showImage = function() {
     var idata = document.getElementById("data").value;

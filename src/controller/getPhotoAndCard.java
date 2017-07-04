@@ -56,40 +56,33 @@ public class getPhotoAndCard extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
-//		BufferedReader br =request.getReader();
-//	    String inputLine;
-//	    String str = "";
-//	    try {
-//	      while ((inputLine = br.readLine()) != null) {
-//	        str += inputLine;
-//	      }
-//	      br.close();
-//	    } catch (IOException e) {
-//	      System.out.println("IOException: " + e);
-//	    }
-//	    
-//	    System.out.print(str);
-//	    Gson gson = new Gson();
-//	    Map<String, String> map = new HashMap<String, String>();  
-//	    map.put("key1", "value1");  
-//	    map.put("key2", "value2");  
-//	    map.put("key3", "value3");  	    
-//	    String jsonString = gson.toJson(map);  
-//	   
-//	    	Gson gson2 = new GsonBuilder().enableComplexMapKeySerialization().create();
-//   	        Type type = new TypeToken<Map<String, String>>() {}.getType();  
-//   	        Map<String, Object> map2 = gson2.fromJson(str.toString(), type); 
-	    
-	    
+
+    	Gson gson2 = new GsonBuilder().enableComplexMapKeySerialization().create();
+	    Type type = new TypeToken<Map<String, String>>() {}.getType();  
+	    Map<String,String> container=new HashMap<String,String>();
 	    if(request.getParameter("identity").equals("school")){
-	    	System.out.print(request.getParameter("message"));
-	    	out.print(request.getParameter("message"));
+	    	String requestMessage=request.getParameter("message");
+	    	System.out.print("+++"+request.getParameter("identity")+"+++");
+	    	System.out.print(requestMessage);
+		    Map<String, String> map2 = gson2.fromJson(requestMessage, type); 
+		    //只传过来一张图片，教职工或学生
+   	        
+		    
+		    container.put("result", "success");
+		    out.print(gson2.toJson(container));
 	    }else if(request.getParameter("identity").equals("society")){
-	    	System.out.print(request.getParameter("message"));
-	    	out.print(request.getParameter("message"));
+	    	String requestMessage=request.getParameter("message");
+	    	System.out.print("+++"+request.getParameter("identity")+"+++");
+	    	System.out.print(requestMessage);
+		    Map<String, String> map2 = gson2.fromJson(requestMessage, type); 
+		    
+		    
+		    container.put("result", "success");
+		    out.print(gson2.toJson(container));
 	    }
 	    else{
 	    	System.out.print("identity illegal");
+	    	out.print("identity illega");
 	    }
 
 	}

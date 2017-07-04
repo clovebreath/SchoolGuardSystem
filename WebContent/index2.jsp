@@ -10,17 +10,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <HEAD>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <TITLE>stdfcectlTest</TITLE>
-    <script type="text/javascript" src="operation.js"></script>
-    <script type="text/javascript" src="cameraLoad.js"></script>
-    <script type="text/javascript" src="rdcardLoad.js"></script>
+    <script type="text/javascript" src="js/operation.js"></script>
+    <script type="text/javascript" src="js/cameraLoad.js"></script>
+    <script type="text/javascript" src="js/rdcardLoad.js"></script>
 </HEAD>
 
 <BODY>
     <div>
         <OBJECT ID="stdfcectl" width="640" height="480" CLASSID="CLSID:41BCE50C-D829-4E8E-A1AD-380EAA7AA02E"></OBJECT>
-        <script language="JavaScript" for="stdfcectl" event="CallBackCheckLiveResult(dwResult)">
-	        getImage(dwResult);
-        </script>
+       <script language="JavaScript" for="stdfcectl" event="CallBackCheckLiveResult(dwResult)">
+			getImage(dwResult);
+		</script>
         <OBJECT classid="clsid:F1317711-6BDE-4658-ABAA-39E31D3704D3" codebase="SDRdCard.cab#version=1,3,6,4" width=330 height=210 hspace=0 vspace=0 id=idcard name=rdcard style="vertical-align: top;"></OBJECT>
         <script type="text/javascript" for=idcard event="Readed()">
         	show_id_data();
