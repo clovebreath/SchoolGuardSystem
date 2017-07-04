@@ -70,6 +70,14 @@ public class getResult extends HttpServlet {
    	        Type type = new TypeToken<Map<String, String>>() {}.getType();  
    	        Map<String, String> map2 = gson2.fromJson(str, type); 
    	        
+   	        if(map2.size()==1){//只传过来一张图片，教职工或学生
+   	        	response.sendRedirect("success1.jsp");
+   	        }else if(map2.size()==4){//传过来身份证号，姓名，两张图片
+   	        	response.sendRedirect("success2.jsp");
+   	        }else{//数据有误
+   	        	
+   	        }
+   	        
    	        System.out.println(map2.size());
    	        
 	}

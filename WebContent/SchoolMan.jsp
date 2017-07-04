@@ -5,7 +5,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
-	
+	<script type="text/javascript" src="js/ajax.js"></script>
 	<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
@@ -36,39 +36,8 @@
 			</div>
 			<div class="col-md-6 column">
 				<div id="getphoto" style="width:auto;height:250px;background:lightgrey;margin:0px;"></div>
-				<button type="button" class="btn btn-default btn-block" onclick="location.href='/getPhotoAndCard.Servlet'">拍照认证</button>
-				<script type="text/javascript">
-					var json;
-					var xmlhttp;
-					if (window.XMLHttpRequest){
-					    //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-					    xmlhttp=new XMLHttpRequest();
-					}else{
-					    // IE6, IE5 浏览器执行代码
-					    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-					}
-					xmlhttp.onreadystatechange=function(){
-					  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-					    {
-					    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-					    }
-					  } 
-formedmess22="identity=society&message={\"picture1\": \"base64.\",\"picture2\": \"base64\",\"id\": \"id\",\"name\": \"name\"}";	
+				<button type="button" class="btn btn-default btn-block" onclick="javascript:schoolmanbuttion()">拍照认证</button>
 
-					xmlhttp.open("POST","getPhotoAndCard",true);
-					xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-					xmlhttp.setRequestHeader("charset","utf-8");
-					xmlhttp.send(formedmess22);
-					
-					var result=xmlhttp.responseText;
-					
-					xmlhttp.open("POST","getResult",true);
-					xmlhttp.setRequestHeader("Content-type","application/json");
-					xmlhttp.setRequestHeader("charset","utf-8");
-					xmlhttp.send(result);
-					//window.location.href="success.jsp";
-					
-				</script>
 			</div>
 		</div>
 	</div>	
