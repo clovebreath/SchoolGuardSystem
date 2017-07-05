@@ -28,7 +28,7 @@
 <body>	
     <div style="margin:0 auto;">
         <OBJECT ID="stdfcectl" width="600" height="450" CLASSID="CLSID:41BCE50C-D829-4E8E-A1AD-380EAA7AA02E" ></OBJECT>
-        <img width="160" height="120" border="0" name="cap_photo" id="jpgfile" style="left: 10px;vertical-align: top;">
+        <img width="160" height="120" border="1" name="my_pic" id="new_pic" style="margin: 10px;vertical-align: top;">
     </div>    
     <button type="button" class="btn btn-default btn-block" onclick="capture();">拍照认证</button>
   	<div id="showing" style="width:450px;height:600px;border:red solid;display:none;"></div>
@@ -36,6 +36,7 @@
     <script language="JavaScript" for="stdfcectl" event="CallBackCheckLiveResult(dwResult)">
 	// 采集成功回调
 	getImage(dwResult);
+	document.getElementById("new_pic").src=dataFromCamera;
 	schoolManButtion(dataFromCamera);
 	</script>
 	
