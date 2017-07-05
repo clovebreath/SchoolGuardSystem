@@ -3,6 +3,9 @@ package controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
@@ -11,6 +14,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Servlet implementation class getPhotoAndCard
@@ -39,7 +46,7 @@ public class getPhotoAndCard extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doPost(request, response);
+//		doPost(request, response);
 	}
 
 	/**
@@ -47,34 +54,53 @@ public class getPhotoAndCard extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+//		BufferedReader br =request.getReader();
+		
+//        String inputLine;
+// 	    String str = "";
+// 	    try {
+// 	      while ((inputLine = br.readLine()) != null) {
+// 	        str += inputLine;
+//       }
+// 	      br.close();
+// 	    } catch (IOException e) {
+// 	      System.out.println("IOException: " + e);
+// 	    }
+// 	    
+// 	   System.out.print(str);
+ 	    
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		BufferedReader br =request.getReader();
-	    String inputLine;
-	    String str = "";
-	    try {
-	      while ((inputLine = br.readLine()) != null) {
-	        str += inputLine;
-	      }
-	      br.close();
-	    } catch (IOException e) {
-	      System.out.println("IOException: " + e);
-	    }
-		out.print(str);
-	}
-	private String  charReader(HttpServletRequest request) {
 
-		BufferedReader br;
-		String str, wholeStr = "";
-		try {
-			br = request.getReader();	
-			while((str = br.readLine()) != null){
-			wholeStr += str;
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return wholeStr;
+    	Gson gson2 = new GsonBuilder().enableComplexMapKeySerialization().create();
+	    Type type = new TypeToken<Map<String, String>>() {}.getType();  
+	    Map<String,String> container=new HashMap<String,String>();
+	    if(request.getParameter("identity").equals("school")){
+	    	String requestMessage=request.getParameter("message");
+	    	System.out.print("+++"+request.getParameter("identity")+"+++");
+	    	System.out.print(requestMessage);
+		    Map<String, String> map2 = gson2.fromJson(requestMessage, type); 
+		    //只传过来一张图片，教职工或学生
+   	        
+		    
+		    container.put("result", "success");
+		    out.print(gson2.toJson(container));
+	    }else if(request.getParameter("identity").equals("society")){
+	    	String requestMessage=request.getParameter("message");
+	    	System.out.print("+++"+request.getParameter("identity")+"+++");
+	    	System.out.print(requestMessage);
+		    Map<String, String> map2 = gson2.fromJson(requestMessage, type); 
+		    
+		    
+		    container.put("result", "success");
+		    out.print(gson2.toJson(container));
+	    }
+	    else{
+	    	System.out.print("identity illegal");
+	    	container.put("result", "failed");
+	    	container.put("reason", "identity illegal");
+	    	out.print(gson2.toJson(container));
+	    }
+
 	}
 }

@@ -21,26 +21,26 @@
 <body>		
 
 <%! String name="小张";
-	String note="破坏学校花花草草，被驱逐";
-	String contactPerson="小王";
+	String classes="三年二班";
+	String 班主任="小王";
 	String contactPositon="园艺工";
 	String contactPhone="13256758888";
 %>
 <div class="container">
-	<div class="row clearfix" style="border:red solid">
+	<div class="row clearfix" style="border:green solid">
 		<div class="col-md-12 column" style="text-align:center;font-size:3em">
-			Sorry
+			Hello
 		</div>
 
 	</div>
-	<div class="row clearfix" style="border:red solid">
+	<div class="row clearfix" style="border:green solid">
 		<div class="col-md-2 column" style="text-align:center">
 			
 		</div>
 		<div class="col-md-8 column" style="margin-top:60px;">
 			<div class="row clearfix">
 				<div class="col-md-4 column">
-					<img style="width:150px;height:100%" src="imgs/0.jpg" class="img-rounded" />
+					<img style="width:150px;height:100%" src="imgs/2.jpg" class="img-rounded" />
 				</div>
 				<div class="col-md-8 column">
 					<ul class="list-unstyled">
@@ -48,7 +48,13 @@
 							姓名：<%= name %>
 						</li>
 						<li>
-							认证结果：<strong>不许入内！</strong>
+							班级：<%= classes %>
+						</li>
+						<li>
+							班主任：<%= name %>
+						</li>
+						<li>
+							认证结果：<strong>允许进入！</strong>
 						</li>
 					</ul>
 					<button class="btn btn-primary btn-block">确定</button>

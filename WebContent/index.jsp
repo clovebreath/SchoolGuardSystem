@@ -1,56 +1,41 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-<HEAD>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <TITLE>stdfcectlTest</TITLE>
-    <script type="text/javascript" src="operation.js"></script>
-    <script type="text/javascript" src="cameraLoad.js"></script>
-    <script type="text/javascript" src="rdcardLoad.js"></script>
-</HEAD>
-
-<BODY>
-    <div>
-        <OBJECT ID="stdfcectl" width="640" height="480" CLASSID="CLSID:41BCE50C-D829-4E8E-A1AD-380EAA7AA02E"></OBJECT>
-        <script language="JavaScript" for="stdfcectl" event="CallBackCheckLiveResult(dwResult)">
-	        getImage(dwResult);
-        </script>
-        <OBJECT classid="clsid:F1317711-6BDE-4658-ABAA-39E31D3704D3" codebase="SDRdCard.cab#version=1,3,6,4" width=330 height=210 hspace=0 vspace=0 id=idcard name=rdcard style="vertical-align: top;"></OBJECT>
-        <script type="text/javascript" for=idcard event="Readed()">
-        	show_id_data();
-        </script>
-        <img width="102" height="120" border="0" name="id_photo" id=jpgfile style="left: 10px;vertical-align: top;">
-        <img width="160" height="120" border="0" name="cap_photo" id=jpgfile style="left: 10px;vertical-align: top;">
-    </div>
-    <br />
-    <br />
-    <div style="text-align: center;">
-        <input type="button" value="open" onclick="javascrypt:openDevice()" />&nbsp;&nbsp;
-        <input type="button" value="capture" onclick="javascrypt:capture()" />&nbsp;&nbsp;
-        <input type="button" value="close" onclick="javascrypt:closeDevice()" />&nbsp;&nbsp;
-        <br />
-        <br />
-        <input type="button" value="openRdcard" onclick="open_rdcard()" />&nbsp;&nbsp;
-        <input type="button" value="closeRdcard" onclick="close_rdcard()" />&nbsp;&nbsp;
-        <input type="button" value="readRdcard" onclick="read_rdcard()">&nbsp;&nbsp;
-        <input type="button" value="endRdcard" onclick="end_rdcard()">&nbsp;&nbsp;
-        <br />
-        <br />
-        <textarea id="parm" cols="43" rows="12"></textarea>&nbsp;&nbsp;
-        <textarea id="data" cols="43" rows="12"></textarea>&nbsp;&nbsp;
-        <textarea id="stat" cols="43" rows="12"></textarea>
-        <br />
-        <br />
-        <textarea id="id_data" cols="43" rows="12"></textarea>
-        <textarea id="json_data" cols="43" rows="12"></textarea>
-    </div>
-</BODY>
-
-</HTML>
-
+<html lang=“zh-CN”>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
+	
+	<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>		
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="jumbotron">
+				<h1>
+					欢迎来到阳光小学！
+				</h1>
+				<p>
+					请选择自己的身份，开始验证。
+				</p>
+				<p>
+					 <a class="btn btn-primary btn-large" href="SchoolMan2.jsp">学生教职工</a>
+					 <a class="btn btn-primary btn-large" href="SocietyMan.jsp">家长</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
