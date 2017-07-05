@@ -66,7 +66,7 @@ public class EncodeModule
                 }  
             }  
               
-            String name = "123.jpg";  
+            String name = "123.jpeg";  
             OutputStream out = new FileOutputStream(ProjectInfomation.OUTPUT_PATH + name);      
             out.write(b);  
             out.flush();  

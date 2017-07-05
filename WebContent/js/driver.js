@@ -1,4 +1,5 @@
 var dataFromCamera = "";
+var cap_base64="";
 var szParam ="";
 var is_cmr = false;
 var newphoto="";
@@ -27,11 +28,11 @@ var closeDevice = function() {
 var getImage = function(dwResult) {
 	show.innerHTML+="getImage***";    
     if (0 == dwResult) {
-        var str = stdfcectl.GetImageData();
-        dataFromCamera = 'data:image/jpeg;base64,'+str;
+        cap_base64 = stdfcectl.GetImageData();
+        dataFromCamera = 'data:image/jpeg;base64,'+cap_base64;
         show.innerHTML+=dataFromCamera;    
         is_cmr = true;
-       setTimeout("showImage()", 3000);
+       //setTimeout("showImage()", 3000);
        show.innerHTML+="getImage success***";    
     } else {
     	show.innerHTML+="getImage fail error"+dwResult+"***";  
@@ -49,6 +50,7 @@ var is_rd = false;
 var rd_id = "";
 var rd_img = "";
 var rd_name = "";
+var rd_base64="";
 var id_card_data="";
 var rd_sex="";
 var open_rdcard = function() {
@@ -90,6 +92,7 @@ var end_rdcard = function() {
 var getMessage = function() {
 	rd_id = rdcard.CardNo;
 	rd_img = 'data:image/jpeg;base64,'+rdcard.JPGBuffer;
+	rd_base64=rdcard.JPGBuffer
 	rd_name=rdcard.NameS;
 	rd_sex=rdcard.Sex;
 	is_rd = true;

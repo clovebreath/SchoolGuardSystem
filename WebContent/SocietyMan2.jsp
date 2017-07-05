@@ -26,9 +26,11 @@
     <![endif]-->
 </head>
 <body>	
-    <div style="margin:0 auto;">
-        <OBJECT ID="stdfcectl" width="600" height="450" CLASSID="CLSID:41BCE50C-D829-4E8E-A1AD-380EAA7AA02E" ></OBJECT>
+    <div style="text-align:center;">
+        <OBJECT ID="stdfcectl"  CLASSID="CLSID:41BCE50C-D829-4E8E-A1AD-380EAA7AA02E"  style="width:320px;height:240px;"></OBJECT>
+        <img width="320px" height="240px" border="1" name="my_pic" id="new_pic" style="margin: 10px;vertical-align: top;"> <br/>
         <OBJECT classid="clsid:F1317711-6BDE-4658-ABAA-39E31D3704D3" codebase="SDRdCard.cab#version=1,3,6,4" width=330 height=210 hspace=0 vspace=0 id=idcard name=rdcard style="vertical-align: top;"></OBJECT>
+        <img width="280px" height="210px" border="1" name="my_pic" id="new_pic" style="margin: 10px;vertical-align: top;"> 
         <script type="text/javascript" for=idcard event="Readed()">
         	getMessage();
         	show.innerHTML+=get_data();
@@ -37,12 +39,13 @@
     </div>    
     <button id="captureBtn" type="button" disabled="true" class="btn btn-default btn-block" onclick="capture();">拍照认证</button>
 
-  	<div id="showing" style="width:450px;height:600px;border:red solid;display:none;"></div>
+  	<div id="showing" style="width:100%;height:300px;border:red solid;display:block;"></div>
   	
     <script language="JavaScript" for="stdfcectl" event="CallBackCheckLiveResult(dwResult)">
 	// 采集成功回调
 	getImage(dwResult);
-	societyManButtion(rd_id,rd_name,rd_img,rd_sex,dataFromCamera);
+	document.getElementById("new_pic").src=dataFromCamera;
+	societyManButtion(rd_id,rd_name,rd_base64,rd_sex,cap_base64);
 	</script>
 	
     <script type = "text/javascript">

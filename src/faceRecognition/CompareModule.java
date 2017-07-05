@@ -67,12 +67,12 @@ public class CompareModule {
 			{
 				if(face_id1.equals("error"))
 				{
-					System.out.println("请重新拍照!");
+					System.out.println("pic1error 请重新拍照!");
 					return ProjectInfomation.PHOTO_ERROR;
 				}
 				else
 				{
-					System.out.println("请重新刷卡!");
+					System.out.println("pic2 error 请重新刷卡!");
 					return ProjectInfomation.ID_CARD_ERROR;
 				}
 				

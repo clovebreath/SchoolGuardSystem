@@ -1,3 +1,4 @@
+var auto_cap;
 var dataFromCamera = "";
 var szParam = "";
 var is_cmr = false;
@@ -20,6 +21,7 @@ var openDevice = function() {
     var szParam = document.getElementById("parm").value;
     stdfcectl.InitParam(szParam);
     stdfcectl.OpenCapture();
+    auto_cap = window.setInterval("capture()", 2000);
 };
 var capture = function() {
     document.getElementById("data").value = "";
@@ -30,6 +32,7 @@ var showImage = function() {
     stdfcectl.ShowPicture(idata);
 };
 var closeDevice = function() {
+	auto_cap = window.clearInterval(auto_cap);
     stdfcectl.CloseCapture();
 };
 var getImage = function(dwResult) {

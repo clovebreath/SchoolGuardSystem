@@ -20,16 +20,16 @@
 </head>
 <body>
 
-	<button type="button" class="btn btn-lg btn-primary" onclick="location.href='list.jsp'">查看记录</button>				
-	<button type="button" class="btn btn-lg btn-primary" onclick="location.href='setting.jsp'">设置</button>			
-	<div id="newMessage" style="width:600px;height:300px;border:grey solid;"></div>
+	<button type="button" class="btn btn-default btn-block" onclick="location.href='list.jsp'">查看记录</button>				
+	<button type="button" class="btn btn-default btn-block" onclick="location.href='setting.jsp'">设置</button>			
+	<div id="newMessage" style="width:100%;height:300px;border:grey solid;"></div>
 
 	<script type="text/javascript">
 		
 		   var websocket = null;
 		    //判断当前浏览器是否支持WebSocket
 		    if ('WebSocket' in window) {
-		        websocket = new WebSocket("ws://localhost:8080/websocket");
+		        websocket = new WebSocket("ws://localhost:8080/SchoolGuardSystem/websocket");
 		    }
 		    else {
 		        alert('当前浏览器 Not support websocket')

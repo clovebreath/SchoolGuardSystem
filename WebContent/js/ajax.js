@@ -14,9 +14,10 @@
 						    {
 								var result=xmlhttp.responseText;
 								console.log("response",result);
+								show.innerHTML+=("--result--"+result); 
 								//window.location.href="success1.jsp"; 
 						    }else{
-						    	console.log("response","error"+xmlhttp.readyState);
+						    	console.log("response","error"+xmlhttp.readyState+ xmlhttp.status);
 						    }
 
 					  } 
@@ -45,9 +46,10 @@
 					    {
 							var result=xmlhttp.responseText;
 							console.log("response",result);
+							show.innerHTML+=("--result--"+result); 
 							//window.location.href="success2.jsp"; 
 					    }else{
-					    	console.log("response","error"+xmlhttp.readyState);
+					    	console.log("response","error"+xmlhttp.readyState+ xmlhttp.status);
 					    }
 					  } 
 					//将图片数据传递给getPhotoAndCard

@@ -1,6 +1,6 @@
 package controller;
 
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
@@ -18,6 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+
+import faceRecognition.CompareModule;
+import faceRecognition.EncodeModule;
 
 /**
  * Servlet implementation class getPhotoAndCard
@@ -76,23 +79,50 @@ public class getPhotoAndCard extends HttpServlet {
 	    Type type = new TypeToken<Map<String, String>>() {}.getType();  
 	    Map<String,String> container=new HashMap<String,String>();
 	    if(request.getParameter("identity").equals("school")){
+	    	
 	    	String requestMessage=request.getParameter("message");
 	    	System.out.print("+++"+request.getParameter("identity")+"+++");
 	    	System.out.print(requestMessage);
 		    Map<String, String> map2 = gson2.fromJson(requestMessage, type); 
 		    //只传过来一张图片，教职工或学生
-   	        
-		    
+   	        map2.get("picture");
+   	        File file1=new File("D:\\image\\wenhao.png");
+			String s1 = EncodeModule.encodeImgageToBase64(file1);
+			//System.out.println(s1);
+   			CompareModule.init();
+   			String re=CompareModule.Compare(s1, map2.get("picture"));
+   			System.out.println(re);
 		    container.put("result", "success");
 		    out.print(gson2.toJson(container));
+		    
 	    }else if(request.getParameter("identity").equals("society")){
+	    	
 	    	String requestMessage=request.getParameter("message");
 	    	System.out.print("+++"+request.getParameter("identity")+"+++");
 	    	System.out.print(requestMessage);
 		    Map<String, String> map2 = gson2.fromJson(requestMessage, type); 
 		    
+		    String imgPath1="D:\\image\\wenhao.png";
+			//身份证照片
+			String imgPath2="D:\\image\\Pro.jpg";
+			
+		/*
+		File file1=new File(imgPath1);
+		File file2=new File(imgPath2);
 		    
+		String s1 = EncodeModule.encodeImgageToBase64(file1);
+		String s2 = EncodeModule.encodeImgageToBase64(file2);
+			CompareModule.init();*/
+			
+			System.out.println(map2.get("picture1"));
+			System.out.println(map2.get("picture2"));
+			
+			EncodeModule.decodeBase64ToImage(map2.get("picture1"));
+			//String res = CompareModule.Compare(s1, s2);
+			String res = CompareModule.Compare(map2.get("picture1"), map2.get("picture2"));
+			
 		    container.put("result", "success");
+		    container.put("res", res);
 		    out.print(gson2.toJson(container));
 	    }
 	    else{

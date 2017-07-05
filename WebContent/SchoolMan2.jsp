@@ -3,7 +3,9 @@
 <%	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<%@ page import="java.util.*" %>
+<%@ page import="java.util.* " %>
+<%@ page import="java.io.* " %>
+<%@ page import="faceRecognition.*" %>
 <!DOCTYPE html>
 <html lang=“zh-CN”>
 <head>
@@ -26,26 +28,26 @@
     <![endif]-->
 </head>
 <body>	
-    <div style="margin:0 auto;">
-        <OBJECT ID="stdfcectl" width="600" height="450" CLASSID="CLSID:41BCE50C-D829-4E8E-A1AD-380EAA7AA02E" ></OBJECT>
-        <img width="160" height="120" border="1" name="my_pic" id="new_pic" style="margin: 10px;vertical-align: top;">
-    </div>    
+    <div style="text-align:center;">
+        <OBJECT ID="stdfcectl"  CLASSID="CLSID:41BCE50C-D829-4E8E-A1AD-380EAA7AA02E"  style="width:320px;height:240px;"></OBJECT>
+        <img width="320px" height="240px" border="1" name="my_pic" id="new_pic" style="margin: 0;vertical-align: top;"> <br/>
+    </div>     
+  
     <button type="button" class="btn btn-default btn-block" onclick="capture();">拍照认证</button>
-  	<div id="showing" style="width:450px;height:600px;border:red solid;display:none;"></div>
-  	
+  	<div id="showing" style="width:100%;height:300px;border:red solid;display:block;"></div>
     <script language="JavaScript" for="stdfcectl" event="CallBackCheckLiveResult(dwResult)">
 	// 采集成功回调
 	getImage(dwResult);
 	document.getElementById("new_pic").src=dataFromCamera;
-	schoolManButtion(dataFromCamera);
+	schoolManButtion(cap_base64);
 	</script>
-	
+
     <script type = "text/javascript">
     	show=document.getElementById("showing");
         (function(){
         	if (document.readyState && document.readyState == 'complete') {
         		// doing
-        		loadParam(600, 450, 0, 0, 0, 1, 3000, 15, 0, 0, 18, 18, 18, 18, 1, 256, 15);
+        		loadParam(640, 480, 0, 0, 0, 1, 3000, 15, 0, 0, 18, 18, 18, 18, 1, 256, 15);
         		openDevice();
         	} else {
         		setTimeout(arguments.callee, 10);
