@@ -27,11 +27,11 @@
 </head>
 <body>	
     <div style="margin:0 auto;">
-        <OBJECT ID="stdfcectl" width="640" height="480" CLASSID="CLSID:41BCE50C-D829-4E8E-A1AD-380EAA7AA02E" ></OBJECT>
+        <OBJECT ID="stdfcectl" width="600" height="450" CLASSID="CLSID:41BCE50C-D829-4E8E-A1AD-380EAA7AA02E" ></OBJECT>
         <img width="160" height="120" border="0" name="cap_photo" id="jpgfile" style="left: 10px;vertical-align: top;">
     </div>    
     <button type="button" class="btn btn-default btn-block" onclick="capture();">拍照认证</button>
-  	<div id="showing" style="width:450px;height:600px;border:red solid"></div>
+  	<div id="showing" style="width:450px;height:600px;border:red solid;display:none;"></div>
   	
     <script language="JavaScript" for="stdfcectl" event="CallBackCheckLiveResult(dwResult)">
 	// 采集成功回调
@@ -44,7 +44,7 @@
         (function(){
         	if (document.readyState && document.readyState == 'complete') {
         		// doing
-        		loadParam(640, 480, 0, 0, 0, 1, 3000, 15, 0, 0, 18, 18, 18, 18, 1, 256, 15);
+        		loadParam(600, 450, 0, 0, 0, 1, 3000, 15, 0, 0, 18, 18, 18, 18, 1, 256, 15);
         		openDevice();
         	} else {
         		setTimeout(arguments.callee, 10);

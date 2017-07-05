@@ -46,7 +46,7 @@ public class getPhotoAndCard extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doPost(request, response);
+//		doPost(request, response);
 	}
 
 	/**
@@ -54,6 +54,21 @@ public class getPhotoAndCard extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+//		BufferedReader br =request.getReader();
+		
+//        String inputLine;
+// 	    String str = "";
+// 	    try {
+// 	      while ((inputLine = br.readLine()) != null) {
+// 	        str += inputLine;
+//       }
+// 	      br.close();
+// 	    } catch (IOException e) {
+// 	      System.out.println("IOException: " + e);
+// 	    }
+// 	    
+// 	   System.out.print(str);
+ 	    
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
@@ -82,7 +97,9 @@ public class getPhotoAndCard extends HttpServlet {
 	    }
 	    else{
 	    	System.out.print("identity illegal");
-	    	out.print("identity illega");
+	    	container.put("result", "failed");
+	    	container.put("reason", "identity illegal");
+	    	out.print(gson2.toJson(container));
 	    }
 
 	}
