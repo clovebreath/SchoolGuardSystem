@@ -43,6 +43,28 @@ public class EncodeModule
 		    return encoder.encode(outputStream.toByteArray());
 	}
 	
+	/**
+	 * 
+	 * @param imageFile 图片文件
+	 * @return Base64编码过的字节数组字符串
+	 */
+	public static String encodeImgageToBase64(File imageFile , String name) {
+		 
+		 ByteArrayOutputStream outputStream = null;
+		    try {
+		      BufferedImage bufferedImage = ImageIO.read(imageFile);
+		      outputStream = new ByteArrayOutputStream();
+		      ImageIO.write(bufferedImage, name , outputStream);
+		    } catch (MalformedURLException e1) {
+		      e1.printStackTrace();
+		    } catch (IOException e) {
+		      e.printStackTrace();
+		    }
+		    BASE64Encoder encoder = new BASE64Encoder();
+		    
+		    return encoder.encode(outputStream.toByteArray());
+	}
+	
 	
 	  /**
 	   * 

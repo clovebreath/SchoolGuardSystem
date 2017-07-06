@@ -102,24 +102,14 @@ public class getPhotoAndCard extends HttpServlet {
 	    	System.out.print(requestMessage);
 		    Map<String, String> map2 = gson2.fromJson(requestMessage, type); 
 		    
-		    String imgPath1="D:\\image\\wenhao.png";
-			//…Ì∑›÷§’’∆¨
-			String imgPath2="D:\\image\\Pro.jpg";
-			
-		/*
-		File file1=new File(imgPath1);
-		File file2=new File(imgPath2);
-		    
-		String s1 = EncodeModule.encodeImgageToBase64(file1);
-		String s2 = EncodeModule.encodeImgageToBase64(file2);
-			CompareModule.init();*/
+		
+			CompareModule.init();
 			
 			System.out.println(map2.get("picture1"));
 			System.out.println(map2.get("picture2"));
 			
 			EncodeModule.decodeBase64ToImage(map2.get("picture1"));
-			//String res = CompareModule.Compare(s1, s2);
-			String res = CompareModule.Compare(map2.get("picture1"), map2.get("picture2"));
+			String res = CompareModule.Compare(map2.get("picture1").replaceAll(" ","+"), map2.get("picture2").replaceAll(" ","+"));
 			
 		    container.put("result", "success");
 		    container.put("res", res);
