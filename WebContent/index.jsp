@@ -30,8 +30,8 @@
 					请选择自己的身份，开始验证。
 				</p>
 				<p>
-					 <a class="btn btn-primary btn-large" href="SchoolMan2.jsp">学生教职工</a>
-					 <a class="btn btn-primary btn-large" href="SocietyMan.jsp">家长</a>
+					 <a class="btn btn-primary btn-large" href="user/SchoolMan2.jsp">学生教职工</a>
+					 <a class="btn btn-primary btn-large" href="user/SocietyMan2.jsp">家长</a>
 				</p>
 			</div>
 		</div>

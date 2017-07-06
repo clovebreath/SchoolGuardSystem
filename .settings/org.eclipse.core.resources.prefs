@@ -1,5 +1,8 @@
 eclipse.preferences.version=1
+encoding//src/dbTools/dbTools.java=UTF-8
 encoding//src/faceRecognition/CompareModule.java=UTF-8
 encoding//src/faceRecognition/EncodeModule.java=UTF-8
 encoding//src/faceRecognition/IdentifyModule.java=UTF-8
+encoding//src/faceRecognition/JudgeModule.java=UTF-8
+encoding//src/faceRecognition/ProjectInfomation.java=UTF-8
 encoding//src/faceRecognition/testModule.java=UTF-8

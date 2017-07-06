@@ -22,7 +22,7 @@
 
 					  } 
 					//将图片数据传递给getPhotoAndCard
-					xmlhttp.open("POST","getPhotoAndCard",true);
+					xmlhttp.open("POST","../getPhotoAndCard",true);
 					xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 					xmlhttp.setRequestHeader("charset","utf-8");
 					xmlhttp.send(data);
@@ -53,7 +53,7 @@
 					    }
 					  } 
 					//将图片数据传递给getPhotoAndCard
-					xmlhttp.open("POST","getPhotoAndCard",true);
+					xmlhttp.open("POST","../getPhotoAndCard",true);
 					xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 					xmlhttp.setRequestHeader("charset","utf-8");
 					xmlhttp.send(data);

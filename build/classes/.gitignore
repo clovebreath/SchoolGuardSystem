@@ -1,3 +1,7 @@
+/controller/
+/dbTools/
 /faceRecognition/
 /imgs/
-/controller/
+/model/
+/servertest/
+/webSocket/

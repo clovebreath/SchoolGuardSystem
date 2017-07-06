@@ -15,12 +15,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSONArray;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import dbTools.dbTools;
 import faceRecognition.CompareModule;
 import faceRecognition.EncodeModule;
+import faceRecognition.IdentifyModule;
 
 /**
  * Servlet implementation class getPhotoAndCard
@@ -72,25 +75,39 @@ public class getPhotoAndCard extends HttpServlet {
 // 	    
 // 	   System.out.print(str);
  	    
+		dbTools dbTool=new dbTools();
+		
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
     	Gson gson2 = new GsonBuilder().enableComplexMapKeySerialization().create();
-	    Type type = new TypeToken<Map<String, String>>() {}.getType();  
+	    Type type = new TypeToken<Map<String, Object>>() {}.getType();  
 	    Map<String,String> container=new HashMap<String,String>();
 	    if(request.getParameter("identity").equals("school")){
 	    	
 	    	String requestMessage=request.getParameter("message");
-	    	System.out.print("+++"+request.getParameter("identity")+"+++");
-	    	System.out.print(requestMessage);
-		    Map<String, String> map2 = gson2.fromJson(requestMessage, type); 
-		    //只传过来一张图片，教职工或学生
-   	        map2.get("picture");
-   	        File file1=new File("D:\\image\\wenhao.png");
+	    	System.out.println(requestMessage);
+		    Map<String, String> requestMap = gson2.fromJson(requestMessage, type); 
+		    
+		    File file1=new File("D:\\image\\wenhao.png");
 			String s1 = EncodeModule.encodeImgageToBase64(file1);
-			//System.out.println(s1);
-   			CompareModule.init();
-   			String re=CompareModule.Compare(s1, map2.get("picture"));
+		    
+		    //只传过来一张图片，教职工或学生
+		    String allPicJson=dbTool.getAllpic();
+		    Map<String, Object> allPicMessage = gson2.fromJson(allPicJson, type); 
+		    
+		    System.out.println(allPicMessage.get("picture"));
+		    System.out.println(allPicMessage.get("picture").getClass());
+		   
+		    String js=gson2.toJson(allPicMessage.get("picture"));
+		    
+			IdentifyModule.init((JSONArray)allPicMessage.get("picture"));
+			
+			String re=IdentifyModule.identify(requestMap.get("picture").replaceAll(" ","+"));
+			
+		    System.out.println(js);
+//		    CompareModule.init();
+//   			String re=CompareModule.Compare(s1, requestMap.get("picture").replaceAll(" ","+"));
    			System.out.println(re);
 		    container.put("result", "success");
 		    out.print(gson2.toJson(container));
@@ -98,19 +115,22 @@ public class getPhotoAndCard extends HttpServlet {
 	    }else if(request.getParameter("identity").equals("society")){
 	    	
 	    	String requestMessage=request.getParameter("message");
-	    	System.out.print("+++"+request.getParameter("identity")+"+++");
 	    	System.out.print(requestMessage);
-		    Map<String, String> map2 = gson2.fromJson(requestMessage, type); 
-		    
-		
-			CompareModule.init();
+		    Map<String, String> requestMap = gson2.fromJson(requestMessage, type); 
+
+//			System.out.println(requestMap.get("picture1"));
+//			System.out.println(requestMap.get("picture2"));
 			
-			System.out.println(map2.get("picture1"));
-			System.out.println(map2.get("picture2"));
+		    //首先判断是否人证合一
+		    CompareModule.init();
+			String res = CompareModule.Compare(requestMap.get("picture1").replaceAll(" ","+"), requestMap.get("picture2").replaceAll(" ","+"));
+			System.out.println(res);
 			
-			EncodeModule.decodeBase64ToImage(map2.get("picture1"));
-			String res = CompareModule.Compare(map2.get("picture1").replaceAll(" ","+"), map2.get("picture2").replaceAll(" ","+"));
+			//如果认证和一，则从数据库查找此人
+			String messages=dbTool.getMessage(requestMap.get("id"),requestMap.get("name"));
+			Map<String, Object> queryResult = gson2.fromJson(messages, type); 
 			
+			//将此人基本信息返回给主页面，同时将是否允许进出学校返回给主页面
 		    container.put("result", "success");
 		    container.put("res", res);
 		    out.print(gson2.toJson(container));

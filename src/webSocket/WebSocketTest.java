@@ -1,30 +1,23 @@
-package controller;
+package webSocket;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-import javax.websocket.OnClose;
-import javax.websocket.OnError;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
+import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 
 /**
  * @ServerEndpoint 注解是一个类层次的注解，它的功能主要是将目前的类定义成一个websocket服务器端,
  * 注解的值将被用于监听用户连接的终端访问URL地址,客户端可以通过这个URL来连接到WebSocket服务器端
  */
-@ServerEndpoint("/mywebsocket")
-public class myWebSocket {
+@ServerEndpoint("/websocket")
+public class WebSocketTest {
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static int onlineCount = 0;
 
     //concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。若要实现服务端与单一客户端通信的话，可以使用Map来存放，其中Key可以为用户标识
-    private static CopyOnWriteArraySet<myWebSocket> webSocketSet = new CopyOnWriteArraySet<myWebSocket>();
-    private static Map<String,myWebSocket> socketSet = new HashMap<String,myWebSocket>();
-    
+    private static CopyOnWriteArraySet<WebSocketTest> webSocketSet = new CopyOnWriteArraySet<WebSocketTest>();
+
     //与某个客户端的连接会话，需要通过它来给客户端发送数据
     private Session session;
 
@@ -59,7 +52,7 @@ public class myWebSocket {
     public void onMessage(String message, Session session) {
         System.out.println("来自客户端的消息:" + message);
         //群发消息
-        for(myWebSocket item: webSocketSet){
+        for(WebSocketTest item: webSocketSet){
             try {
                 item.sendMessage(message);
             } catch (IOException e) {
@@ -95,10 +88,10 @@ public class myWebSocket {
     }
 
     public static synchronized void addOnlineCount() {
-        myWebSocket.onlineCount++;
+        WebSocketTest.onlineCount++;
     }
 
     public static synchronized void subOnlineCount() {
-        myWebSocket.onlineCount--;
+        WebSocketTest.onlineCount--;
     }
 }

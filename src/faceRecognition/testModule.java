@@ -32,10 +32,10 @@ public class testModule {
 //			names[i] = files[i].getName();
 //			strs[i] = b64;
 //		}
-/*
-		IdentifyModule.init(strs, names);
-		IdentifyModule.identify(s1);
-		*/
+//
+//		IdentifyModule.init(strs, names);
+//		IdentifyModule.identify(s1);
+		
 
 		
 	}
