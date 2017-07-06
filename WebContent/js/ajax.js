@@ -13,9 +13,16 @@
 						  if (xmlhttp.readyState==4 && xmlhttp.status==200)
 						    {
 								var result=xmlhttp.responseText;
-								console.log("response",result);
 								show.innerHTML+=("--result--"+result); 
-								//window.location.href="success1.jsp"; 
+								var people=JSON.parse(result);
+								
+								document.getElementById("people_identity").innerHTML=people.identity;
+								document.getElementById("people_id").innerHTML=people.message.id;
+								document.getElementById("people_name").innerHTML=people.message.name;
+								document.getElementById("people_canleave").innerHTML=people.message.canleave;
+								document.getElementById("log_pic").style.display="inline";
+								document.getElementById("log_pic").src= 'data:image/png;base64,'+people.message.pic;
+
 						    }else{
 						    	console.log("response","error"+xmlhttp.readyState+ xmlhttp.status);
 						    }
@@ -47,6 +54,14 @@
 							var result=xmlhttp.responseText;
 							console.log("response",result);
 							show.innerHTML+=("--result--"+result); 
+							var people=JSON.parse(result);
+							
+							document.getElementById("people_identity").innerHTML=people.identity;
+							document.getElementById("people_id").innerHTML=people.message.id;
+							document.getElementById("people_name").innerHTML=people.message.name;
+							document.getElementById("people_canleave").innerHTML=people.message.canleave;
+							document.getElementById("log_pic").style.display="inline";
+							document.getElementById("log_pic").src= 'data:image/png;base64,'+people.message.pic;
 							//window.location.href="success2.jsp"; 
 					    }else{
 					    	console.log("response","error"+xmlhttp.readyState+ xmlhttp.status);

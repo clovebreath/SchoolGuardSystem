@@ -28,21 +28,28 @@
 <body>	
     <div style="text-align:center;">
         <OBJECT ID="stdfcectl"  CLASSID="CLSID:41BCE50C-D829-4E8E-A1AD-380EAA7AA02E"  style="width:320px;height:240px;"></OBJECT>
-        <img width="320px" height="240px" border="1" name="my_pic" id="new_pic" style="margin: 10px;vertical-align: top;"> <br/>
+        <img  border="1" name="my_pic" id="new_pic" style="height:240px;width:auto;margin: 0;vertical-align: top;">
+        <img  border="1" name="log_pic" id="log_pic" style="height:240px;width:auto;margin: 0;vertical-align: top;display:none;">  <br/>
         <OBJECT classid="clsid:F1317711-6BDE-4658-ABAA-39E31D3704D3" codebase="SDRdCard.cab#version=1,3,6,4" width=330 height=210 hspace=0 vspace=0 id=idcard name=rdcard style="vertical-align: top;"></OBJECT>
-        <img width="280px" height="210px" border="1" name="my_pic" id="new_pic" style="margin: 10px;vertical-align: top;"> 
+        <img  border="1" name="id_pic" id="idcard_pic" style="height:210px;width:auto;margin: 0;vertical-align: top;"> 
         <script type="text/javascript" for=idcard event="Readed()">
         	getMessage();
         	show.innerHTML+=get_data();
+        	document.getElementById("idcard_pic").src=rd_img;
         	document.getElementById("captureBtn").disabled=false;
         </script>
     </div>    
     <button id="captureBtn" type="button" disabled="true" class="btn btn-default btn-block" onclick="capture();">拍照认证</button>
-
+	  <tbody id="people_data">
+	    <tr><td>身份</td><td id="people_identity"></td></tr>
+	    <tr><td>学工号</td><td id="people_id"></td></tr>
+	    <tr><td>姓名</td><td id="people_name"></td></tr>
+	    <tr><td>能否通过</td><td id="people_canleave" ></td></tr>
+	  </tbody>
   	<div id="showing" style="width:100%;height:300px;border:red solid;display:block;"></div>
   	
     <script language="JavaScript" for="stdfcectl" event="CallBackCheckLiveResult(dwResult)">
-	// 采集成功回调
+	// 拍照成功回调
 	getImage(dwResult);
 	document.getElementById("new_pic").src=dataFromCamera;
 	societyManButtion(rd_id,rd_name,rd_base64,rd_sex,cap_base64);

@@ -30,11 +30,25 @@
 <body>	
     <div style="text-align:center;">
         <OBJECT ID="stdfcectl"  CLASSID="CLSID:41BCE50C-D829-4E8E-A1AD-380EAA7AA02E"  style="width:320px;height:240px;"></OBJECT>
-        <img width="320px" height="240px" border="1" name="my_pic" id="new_pic" style="margin: 0;vertical-align: top;"> <br/>
+        <img width="320px" height="240px" border="1" name="my_pic" id="new_pic" style="margin: 0;vertical-align: top;">
+        <img border="1" name="log_pic" id="log_pic" style="margin: 0;height:240px;width:auto;vertical-align: top;display:none;"> 
     </div>     
-  
+  	
     <button type="button" class="btn btn-default btn-block" onclick="capture();">拍照认证</button>
+    <table class="table">
+  <caption>基本的表格布局</caption>
+  <thead>
+    <tr><th>名称</th><th>数据</th></tr>
+  </thead>
+  <tbody id="people_data">
+    <tr><td>身份</td><td id="people_identity"></td></tr>
+    <tr><td>学工号</td><td id="people_id"></td></tr>
+    <tr><td>姓名</td><td id="people_name"></td></tr>
+    <tr><td>能否通过</td><td id="people_canleave" ></td></tr>
+  </tbody>
+</table>
   	<div id="showing" style="width:100%;height:300px;border:red solid;display:block;"></div>
+  	
     <script language="JavaScript" for="stdfcectl" event="CallBackCheckLiveResult(dwResult)">
 	// 采集成功回调
 	getImage(dwResult);
