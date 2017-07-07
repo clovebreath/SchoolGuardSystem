@@ -1,7 +1,8 @@
+				var xmlhttp;
+				var result;				
 				var schoolManButtion=function(newphoto){
 					var data="identity=school&message={\"picture\": \""+newphoto+"\"}";
 					console.log(data);
-					var xmlhttp;
 					if (window.XMLHttpRequest){
 					    //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
 					    xmlhttp=new XMLHttpRequest();
@@ -12,16 +13,39 @@
 					xmlhttp.onreadystatechange=function(){//根据返回数据shi'x
 						  if (xmlhttp.readyState==4 && xmlhttp.status==200)
 						    {
-								var result=xmlhttp.responseText;
+								result=xmlhttp.responseText;
 								show.innerHTML+=("--result--"+result); 
 								var people=JSON.parse(result);
 								
-								document.getElementById("people_identity").innerHTML=people.identity;
-								document.getElementById("people_id").innerHTML=people.message.id;
-								document.getElementById("people_name").innerHTML=people.message.name;
-								document.getElementById("people_canleave").innerHTML=people.message.canleave;
-								document.getElementById("log_pic").style.display="inline";
-								document.getElementById("log_pic").src= 'data:image/png;base64,'+people.message.pic;
+								if ("photo_error" == people.result) {
+//									document.getElementById("people_identity").innerHTML='';
+//									document.getElementById("people_id").innerHTML='';
+//									document.getElementById("people_name").innerHTML='';
+//									document.getElementById("people_canleave").innerHTML='';
+									document.getElementById("log_pic").src='../image/no28.png';
+									document.getElementById("log_pic").style.display="inline";
+									
+									alert("照片中无法识别人脸，请重新拍照");
+									
+								}else if ("not_match"==people.result){
+//									document.getElementById("people_identity").innerHTML='';
+//									document.getElementById("people_id").innerHTML='';
+//									document.getElementById("people_name").innerHTML='';
+//									document.getElementById("people_canleave").innerHTML='';
+									document.getElementById("log_pic").src='../image/no28.png';
+									document.getElementById("log_pic").style.display="inline";
+									
+									alert("无匹配数据，请重新拍照");
+									
+								}else{
+									document.getElementById("people_identity").innerHTML=people.identity;
+									document.getElementById("people_id").innerHTML=people.message.id;
+									document.getElementById("people_name").innerHTML=people.message.name;
+									document.getElementById("people_canleave").innerHTML=people.message.canleave;
+									document.getElementById("log_pic").style.display="inline";
+									document.getElementById("log_pic").src= 'data:image/png;base64,'+people.message.pic;
+								}
+
 
 						    }else{
 						    	console.log("response","error"+xmlhttp.readyState+ xmlhttp.status);
@@ -40,7 +64,7 @@
 					console.log(new Date(),rd_img);
 					console.log(new Date(),dataFromCamera);
 					var data="identity=society&message={\"picture1\": \""+dataFromCamera+"\",\"picture2\":\""+rd_img+"\",\"id\":\""+rd_id+"\",\"name\":\""+rd_name+"\"}";
-					var xmlhttp;
+
 					if (window.XMLHttpRequest){
 					    //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
 					    xmlhttp=new XMLHttpRequest();
@@ -51,18 +75,44 @@
 					xmlhttp.onreadystatechange=function(){//图片数据预处理之后，将图片数据传递给getResult
 					  if (xmlhttp.readyState==4 && xmlhttp.status==200)
 					    {
-							var result=xmlhttp.responseText;
-							console.log("response",result);
+							result=xmlhttp.responseText;
 							show.innerHTML+=("--result--"+result); 
 							var people=JSON.parse(result);
 							
-							document.getElementById("people_identity").innerHTML=people.identity;
-							document.getElementById("people_id").innerHTML=people.message.id;
-							document.getElementById("people_name").innerHTML=people.message.name;
-							document.getElementById("people_canleave").innerHTML=people.message.canleave;
-							document.getElementById("log_pic").style.display="inline";
-							document.getElementById("log_pic").src= 'data:image/png;base64,'+people.message.pic;
-							//window.location.href="success2.jsp"; 
+							if("photo_error"==people.result){
+								
+								console.log(new Date(),people.result);
+								alert("照片中无法识别人脸，请重新拍照");
+								document.getElementById("new_pic").src="";
+								
+							}else if ("not_match"==people.result){
+								
+								alert("照片中无法识别人脸，请重新拍照");
+								
+							}else if("noresult"==people.identity){
+								
+								document.getElementById("people_identity").innerHTML="无登记记录";
+								document.getElementById("people_id").innerHTML=people.message.id;
+								document.getElementById("people_name").innerHTML=people.message.name;
+								document.getElementById("people_canleave").innerHTML='N';
+								alert("请联系门卫进行登记注册");
+//								document.getElementById("log_pic").style.display="inline";
+//								document.getElementById("log_pic").src= 'data:image/png;base64,'+people.message.pic;
+								//window.location.href="success2.jsp"; 
+							}else if("parent"==people.identity){
+								document.getElementById("people_identity").innerHTML=people.identity;
+								document.getElementById("people_id").innerHTML=people.message.id;
+								document.getElementById("people_name").innerHTML=people.message.name;
+								document.getElementById("people_canleave").innerHTML=people.message.canleave;
+								
+							}else  if("blacklist"==people.identity){
+								document.getElementById("people_identity").innerHTML=people.identity;
+								document.getElementById("people_id").innerHTML=people.message.id;
+								document.getElementById("people_name").innerHTML=people.message.name;
+								document.getElementById("people_canleave").innerHTML='N';
+							}else{
+								
+							}
 					    }else{
 					    	console.log("response","error"+xmlhttp.readyState+ xmlhttp.status);
 					    }

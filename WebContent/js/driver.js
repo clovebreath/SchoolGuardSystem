@@ -14,8 +14,11 @@ var openDevice = function() {
     show.innerHTML+="openDevice***";
 };
 var capture = function() {
+	dataFromCamera='';
+	cap_base64='';
     stdfcectl.GetFace();
     show.innerHTML+="capture***";   
+    document.getElementById("new_pic").src=dataFromCamera;
 };
 var showImage = function() {
     stdfcectl.ShowPicture(dataFromCamera);
@@ -45,7 +48,7 @@ var getImage = function(dwResult) {
 
 
 
-
+//id_card模组
 var is_rd = false;
 var rd_id = "";
 var rd_img = "";
@@ -101,3 +104,14 @@ var getMessage = function() {
 var get_data = function() {
 	return "{\"identity\": \"society\",\"message\":{\"picture1\": \""+dataFromCamera+"\"+\"picture2\":\""+rd_img+"\",\"id\":\""+rd_id+"\",\"name\":\""+rd_name+"\"}}";
 };
+
+
+//button_control
+var changeButton=function(){
+	document.getElementById(arguments[0]).disabled=!document.getElementById(arguments[0]).disabled;
+}
+//log_image_control
+var changeLogpic=function(){
+	document.getElementById("log_pic").style.display="none";
+}
+

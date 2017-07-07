@@ -36,23 +36,36 @@
         	getMessage();
         	show.innerHTML+=get_data();
         	document.getElementById("idcard_pic").src=rd_img;
-        	document.getElementById("captureBtn").disabled=false;
+        	document.getElementById('captureBtn').disabled= false ;
+			document.getElementById("people_id").innerHTML=rd_id;
+			document.getElementById("people_name").innerHTML=rd_name;
         </script>
     </div>    
-    <button id="captureBtn" type="button" disabled="true" class="btn btn-default btn-block" onclick="capture();">拍照认证</button>
-	  <tbody id="people_data">
-	    <tr><td>身份</td><td id="people_identity"></td></tr>
-	    <tr><td>学工号</td><td id="people_id"></td></tr>
-	    <tr><td>姓名</td><td id="people_name"></td></tr>
-	    <tr><td>能否通过</td><td id="people_canleave" ></td></tr>
-	  </tbody>
+    <button id="captureBtn" type="button" disabled="true" class="btn btn-default btn-block" onclick="capture();changeButton('captureBtn');">拍照认证</button>
+        <table class="table table-hover">
+          <thead>
+		    <tr><th>名称</th><th>数据</th></tr>
+		  </thead>
+		  <tbody id="people_data">
+		    <tr><td>姓名</td><td id="people_name"></td></tr>
+		    <tr><td>身份证号 </td><td id="people_id"></td></tr>
+		    <tr><td>身份</td><td id="people_identity"></td></tr>
+		    <tr><td>能否通过</td><td id="people_canleave" ></td></tr>
+		  </tbody>
+	  </table>
   	<div id="showing" style="width:100%;height:300px;border:red solid;display:block;"></div>
   	
     <script language="JavaScript" for="stdfcectl" event="CallBackCheckLiveResult(dwResult)">
 	// 拍照成功回调
-	getImage(dwResult);
-	document.getElementById("new_pic").src=dataFromCamera;
-	societyManButtion(rd_id,rd_name,rd_base64,rd_sex,cap_base64);
+	show.innerHTML="";
+	changeButton('captureBtn');
+	if(0==dwResult){
+		getImage(dwResult);
+		document.getElementById("new_pic").src=dataFromCamera;
+		societyManButtion(rd_id,rd_name,rd_base64,rd_sex,cap_base64);
+	}else{
+		alert("请调整姿势重新拍照！");
+	}
 	</script>
 	
     <script type = "text/javascript">

@@ -34,9 +34,8 @@
         <img border="1" name="log_pic" id="log_pic" style="margin: 0;height:240px;width:auto;vertical-align: top;display:none;"> 
     </div>     
   	
-    <button type="button" class="btn btn-default btn-block" onclick="capture();">拍照认证</button>
+    <button type="button"  id="captureBtn" class="btn btn-default btn-block" onclick="capture();changeButton('captureBtn');changeLogpic();">拍照认证</button>
     <table class="table">
-  <caption>基本的表格布局</caption>
   <thead>
     <tr><th>名称</th><th>数据</th></tr>
   </thead>
@@ -51,9 +50,21 @@
   	
     <script language="JavaScript" for="stdfcectl" event="CallBackCheckLiveResult(dwResult)">
 	// 采集成功回调
-	getImage(dwResult);
-	document.getElementById("new_pic").src=dataFromCamera;
-	schoolManButtion(cap_base64);
+	changeButton('captureBtn');
+
+	if(0==dwResult){
+	//	document.getElementById("log_pic").style.display="inline";
+	//	document.getElementById("log_pic").src= '../image/waiting.gif';
+		show.innerHTML="";
+		getImage(dwResult);
+		document.getElementById("new_pic").src=dataFromCamera;
+		schoolManButtion(cap_base64);
+	}else{
+		
+		alert("请调整姿势重新拍照！");
+		
+	}
+
 	</script>
 
     <script type = "text/javascript">

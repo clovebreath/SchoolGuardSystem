@@ -67,7 +67,7 @@ public class CompareModule {
 			{
 				if(face_id1.equals("error"))
 				{
-					System.out.println("pic1error 请重新拍照!");
+					System.out.println("pic1 error 请重新拍照!");
 					return ProjectInfomation.PHOTO_ERROR;
 				}
 				else

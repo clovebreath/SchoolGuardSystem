@@ -22,8 +22,11 @@
 
 	<button type="button" class="btn btn-default btn-block" onclick="location.href='list.jsp'">查看记录</button>				
 	<button type="button" class="btn btn-default btn-block" onclick="location.href='setting.jsp'">设置</button>			
-	<div id="newMessage" style="width:100%;height:300px;border:grey solid;"></div>
-
+	<div id="newMessage" style="width:100%;height:100px;border:grey solid;"></div>
+	
+	<textarea id="text" style="width:100%;height:100px;border:grey solid;"></textarea>
+	<button type="button" class="btn btn-default btn-block" onclick="javascript:send();">发送</button>			
+	
 	<script type="text/javascript">
 		
 		   var websocket = null;

@@ -12,7 +12,7 @@ import com.eyekey.http.EyeKeyHttp;
 public class IdentifyModule 
 {
 	private static EyeKeyHttp e;
-	
+	private static JSONObject exist;
 	/**
 	 * 模块初始化方法，必须在比较前先行执行
 	 * 当前一次初始化失败后必须重新初始化
@@ -57,11 +57,27 @@ public class IdentifyModule
 	{
 		try
 		{
-			JSONObject exist = e.getCrowdByName(ProjectInfomation.CROWD_NAME);
+			exist = e.getCrowdByName(ProjectInfomation.CROWD_NAME);
 			String face_id1 = getFaceidBycheckImg(photoB64);
-			if(exist.get("res_code").equals("0000"))
+			if(!face_id1.equals("error")&&exist.get("res_code").equals("0000"))
 			{
-				JSONObject json = e.matchIdentifyByName(face_id1, ProjectInfomation.CROWD_NAME).getJSONArray("face").getJSONObject(0).getJSONArray("result").getJSONObject(0);
+				JSONObject j1=e.matchIdentifyByName(face_id1, ProjectInfomation.CROWD_NAME);
+				System.out.println(j1);
+				JSONArray ja=j1.getJSONArray("face");
+				JSONObject j2=ja.getJSONObject(0);
+				JSONObject json;
+				int index = 0;
+				while( j2.getJSONArray("result").isEmpty())
+				{
+					 j1=e.matchIdentifyByName(face_id1, ProjectInfomation.CROWD_NAME);
+					 ja=j1.getJSONArray("face");
+					 j2=ja.getJSONObject(0);
+					 System.out.println(index++);
+				}
+				
+				json = j2.getJSONArray("result").getJSONObject(0);
+
+				//JSONObject json = e.matchIdentifyByName(face_id1, ProjectInfomation.CROWD_NAME).getJSONArray("face").getJSONObject(0).getJSONArray("result").getJSONObject(0);
 				float similarity = json.getFloat("similarity");
 				String result = json.getString("person_name");
 				if(JudgeModule.judge(similarity).equals(ProjectInfomation.MATCH))
@@ -78,8 +94,10 @@ public class IdentifyModule
 					return ProjectInfomation.NOT_MATCH;
 				}
 				
-			}
-			else
+			}else if(face_id1.equals("error")){
+				System.out.println("接受的照片中无人脸");
+				return ProjectInfomation.PHOTO_ERROR;
+			}else
 			{
 				System.out.println("1对n模块初始化错误");
 				return ProjectInfomation.MODULE_INIT_ERROR;

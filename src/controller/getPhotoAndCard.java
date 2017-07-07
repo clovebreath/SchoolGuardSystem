@@ -52,7 +52,7 @@ public class getPhotoAndCard extends HttpServlet {
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
-	    //只传过来一张图片，需从数据库中取出所有教职工和学生图片进行1对N比对
+
 		gson2 = new GsonBuilder().enableComplexMapKeySerialization().create();
 		type = new TypeToken<Map<String, Object>>() {}.getType();  
 		dbTool=new dbTools();
@@ -62,7 +62,7 @@ public class getPhotoAndCard extends HttpServlet {
 	    JSONObject jObject = new JSONObject(allPicMessage);
 	    JSONArray ja = jObject.getJSONArray("picture");
 	    
-	    //在人群中找出此人
+	    
 		IdentifyModule.init(ja);
 		CompareModule.init();
 	}
@@ -89,30 +89,47 @@ public class getPhotoAndCard extends HttpServlet {
 	    	
 	    	String requestMessage=request.getParameter("message");
 		    Map<String, String> requestMap = gson2.fromJson(requestMessage, type); 
-//		    System.out.println(requestMap.get("picture").replaceAll(" ","+"));
+		    System.out.println(requestMessage);
 
 		    //1对多匹配
 			String re=IdentifyModule.identify(requestMap.get("picture").replaceAll(" ","+"));
-			System.out.println(re);
-			
+		
 			if(re.equals(ProjectInfomation.NOT_MATCH)){
+				container.put("result", re);
+				out.print(gson2.toJson(container));
+			}else if(re.equals(ProjectInfomation.PHOTO_ERROR)){
+				container.put("result", re);
+				out.print(gson2.toJson(container));
+			}else if(re.equals(ProjectInfomation.MODULE_INIT_ERROR)){
 				container.put("result", re);
 				out.print(gson2.toJson(container));
 			}else{
 				out.print(dbTool.getSchoolMessage(re));
 			}
-		    	    
+		    
+			
+			
 	    }else if(request.getParameter("identity").equals("society")){
 	    	
-	    	String requestMessage=request.getParameter("message");
+	    	//避免传输过程中中文乱码
+	    	String ss=request.getParameter("message");
+	    	String requestMessage=new String((ss.getBytes("ISO-8859-1")),"UTF-8");
+	    	
 		    Map<String, String> requestMap = gson2.fromJson(requestMessage, new TypeToken<Map<String, String>>() {}.getType()); 
 			
 		    //首先判断是否人证合一
 		    
 			String res = CompareModule.Compare(requestMap.get("picture1").replaceAll(" ","+"), requestMap.get("picture2").replaceAll(" ","+"));
 			System.out.println(res);
-			
-			if(res.equals(ProjectInfomation.NOT_MATCH)){
+			if(res.equals(ProjectInfomation.PHOTO_ERROR)){
+				//图片错误
+				container.put("result", res);
+			    out.print(gson2.toJson(container));
+			}else if(res.equals(ProjectInfomation.ID_CARD_ERROR)){
+				//将此人基本信息返回给主页面，同时将是否允许进出学校返回给主页面
+			    container.put("result", res);
+			    out.print(gson2.toJson(container));
+			}else if(res.equals(ProjectInfomation.NOT_MATCH)){
 				//将此人基本信息返回给主页面，同时将是否允许进出学校返回给主页面
 			    container.put("result", res);
 			    out.print(gson2.toJson(container));
