@@ -104,7 +104,25 @@ public class getPhotoAndCard extends HttpServlet {
 				container.put("result", re);
 				out.print(gson2.toJson(container));
 			}else{
-				out.print(dbTool.getSchoolMessage(re));
+				
+				//确定为校内人士之后，增加一条来访记录
+				String schoolManMessage=dbTool.getSchoolMessage(re);
+				Map<String, Object> schoolManRawMap = gson2.fromJson(schoolManMessage, type); 
+
+				out.print(schoolManMessage);
+if(schoolManRawMap.get("identity").equals("student")){
+	String rawMessage=gson2.toJson(schoolManRawMap.get("message"));
+	Map<String, String> newRecord= gson2.fromJson(rawMessage, new TypeToken<Map<String, String>>() {}.getType()); 
+	newRecord.put("identity", (String)schoolManRawMap.get("identity"));
+	newRecord.put("sid", null);
+	newRecord.put("pid", null);
+	
+	System.out.println(gson2.toJson(newRecord));
+	dbTool.addNewRecord(gson2.toJson(newRecord));
+}else{
+	
+}
+
 			}
 		    
 			
