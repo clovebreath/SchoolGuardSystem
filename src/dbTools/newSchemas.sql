@@ -41,6 +41,7 @@ CREATE TABLE `schoolsys`.`student` (
   `sid` VARCHAR(20) NULL,
   `tid` VARCHAR(20) NULL,
   `time` DATETIME NOT NULL,
+  `pid` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`id`));
    alter table  `schoolsys`.`student` modify column spic MediumBlob ;
       alter table  `schoolsys`.`worker` modify column wpic MediumBlob ;

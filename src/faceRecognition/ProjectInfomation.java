@@ -18,7 +18,8 @@ public class ProjectInfomation
 	 * 判断是否为同一个人的分界
 	 */
 	public static final Float BOUND = 76.0f;
-	
+	public static final Float NEW_BOUND = 66.0f;
+
 	public static final String MATCH = "match";
 	public static final String NOT_MATCH = "not_match";
 	

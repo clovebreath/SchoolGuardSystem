@@ -50,7 +50,7 @@ public class CompareModule {
 			
 			if(!face_id1.equals("error") && !face_id2.equals("error"))
 			{
-				
+				/*
 				JSONObject json  = e.createPeopleById(null, null , null, face_id2);
 				String people_id = json.getString("people_id");
 				
@@ -60,7 +60,12 @@ public class CompareModule {
 				String result = JudgeModule.judge(similarity , systemJudge);
 				System.out.println(similarity);
 				System.out.println(result);
-				e.deletePeopleById(people_id);
+				e.deletePeopleById(people_id);*/
+				
+				JSONObject json = e.matchCompare(face_id1, face_id2);
+				float similarity = json.getFloatValue("similarity");
+				System.out.println(similarity);
+				String result = JudgeModule.judge(similarity, false);
 				return result;
 			}
 			else

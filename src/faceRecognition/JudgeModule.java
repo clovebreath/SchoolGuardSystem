@@ -39,7 +39,7 @@ public class JudgeModule
 	public static String judge(float similarity)
 	{
 		
-			if(similarity >= ProjectInfomation.BOUND)
+			if(similarity >= ProjectInfomation.NEW_BOUND)
 			{
 				return ProjectInfomation.MATCH;
 			}

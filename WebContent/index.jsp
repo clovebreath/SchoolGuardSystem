@@ -24,7 +24,7 @@
 		<div class="col-md-12 column">
 			<div class="jumbotron">
 				<h1>
-					欢迎来到@#$%^&小学！
+					欢迎来到齐鲁软件小学！
 				</h1>
 				<p>
 					请选择自己的身份，开始验证。

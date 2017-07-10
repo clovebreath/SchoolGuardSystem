@@ -87,7 +87,10 @@
 								
 							}else if ("not_match"==people.result){
 								
-								alert("照片中无法识别人脸，请重新拍照");
+								
+								alert("照片与身份证不匹配，请重试！");
+								document.getElementById("new_pic").src="";
+								document.getElementById('captureBtn').disabled= true ;
 								
 							}else if("noresult"==people.identity){
 								
@@ -106,10 +109,12 @@
 								document.getElementById("people_canleave").innerHTML=people.message.canleave;
 								
 							}else  if("blacklist"==people.identity){
+								
 								document.getElementById("people_identity").innerHTML=people.identity;
 								document.getElementById("people_id").innerHTML=people.message.id;
 								document.getElementById("people_name").innerHTML=people.message.name;
 								document.getElementById("people_canleave").innerHTML='N';
+								
 							}else{
 								
 							}
