@@ -6,10 +6,16 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
 	
+	
+	
 	<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	
+	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+	
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  
   
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -17,15 +23,36 @@
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+    
 </head>
 <body>
 
+	<table class="table">
+	  <thead>
+	    <tr><th>名称</th><th>数据</th></tr>
+	  </thead>
+	  <tbody id="people_data">
+	    <tr><td>身份</td><td id="people_identity"></td></tr>
+		<tr class="school" style="display: none"><td >学工号</td><td id="people_id_school"></td></tr>
+		<tr class="parent blacklist" style="display: none"><td>身份证号</td><td id="people_id_society"></td></tr>  
+	    <tr><td>姓名</td><td id="people_name"></td></tr>
+	    <tr><td>能否通过</td><td id="people_canleave_school" ></td></tr>
+	    <tr class="parent" style="display: none"><td>是否预约</td><td id="people_canleave_society" ></td></tr>
+	     <tr class="parent" style="display: none"><td>孩子姓名</td><td id="child_name" ></td></tr>
+	     <tr class="parent" style="display: none"><td>预约老师</td><td id="order_teacher" ></td></tr>
+	     <tr class="blacklist" style="display: none"><td>负责人</td><td id="contact_name" ></td></tr>
+	     <tr class="blacklist" style="display: none"><td>备注</td><td id="note" ></td></tr>
+	     
+	  </tbody>
+	</table>
 	<button type="button" class="btn btn-default btn-block" onclick="location.href='list.jsp'">查看记录</button>				
 	<button type="button" class="btn btn-default btn-block" onclick="location.href='setting.jsp'">设置</button>			
 	<div id="newMessage" style="width:100%;height:100px;border:grey solid;"></div>
 	
 	<textarea id="text" style="width:100%;height:100px;border:grey solid;"></textarea>
 	<button type="button" class="btn btn-default btn-block" onclick="javascript:send();">发送</button>			
+	
 	
 	<script type="text/javascript">
 		
@@ -50,7 +77,7 @@
 
 		    //接收到消息的回调方法
 		    websocket.onmessage = function (event) {
-		        setMessageInnerHTML(event.data);
+		        setMessage(event.data);
 		    }
 
 		    //连接关闭的回调方法
@@ -62,10 +89,60 @@
 		    window.onbeforeunload = function () {
 		        closeWebSocket();
 		    }
-
+		    
 		    //将消息显示在网页上
-		    function setMessageInnerHTML(innerHTML) {
-		        document.getElementById('newMessage').innerHTML += innerHTML + '<br/>';
+			function setMessageInnerHTML(data){
+			    document.getElementById('newMessage').innerHTML += data + '<br/>';   
+			}
+		    
+		    function setMessage(data) {
+
+		    	var people=JSON.parse(data);
+		    	
+		    	switch (people.identity)
+		    	{
+		    	    case "parent":
+		    	    	$(".school").hide();
+		    	    	$(".blacklist").hide();
+		    	    	$(".parent").show();
+		    	    	$("#people_identity").text=people.identity;
+		    	    	$("#people_id_society").text=people.message.id;
+		    	    	$("#people_name").text=people.message.name;
+		    	    	$("#people_canleave_society").text=people.message.isordered;
+		    	    	$("#child_name").text=people.message.studentname;
+		    	    	$("#order_teacher").text=people.message.teachername;
+		    	    break;
+		    	    case "blacklist":
+		    	    	$(".school").hide();
+		    	    	$(".parent").hide();
+		    	    	$(".blacklist").show();
+		    	    	$("#people_identity").text=people.identity;
+		    	    	$("#people_id_society").text=people.message.id;
+		    	    	$("#people_name").text=people.message.name;
+		    	    	$("#contact_name").text=people.message.studentname;
+		    	    	$("#note").text=people.message.note;
+		    	    break;
+		    	    case "student":
+		    	    	$(".parent").hide();
+		    	    	$(".blacklist").hide();
+		    	    	$(".school").show();
+		    	    	$("#people_identity").val=people.identity;
+		    	    	$("#people_id_school").val=people.message.id;
+		    	    	$("#people_name").val=people.message.name;
+		    	    	$("#people_canleave_school").val=people.message.canleave;
+			    	break;
+		    	    default:
+		    	    //worker
+		    	    	$(".parent").hide();
+	    	    		$(".blacklist").hide();
+	    	    		$(".school").show();
+		    	    	$("#people_identity").innerHTML=people.identity;
+		    	    	$("#people_id_school").innerHTML=people.message.id;
+		    	    	$("#people_name").innerHTML=people.message.name;
+		    	    	$("#people_canleave_school").innerHTML=people.message.canleave;
+		    	}
+		    	
+		    	
 		    }
 
 		    //关闭WebSocket连接

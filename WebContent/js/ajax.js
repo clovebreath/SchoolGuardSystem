@@ -44,6 +44,10 @@
 									document.getElementById("people_canleave").innerHTML=people.message.canleave;
 									document.getElementById("log_pic").style.display="inline";
 									document.getElementById("log_pic").src= 'data:image/png;base64,'+people.message.pic;
+									
+									delete people.message.pic;
+									console.log(JSON.stringify(people));
+									send(JSON.stringify(people));
 								}
 
 
