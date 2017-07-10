@@ -47,7 +47,7 @@
 			if(request.getParameter("pgcnt")!=null){
 			    pgcnt = request.getParameter("pgcnt");
 			}else{
-			    pgcnt = "2";
+			    pgcnt = "5";
 			}
 			PageSize = java.lang.Integer.parseInt(pgcnt); //**转换为int类型**
 
@@ -57,7 +57,7 @@
 			            + "?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8";
 			    String user = "root";
 			    String pwd = "123456";
-			    String sql = "select *from record;";
+			    String sql = "SELECT id,name,identity,status,sname,wname,time FROM schoolsys.record left join worker on record.tid=worker.wid left join student on record.sid=student.sid";
 			    Class.forName("com.mysql.jdbc.Driver");
 			    Connection conn = DriverManager.getConnection(connectString, user, pwd);
 			
@@ -83,8 +83,8 @@
 	        <td><%=rs.getString("name") %></td>
 	        <td><%=rs.getString("identity") %></td>
 	        <td><%=rs.getString("status") %></td>
-	        <td><%=rs.getString("sid") %></td>
-	        <td><%=rs.getString("tid") %></td>
+	        <td><%=rs.getString("sname") %></td>
+	        <td><%=rs.getString("wname") %></td>
 	        <td><%=rs.getString("time") %></td>
         </tr></a>
         <%
@@ -102,9 +102,9 @@
 
        <br/><br/>  
        <div style="float:right">
-	        <a type="button" class="btn btn-default " href="list.jsp?pgno=<%=PageNow-1 %>&pgcnt=2">
+	        <a type="button" class="btn btn-default " href="list.jsp?pgno=<%=PageNow-1 %>&pgcnt=5">
 	                        上一页</a>    &nbsp;               
-	        <a type="button" class="btn btn-default " href="list.jsp?pgno=<%=PageNow+1 %>&pgcnt=2">
+	        <a type="button" class="btn btn-default " href="list.jsp?pgno=<%=PageNow+1 %>&pgcnt=5">
 	                       下一页</a>      &nbsp;   
 	       <button type="button" class="btn btn-default " onclick="location.href='index.jsp'">返回</button>
        </div>

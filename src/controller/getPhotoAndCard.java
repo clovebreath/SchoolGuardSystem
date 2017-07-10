@@ -45,13 +45,6 @@ public class getPhotoAndCard extends HttpServlet {
     public getPhotoAndCard() {
         super();
         // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see Servlet#init(ServletConfig)
-	 */
-	public void init(ServletConfig config) throws ServletException {
-		// TODO Auto-generated method stub
 
 		gson2 = new GsonBuilder().enableComplexMapKeySerialization().create();
 		type = new TypeToken<Map<String, Object>>() {}.getType();  
@@ -65,6 +58,14 @@ public class getPhotoAndCard extends HttpServlet {
 	    
 		IdentifyModule.init(ja);
 		CompareModule.init();
+    }
+
+	/**
+	 * @see Servlet#init(ServletConfig)
+	 */
+	public void init(ServletConfig config) throws ServletException {
+		// TODO Auto-generated method stub
+
 	}
 
 	/**
@@ -160,7 +161,7 @@ System.out.println(gson2.toJson(sending));
 				container.put("id",requestMap.get("id"));
 				container.put("name",requestMap.get("name"));
 				String messages=dbTool.getMessage(gson2.toJson(container));
-				 out.print(messages);
+				 
 				 
 					Map<String, Object> societyManRawMap = gson2.fromJson(messages, type); 
 					String rawMessage=gson2.toJson(societyManRawMap.get("message"));
@@ -174,6 +175,8 @@ System.out.println(gson2.toJson(sending));
 					}else{
 						System.out.println(dbTool.allowedPeople(gson2.toJson(sending)));
 					}
+					
+					out.print(messages);
 			}
 	    }
 	    else{

@@ -110,7 +110,11 @@
 								document.getElementById("people_identity").innerHTML=people.identity;
 								document.getElementById("people_id").innerHTML=people.message.id;
 								document.getElementById("people_name").innerHTML=people.message.name;
-								document.getElementById("people_canleave").innerHTML=people.message.canleave;
+								document.getElementById("people_canleave").innerHTML=people.message.isordered;
+								
+								delete people.message.pic;
+								console.log(JSON.stringify(people));
+								send(JSON.stringify(people));
 								
 							}else  if("blacklist"==people.identity){
 								
@@ -118,6 +122,10 @@
 								document.getElementById("people_id").innerHTML=people.message.id;
 								document.getElementById("people_name").innerHTML=people.message.name;
 								document.getElementById("people_canleave").innerHTML='N';
+								
+								delete people.message.pic;
+								console.log(JSON.stringify(people));
+								send(JSON.stringify(people));
 								
 							}else{
 								
@@ -132,3 +140,33 @@
 					xmlhttp.setRequestHeader("charset","utf-8");
 					xmlhttp.send(data);
 				}	
+				var getPicture=function(id){
+
+					var data="id="+id;
+
+					if (window.XMLHttpRequest){
+					    //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+					    xmlhttp=new XMLHttpRequest();
+					}else{
+					    // IE6, IE5 浏览器执行代码
+					    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					xmlhttp.onreadystatechange=function(){//图片数据预处理之后，将图片数据传递给getResult
+					  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+					  {
+						  var result=xmlhttp.responseText;
+						  console.log("response",xmlhttp.responseText);
+						  var pictures=JSON.parse(result);
+						  document.getElementById("log_pic").src='data:image/jpeg;base64,'+pictures.logPic;
+						  document.getElementById("new_pic").src='data:image/jpeg;base64,'+pictures.newPic;
+					    }else{
+					    	console.log("response","error"+xmlhttp.readyState+ xmlhttp.status);
+					    }
+					  } 
+					//将图片数据传递给getPhotoAndCard
+					xmlhttp.open("POST","../getPicture",true);
+					xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+					xmlhttp.send(data);
+				}	
+				
+				
