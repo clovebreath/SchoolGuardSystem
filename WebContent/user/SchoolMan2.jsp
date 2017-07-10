@@ -35,6 +35,8 @@
     </div>     
   	
     <button type="button"  id="captureBtn" class="btn btn-default btn-block" onclick="capture();changeButton('captureBtn');changeLogpic();">拍照认证</button>
+    <a href="../index.jsp"><button id="returnBtn" type="button" class="btn btn-default btn-block" >返回</button></a>
+    
 <table class="table">
   <thead>
     <tr><th>名称</th><th>数据</th></tr>

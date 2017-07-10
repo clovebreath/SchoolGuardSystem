@@ -42,6 +42,8 @@
         </script>
     </div>    
     <button id="captureBtn" type="button" disabled="true" class="btn btn-default btn-block" onclick="capture();changeButton('captureBtn');">拍照认证</button>
+    <a href="../index.jsp"><button id="returnBtn" type="button" class="btn btn-default btn-block" >返回</button></a>
+    
         <table class="table table-hover">
           <thead>
 		    <tr><th>名称</th><th>数据</th></tr>

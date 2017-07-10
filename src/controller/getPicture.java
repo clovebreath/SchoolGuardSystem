@@ -61,13 +61,16 @@ public class getPicture extends HttpServlet {
 		container=new HashMap<String,String>();
 		String id=request.getParameter("id");
 
-		String record=dbTool.getRecordDetailById(id);
-		System.out.println(record);
-		Map<String,String> recordMap=gson2.fromJson(record, new TypeToken<Map<String, String>>() {}.getType()); 
+	//	String record=dbTool.getRecordDetailById(id);
+	//	System.out.println(record);
+	//	Map<String,String> recordMap=gson2.fromJson(record, new TypeToken<Map<String, String>>() {}.getType()); 
 		
-		container.put("newPic", recordMap.get("newpic"));
-		container.put("logPic", recordMap.get("logpic"));
-		out.println(gson2.toJson(container));
+	//	container.put("newPic", recordMap.get("newpic"));
+	//	container.put("logPic", recordMap.get("logpic"));
+	//	out.println(gson2.toJson(container));	
+		
+		String record=dbTool.getPicById(id);
+		out.println(record);	
 
 	}
 
