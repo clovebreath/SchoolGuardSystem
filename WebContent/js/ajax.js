@@ -38,14 +38,15 @@
 									alert("无匹配数据，请重新拍照");
 									
 								}else{
-									document.getElementById("people_identity").innerHTML=people.identity;
-									document.getElementById("people_id").innerHTML=people.message.id;
-									document.getElementById("people_name").innerHTML=people.message.name;
-									document.getElementById("people_canleave").innerHTML=people.message.canleave;
+									document.getElementById("people_identity").innerHTML=people.details.identity;
+									document.getElementById("people_id").innerHTML=people.details.id;
+									document.getElementById("people_name").innerHTML=people.details.name;
+									document.getElementById("people_canleave").innerHTML=people.result;
 									document.getElementById("log_pic").style.display="inline";
-									document.getElementById("log_pic").src= 'data:image/png;base64,'+people.message.pic;
+									document.getElementById("log_pic").src= 'data:image/png;base64,'+people.details.imglog;
 									
-									delete people.message.pic;
+									delete people.details.imglog;
+									delete people.details.imgnow;
 									console.log(JSON.stringify(people));
 									send(JSON.stringify(people));
 								}
@@ -106,29 +107,32 @@
 //								document.getElementById("log_pic").style.display="inline";
 //								document.getElementById("log_pic").src= 'data:image/png;base64,'+people.message.pic;
 								//window.location.href="success2.jsp"; 
-							}else if("parent"==people.identity){
-								document.getElementById("people_identity").innerHTML=people.identity;
-								document.getElementById("people_id").innerHTML=people.message.id;
-								document.getElementById("people_name").innerHTML=people.message.name;
-								document.getElementById("people_canleave").innerHTML=people.message.isordered;
+							}else if("parent"==people.details.identity){
+								document.getElementById("people_identity").innerHTML=people.details.identity;
+								document.getElementById("people_id").innerHTML=people.details.id;
+								document.getElementById("people_name").innerHTML=people.details.name;
+								document.getElementById("people_canleave").innerHTML=people.result;
 								
-								delete people.message.pic;
+								delete people.details.imgnow;
+								delete people.details.imglog;
+								delete people.details.imgstu;
+								
 								console.log(JSON.stringify(people));
 								send(JSON.stringify(people));
 								
-							}else  if("blacklist"==people.identity){
+							}else  if("blacklist"==people.details.identity){
 								
-								document.getElementById("people_identity").innerHTML=people.identity;
-								document.getElementById("people_id").innerHTML=people.message.id;
-								document.getElementById("people_name").innerHTML=people.message.name;
-								document.getElementById("people_canleave").innerHTML='N';
-								
-								delete people.message.pic;
+								document.getElementById("people_identity").innerHTML=people.details.identity;
+								document.getElementById("people_id").innerHTML=people.details.id;
+								document.getElementById("people_name").innerHTML=people.details.name;
+								document.getElementById("people_canleave").innerHTML=people.result;
+								delete people.details.imgnow;
+								delete people.details.imglog;
 								console.log(JSON.stringify(people));
 								send(JSON.stringify(people));
 								
 							}else{
-								
+								document.getElementById("people_identity").innerHTML="somethingwrong";
 							}
 					    }else{
 					    	console.log("response","error"+xmlhttp.readyState+ xmlhttp.status);
@@ -141,9 +145,8 @@
 					xmlhttp.send(data);
 				}	
 				var getPicture=function(id){
-
 					var data="id="+id;
-
+					console.log(data);
 					if (window.XMLHttpRequest){
 					    //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
 					    xmlhttp=new XMLHttpRequest();
@@ -157,8 +160,8 @@
 						  var result=xmlhttp.responseText;
 						  console.log("response",xmlhttp.responseText);
 						  var pictures=JSON.parse(result);
-						  document.getElementById("log_pic").src='data:image/jpeg;base64,'+pictures.picture;
-						//  document.getElementById("new_pic").src='data:image/jpeg;base64,'+pictures.newPic;
+						  document.getElementById("log_pic").src='data:image/jpeg;base64,'+pictures.logPic;
+						  document.getElementById("new_pic").src='data:image/jpeg;base64,'+pictures.newPic;
 					    }else{
 					    	console.log("response","error"+xmlhttp.readyState+ xmlhttp.status);
 					    }
@@ -168,5 +171,29 @@
 					xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 					xmlhttp.send(data);
 				}	
+			    var setNotAllowedParent=function(id){
+					var data="id="+id;
+					if (window.XMLHttpRequest){
+					    //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+					    xmlhttp=new XMLHttpRequest();
+					}else{
+					    // IE6, IE5 浏览器执行代码
+					    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					xmlhttp.onreadystatechange=function(){//图片数据预处理之后，将图片数据传递给getResult
+					  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+					  {
+						  var result=xmlhttp.responseText;
+						  console.log("response",xmlhttp.responseText);
+						  
+					    }else{
+					    	console.log("response","error"+xmlhttp.readyState+ xmlhttp.status);
+					    }
+					  } 
+					xmlhttp.open("POST","../setNotAllowedParent",true);
+					xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+					xmlhttp.send(data);
+			    }
+			    
 				
 				

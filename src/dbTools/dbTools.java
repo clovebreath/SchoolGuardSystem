@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.io.File;
 import java.sql.Connection;
 import com.google.gson.reflect.TypeToken;
+import com.mysql.jdbc.EscapeTokenizer;
+
 import faceRecognition.EncodeModule;
 
 public class dbTools {
@@ -415,7 +417,7 @@ public class dbTools {
 		return json;
 	}
 
-	public String getRecordDetailById(String id) {// 获取一条详细记录
+	public String getRecordDetailById(int id) {// 获取一条详细记录
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -426,15 +428,16 @@ public class dbTools {
 			String sq = "select * from schoolsys.record where id=?";
 			conn = dbTools.getConn();
 			ps = conn.prepareStatement(sq);
-			ps.setString(1, id);
+			ps.setInt(1, id);
 			rs = ps.executeQuery();
 			if (rs.next()) {
+				String pid=rs.getString("pid");
 				if (rs.getString("identity").equals("parent")) {
 					String sql = "SELECT record.id,record.name,record.identity,status,sname,wname,time,record.pic as newpic,parent.pic as logpic FROM schoolsys.record left join worker on record.tid=worker.wid left join student on record.sid=student.sid left join parent on record.pid=parent.id where pid=?;";
 					ps = conn.prepareStatement(sql);
-					ps.setString(1, id);
+					ps.setString(1, pid);
 					rs = ps.executeQuery();
-					if (rs.next()) {
+					while (rs.next()) {
 						resultMap.put("id", rs.getString("id"));
 						resultMap.put("name", rs.getString("name"));
 						resultMap.put("identity", rs.getString("identity"));
@@ -448,9 +451,9 @@ public class dbTools {
 				} else if (rs.getString("identity").equals("student")) {
 					String sql = "SELECT record.id,record.name,record.identity,status,time,record.pic as newpic,student.spic as logpic FROM schoolsys.record left join student on record.pid=student.sid where pid=?;";
 					ps = conn.prepareStatement(sql);
-					ps.setString(1, id);
+					ps.setString(1, pid);
 					rs = ps.executeQuery();
-					if (rs.next()) {
+					while (rs.next()) {
 						resultMap.put("id", rs.getString("id"));
 						resultMap.put("name", rs.getString("name"));
 						resultMap.put("identity", rs.getString("identity"));
@@ -464,9 +467,9 @@ public class dbTools {
 				} else {
 					String sql = "SELECT record.id,record.name,record.identity,status,time,record.pic as newpic,worker.wpic as logpic FROM schoolsys.record left join worker on record.pid=worker.wid where pid=?;";
 					ps = conn.prepareStatement(sql);
-					ps.setString(1, id);
+					ps.setString(1,pid);
 					rs = ps.executeQuery();
-					if (rs.next()) {
+					while (rs.next()) {
 						resultMap.put("id", rs.getString("id"));
 						resultMap.put("name", rs.getString("name"));
 						resultMap.put("identity", rs.getString("identity"));
@@ -613,6 +616,7 @@ public class dbTools {
 		Map<String, Object> temping = new HashMap<String, Object>();
 		try {
 			String sql = "select * from parent left join student on parent.sid=student.sid left join worker on student.tid=worker.wid where parent.id=?";
+			String sql2="select max(id) from record ";
 			conn = dbTools.getConn();
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
@@ -629,6 +633,11 @@ public class dbTools {
 				resultMap.put("imgstu", rs.getString("spic"));
 				resultMap.put("stuName", rs.getString("sname"));
 				isorder = rs.getString("isordered");
+			}
+			ps = conn.prepareStatement(sql2);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				resultMap.put("recordid", rs.getInt(1)+1);
 			}
 			temping.put("details", resultMap);
 			if (isorder.equals("Y")) {
@@ -654,6 +663,7 @@ public class dbTools {
 		Map<String, Object> temping = new HashMap<String, Object>();
 		try {
 			String sql = "select * from schoolsys.blacklist left join schoolsys.worker on blacklist.contactid=worker.wid where id=?";
+			String sql2="select max(id) from record ";
 			conn = dbTools.getConn();
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
@@ -667,6 +677,11 @@ public class dbTools {
 				resultMap.put("contactPhone", rs.getString("phone"));
 				resultMap.put("contactPosition", rs.getString("position"));
 				resultMap.put("contactName", rs.getString("wname"));
+			}
+			ps = conn.prepareStatement(sql2);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				resultMap.put("recordid", rs.getInt(1)+1);
 			}
 			temping.put("result", "notallowed");
 			temping.put("details", resultMap);
@@ -689,6 +704,7 @@ public class dbTools {
 		Map<String, Object> temping = new HashMap<String, Object>();
 		try {
 			String sql = "select * from schoolsys.student left join schoolsys.worker on student.tid=worker.wid where sid=?";
+			String sql2="select max(id) from record ";
 			conn = dbTools.getConn();
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
@@ -703,6 +719,11 @@ public class dbTools {
 				resultMap.put("class", rs.getString("class"));
 				resultMap.put("teacherName", rs.getString("wname"));
 				canleave = rs.getString("canleave");
+			}
+			ps = conn.prepareStatement(sql2);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				resultMap.put("recordid", rs.getInt(1)+1);
 			}
 			temping.put("details", resultMap);
 			if (canleave.equals("Y")) {
@@ -728,6 +749,7 @@ public class dbTools {
 		Map<String, Object> temping = new HashMap<String, Object>();
 		try {
 			String sql = "select * from schoolsys.worker where wid=?";
+			String sql2="select max(id) from record ";
 			conn = dbTools.getConn();
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
@@ -740,6 +762,11 @@ public class dbTools {
 				resultMap.put("name", rs.getString("wname"));
 				resultMap.put("phone", rs.getString("phone"));
 				resultMap.put("position", rs.getString("position"));
+			}
+			ps = conn.prepareStatement(sql2);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				resultMap.put("recordid", rs.getInt(1)+1);
 			}
 			temping.put("result", "allowed");
 			temping.put("details", resultMap);
@@ -812,6 +839,29 @@ public class dbTools {
 		}
 		dbTools.closeConn(conn);
 		return name;
+	}
+	
+	public String changeRecordResult(int id) {//修改record的status状态
+		Connection conn = null;
+		PreparedStatement ps = null;
+		Gson gson = new Gson();
+		String json = "";
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		try {
+			String sql = "UPDATE `schoolsys`.`record` SET `status`='allowed' WHERE `id`=?;";
+			conn = dbTools.getConn();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1,id);
+			ps.executeUpdate();
+			resultMap.put("message", "ok");
+			json = gson.toJson(resultMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+			resultMap.put("message", "fail");
+			json = gson.toJson(resultMap);
+		}
+		dbTools.closeConn(conn);
+		return json;
 	}
 
 	public String allowedPeople(String message) {// 处理模块总方法直接调用即可
@@ -959,4 +1009,14 @@ public class dbTools {
 		}
 	}
 
+//	 public static void main(String[] args) {
+//	 Map<String, Object> map = new HashMap<String, Object>();
+//	 map.put("id", "201400300001");
+//	 map.put("identity", "student");
+//	 map.put("imgnow", "sadsadasasf");
+//	 Gson gson = new Gson();
+//	 String json = gson.toJson(map);
+//	 dbTools db = new dbTools();
+//	 System.out.println(db.getRecordDetailById(43));
+//	 }
 }

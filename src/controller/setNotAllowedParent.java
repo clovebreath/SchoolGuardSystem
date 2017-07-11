@@ -24,8 +24,8 @@ import dbTools.dbTools;
 /**
  * Servlet implementation class getResult
  */
-@WebServlet("/getPicture")
-public class getPicture extends HttpServlet {
+@WebServlet("/setNotAllowedParent")
+public class setNotAllowedParent extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	dbTools dbTool;
@@ -35,7 +35,7 @@ public class getPicture extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public getPicture() {
+    public setNotAllowedParent() {
         super();
         // TODO Auto-generated constructor stub
 		gson2 = new GsonBuilder().enableComplexMapKeySerialization().create();
@@ -58,15 +58,10 @@ public class getPicture extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		container=new HashMap<String,String>();
 		String id=request.getParameter("id");
-		String record=dbTool.getRecordDetailById(Integer.parseInt(id));
-	    System.out.println(Integer.parseInt(id)+record);
-		Map<String,String> recordMap=gson2.fromJson(record, new TypeToken<Map<String, String>>() {}.getType()); 
-		
-		container.put("newPic", recordMap.get("newpic"));
-		container.put("logPic", recordMap.get("logpic"));
-		out.println(gson2.toJson(container));	
+		String record=dbTool.changeRecordResult(Integer.parseInt(id));
+
+		out.println(record);	
 		
 
 	}

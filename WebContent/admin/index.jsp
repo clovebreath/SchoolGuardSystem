@@ -31,8 +31,8 @@
 <div class="container">
    <div class="row">
       <div class="col-md-4">
-      	<img alt="注册照片"  id="log_pic" src="" style="width:200px;height:auto">
-      	<!-- <img alt="现场照片"  id="new_pic" src="" style="width:100px;height:auto">-->
+      	<img alt="注册照片"  id="log_pic" src="" style="width:100px;height:auto">
+       <img alt="现场照片"  id="new_pic" src="" style="width:100px;height:auto">
       </div>
       <div class="col-md-8">
       	<table class="table">
@@ -54,6 +54,8 @@
 		    
 		  </tbody>
 		</table>
+		<button type="button" id="notorderedval"class="btn btn-default btn-block notordered"  style="display: none" onclick="javascript:setNotAllowedParent($('#notorderedval').val());javascript:$('.notallowed').hide();	">允许通过</button>				
+		<button type="button" class="btn btn-default btn-block notordered"  style="display: none" onclick="javascript:$('.notallowed').hide();">不许通过</button>		
       </div>      
    </div>
    <div class="row">...</div>
@@ -113,51 +115,56 @@
 		    function setMessage(data) {
 
 		    	var people=JSON.parse(data);
-		    	getPicture(people.message.id);
-		    	switch (people.identity)
+		    	getPicture(people.details.recordid);
+		    	switch (people.details.identity)
 		    	{
 		    	    case "parent":
 		    	    	$(".school").hide();
 		    	    	$(".blacklist").hide();
 		    	    	$(".parent").show();
-		    	    	$("#people_identity").text(people.identity);
-		    	    	$("#people_id_society").text(people.message.id);
-		    	    	$("#people_name").text(people.message.name);
-		    	    	$("#people_canleave_school").text(people.message.isordered);
-		    	    	$("#people_canleave_society").text(people.message.isordered);
-		    	    	$("#child_name").text(people.message.student);
-		    	    	$("#order_teacher").text(people.message.teacher);
+		    	    	$("#people_identity").text(people.details.identity);
+		    	    	$("#people_id_society").text(people.details.id);
+		    	    	$("#people_name").text(people.details.name);
+		    	    	$("#people_canleave_school").text(people.result);
+		    	    	$("#people_canleave_society").text(people.result);
+		    	    	$("#child_name").text(people.details.stuName);
+		    	    	$("#order_teacher").text(people.details.teacherName);
+		    	    	if("notallowed"==people.result){
+		    	    		$(".notallowed").show();
+		    	    		$("#notorderedval").val(people.details.id);
+		    	    	}else{
+		    	    		$(".notallowed").hide();	
+		    	    	}
 		    	    break;
 		    	    case "blacklist":
 		    	    	$(".school").hide();
 		    	    	$(".parent").hide();
 		    	    	$(".blacklist").show();
-		    	    	$("#people_identity").text(people.identity);
-		    	    	$("#people_id_society").text(people.message.id);
-		    	    	$("#people_canleave_school").text("N");
-		    	    	$("#people_name").text(people.message.name);
-		    	    	$("#contact_name").text(people.message.personincharge+"cell: "+people.message.personinchargephone);
-		    	    	$("#note").text(people.message.note);
+		    	    	$("#people_identity").text(people.details.identity);
+		    	    	$("#people_id_society").text(people.details.id);
+		    	    	$("#people_canleave_school").text(people.result);
+		    	    	$("#people_name").text(people.details.name);
+		    	    	$("#contact_name").text(people.details.contactName+"  cell: "+people.details.contactPhone);
+		    	    	$("#note").text(people.details.note);
 		    	    break;
 		    	    case "student":
 		    	    	$(".parent").hide();
 		    	    	$(".blacklist").hide();
 		    	    	$(".school").show();
-		    	    	$("#people_identity").text(people.identity);
-		    	    	$("#people_id_school").text(people.message.id);
-		    	    	$("#people_name").text(people.message.name);
-		    	    	$("#people_canleave_school").text(people.message.canleave);
+		    	    	$("#people_identity").text(people.details.identity);
+		    	    	$("#people_id_school").text(people.details.id);
+		    	    	$("#people_name").text(people.details.name);
+		    	    	$("#people_canleave_school").text(people.result);
 			    	break;
 		    	    default:
 		    	    //worker
 		    	    	$(".parent").hide();
 	    	    		$(".blacklist").hide();
 	    	    		$(".school").show();
-		    	    	$("#people_identity").text(people.identity);
-		    	    	$("#people_canleave_school").text("Y");
-		    	    	$("#people_id_school").text(people.message.id);
-		    	    	$("#people_name").text(people.message.name);
-		    	    	$("#people_canleave_school").text(people.message.canleave);
+		    	    	$("#people_identity").text(people.details.identity);
+		    	    	$("#people_canleave_school").text(people.result);
+		    	    	$("#people_id_school").text(people.details.id);
+		    	    	$("#people_name").text(people.details.name);
 		    	}
 		    	
 		    	
@@ -173,6 +180,7 @@
 		        var message = document.getElementById('text').value;
 		        websocket.send(message);
 		    }
+		    
 	</script>
 </body>
 </html>

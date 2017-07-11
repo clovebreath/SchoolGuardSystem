@@ -48,8 +48,8 @@
     <tr><td>能否通过</td><td id="people_canleave" ></td></tr>
   </tbody>
 </table>
-  	<div id="showing" style="width:100%;height:100px;border:red solid;display:block;"></div>
-  	<div id="newMessage" style="width:100%;height:100px;border:grey solid;"></div>
+  	<div id="showing" style="width:100%;height:150px;border:red solid;display:block;"></div>
+  	<div id="newMessage" style="width:100%;height:150px;border:grey solid;"></div>
   	<textarea id="text" style="width:100%;height:100px;border:grey solid;"></textarea>
   	
     <script language="JavaScript" for="stdfcectl" event="CallBackCheckLiveResult(dwResult)">
