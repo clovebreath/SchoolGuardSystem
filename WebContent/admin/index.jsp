@@ -32,7 +32,7 @@
    <div class="row">
       <div class="col-md-4">
       	<img alt="注册照片"  id="log_pic" src="" style="width:100px;height:auto">
-       <img alt="现场照片"  id="new_pic" src="" style="width:100px;height:auto">
+       <img alt="现场照片"  id="new_pic" src="" style="width:200px;height:auto">
       </div>
       <div class="col-md-8">
       	<table class="table">
