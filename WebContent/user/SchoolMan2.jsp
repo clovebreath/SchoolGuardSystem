@@ -34,7 +34,7 @@
         <img border="1" name="log_pic" id="log_pic" style="margin: 0;height:240px;width:auto;vertical-align: top;display:none;"> 
     </div>     
   	
-    <button type="button"  id="captureBtn" class="btn btn-default btn-block" onclick="capture();changeButton('captureBtn');changeLogpic();changeState();">拍照认证</button>
+    <button type="button"  id="captureBtn" class="btn btn-default btn-block" onclick="capture('new_pic');changeButton('captureBtn');changeLogpic();changeState();">拍照认证</button>
     <a href="../index.jsp"><button id="returnBtn" type="button" disabled="true" class="btn btn-default btn-block" >返回</button></a>
     
 <table class="table">

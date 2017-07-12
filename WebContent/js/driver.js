@@ -11,34 +11,27 @@ var loadParam = function(width, height, rotate, flip, capidx, audio, step, time,
 var openDevice = function() {
     stdfcectl.InitParam(szParam);
     stdfcectl.OpenCapture();
-    show.innerHTML+="openDevice***";
 };
-var capture = function() {
+var capture = function(id) {
 	dataFromCamera='';
 	cap_base64='';
     stdfcectl.GetFace();
-    show.innerHTML+="capture***";   
-    document.getElementById("new_pic").src=dataFromCamera;
+    document.getElementById(id).src=dataFromCamera;
 };
 var showImage = function() {
     stdfcectl.ShowPicture(dataFromCamera);
-    show.innerHTML+="showImage***";    
 };
 var closeDevice = function() {
     stdfcectl.CloseCapture();
 };
 
 var getImage = function(dwResult) {
-	show.innerHTML+="getImage***";    
     if (0 == dwResult) {
         cap_base64 = stdfcectl.GetImageData();
         dataFromCamera = 'data:image/jpeg;base64,'+cap_base64;
-        show.innerHTML+=dataFromCamera;    
         is_cmr = true;
        //setTimeout("showImage()", 3000);
-       show.innerHTML+="getImage success***";    
     } else {
-    	show.innerHTML+="getImage fail error"+dwResult+"***";  
         if (-15 == dwResult) {
             alert("DISCONNECTED");
         }
@@ -59,37 +52,30 @@ var rd_sex="";
 var open_rdcard = function() {
 	var result = rdcard.openport();
 	if(result === 0) {
-		show.innerHTML += 'open succeed\n';
 	}
 	else {
-		show.innerHTML += 'open failed: ' + result + '\n';
+		alert("身份证读取设备连接出错，请重试");
 	}
 };
 var close_rdcard = function() {
 	var result = rdcard.closeport();
 	if(result === 0) {
-		show.innerHTML += 'close succeed\n';
 	}
 	else {
-		show.innerHTML += 'close failed: ' + result + '\n';
 	}
 };
 var read_rdcard = function() {
 	var result = rdcard.ReadCard2();
 	if(result === 0) {
-		show.innerHTML += 'read succeed\n';
 	}
 	else {
-		show.innerHTML += 'read failed: ' + result + '\n';
 	}
 };
 var end_rdcard = function() {
 	var result = rdcard.endread();
 	if(result === 0) {
-		show.innerHTML += 'end read succeed\n';
 	}
 	else {
-		show.innerHTML += 'end read failed: ' + result + '\n';
 	}
 };
 var getMessage = function() {

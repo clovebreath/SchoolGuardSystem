@@ -14,7 +14,6 @@
 						  if (xmlhttp.readyState==4 && xmlhttp.status==200)
 						    {
 								result=xmlhttp.responseText;
-								show.innerHTML+=("--result--"+result); 
 								var people=JSON.parse(result);
 								
 								if ("photo_error" == people.result) {
@@ -81,7 +80,6 @@
 					  if (xmlhttp.readyState==4 && xmlhttp.status==200)
 					    {
 							result=xmlhttp.responseText;
-							show.innerHTML+=("--result--"+result); 
 							var people=JSON.parse(result);
 							
 							if("photo_error"==people.result){
