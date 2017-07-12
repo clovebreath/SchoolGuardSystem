@@ -57,7 +57,7 @@
 			            + "?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8";
 			    String user = "root";
 			    String pwd = "123456";
-			    String sql = "SELECT id,name,identity,status,sname,wname,time FROM schoolsys.record left join worker on record.tid=worker.wid left join student on record.sid=student.sid";
+			    String sql = "SELECT id,name,identity,status,sname,wname,time FROM schoolsys.record left join worker on record.tid=worker.wid left join student on record.sid=student.sid ORDER BY id desc";
 			    Class.forName("com.mysql.jdbc.Driver");
 			    Connection conn = DriverManager.getConnection(connectString, user, pwd);
 			

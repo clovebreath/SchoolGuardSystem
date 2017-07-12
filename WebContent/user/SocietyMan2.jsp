@@ -41,7 +41,7 @@
 			document.getElementById("people_name").innerHTML=rd_name;
         </script>
     </div>    
-    <button id="captureBtn" type="button" disabled="true" class="btn btn-default btn-block" onclick="capture();changeButton('captureBtn');">拍照认证</button>
+    <button id="captureBtn" type="button" disabled="true" class="btn btn-default btn-block" onclick="capture();changeButton('captureBtn');changeState();">拍照认证</button>
     <a href="../index.jsp"><button id="returnBtn" type="button" class="btn btn-default btn-block" >返回</button></a>
     
         <table class="table table-hover">
@@ -62,6 +62,7 @@
 	// 拍照成功回调
 	show.innerHTML="";
 	changeButton('captureBtn');
+	changeButton('returnBtn',false);
 	if(0==dwResult){
 		getImage(dwResult);
 		document.getElementById("new_pic").src=dataFromCamera;

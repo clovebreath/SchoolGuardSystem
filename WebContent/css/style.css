@@ -1,0 +1,196 @@
+@font-face
+{
+font-family: arial;
+src: url('../font/Arial.ttf'),
+     url('../font/arial.eot'); /* IE9+ */
+}
+@font-face
+{
+font-family: optima;
+src: url('../font/optima.ttf'),
+     url('../font/optima.eot'); /* IE9+ */
+}
+*{
+	margin: 0;
+	border: 0;
+	text-align: center;
+}
+html , body{
+	letter-spacing:0.3em;
+	font-family: arial;
+	height: 80%;
+	background-color: #FFF5C9;
+}
+#banner{
+	text-align: left;
+	margin-top: 3%;
+}
+#banner p{
+	display: inline-block;
+	padding: 5px 10px;
+	text-align: left;
+	background-color: #EAE5D4;
+}
+#footer{
+	text-align: right;
+	margin-bottom: 3%;
+}
+#main{
+	padding-top:10% ;
+	padding-bottom:15% ;
+	height: auto;
+}
+#main p{
+	margin-top: 2.5%;
+}
+button{
+	color: white;
+	font-size: 1.1em;
+	letter-spacing:0.3em;
+}
+#staff-btn{
+	max-width:250px;
+	min-height:45px;
+	margin-top: 2.5%;
+	width: 30%;
+	height: 10%;
+	background-color: #A0A0A0;
+}
+#visitor-btn{
+	max-width:250px;
+	min-height:45px;
+	margin-top: 2.5%;
+	width: 30%;
+	height: 10%;
+	background-color: #A0A0A0;
+}
+
+#footer-bg-letter{
+	position:fixed;
+	right:0px;
+	bottom:0px;
+	z-index:0;
+	font-size: 3em;
+	font-family: optima;
+	display: inline-block;
+	color: #D7C7BE;
+}
+#footer-front-text{
+	margin: 30px 15px ;
+	position:fixed;
+	right:0px;
+	bottom:0px;
+	z-index:1;
+	display: block;
+	color: #D7C7BE;
+	background-color: #FFF5C9;
+	
+}
+#staff-bg-letter{
+	position:fixed;
+	left:0px;
+	top:0;
+	z-index:0;
+	color: #D7C7BE;
+	font-size: 10em;
+	letter-spacing:0.3em;
+	font-family: optima;
+	display: inline-block;
+}
+#staff-main{
+	float: left;
+	display: inline-block;
+	margin: 5% 2% 10% 10%;
+	width: 50%;
+	height: 100%;
+}
+#staff-right{
+	float: left;
+	display: inline-block;
+	margin: 5% 10% 10% 2%;
+	width: 26%;
+	height: 100%;
+}
+#camera{
+	width:100%;
+	height:100%;
+	z-index:1;
+	background-color: #A0A0A0;
+}
+#staff-message{
+	margin-bottom: 4%;
+	height:64%;
+	background-color: #EDE9DC;
+}
+#log_pic{
+	padding-top:10px ;
+	padding-bottom: 10px;
+	width: 30%;
+	height: auto;
+}
+#new_pic{
+	padding-top:10px ;
+	padding-bottom: 10px;
+	width: 60%;
+	height: auto;
+}
+#people_data{
+	width: 90%;
+	margin: 0 5%;
+	letter-spacing:normal;
+}
+.tb-front{
+	width: 50%;
+}
+.tb-back{
+	width: 50%;
+}
+#staff-tips{
+	margin-top: 4%;
+	margin-bottom: 4%;
+	height:14%;
+	background-color: #EDE9DC;
+}
+#staff-tips-message{
+  position: relative;
+  top:50%;
+  transform:translateY(-50%);
+}
+#staff-btnarea{
+	margin-top: 5%;
+	height:14%;
+}
+#capture{
+	font-family: arial;
+	color: black;
+	width: 48%;
+	height: 100%;
+}
+#back{
+	font-family: arial;
+	color: black;
+	width: 48%;
+	height: 100%;
+}
+#vi_log_pic{
+	padding-top:10px ;
+	padding-bottom: 10px;
+	width: 22%;
+	height: auto;
+}
+#vi_idcard_pic{
+	padding-top:10px ;
+	padding-bottom: 10px;
+	width: 22%;
+	height: auto;
+}
+#vi_new_pic{
+	padding-top:10px ;
+	padding-bottom: 10px;
+	width: 44%;
+	height: auto;
+}
+.glyphicon{
+	position: relative;
+   	top: 6px;
+}

@@ -671,6 +671,7 @@ public class dbTools {
 			while (rs.next()) {
 				resultMap.put("identity", identity);
 				resultMap.put("id", rs.getString("id"));
+				resultMap.put("name", rs.getString("name"));
 				resultMap.put("note", rs.getString("note"));
 				resultMap.put("imgnow", imgnow);
 				resultMap.put("imglog", rs.getString("pic"));

@@ -108,10 +108,20 @@ var get_data = function() {
 
 //button_control
 var changeButton=function(){
-	document.getElementById(arguments[0]).disabled=!document.getElementById(arguments[0]).disabled;
+	if(arguments.length==1){
+		document.getElementById(arguments[0]).disabled=!document.getElementById(arguments[0]).disabled;		
+	}else{
+		document.getElementById(arguments[0]).disabled=arguments[1];			
+	}
 }
 //log_image_control
 var changeLogpic=function(){
 	document.getElementById("log_pic").style.display="none";
 }
 
+var changeState=function(){
+	document.getElementById("people_identity").innerHTML="";
+	document.getElementById("people_id").innerHTML="";
+	document.getElementById("people_name").innerHTML="";
+	document.getElementById("people_canleave").innerHTML="";
+}

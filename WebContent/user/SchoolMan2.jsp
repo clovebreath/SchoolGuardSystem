@@ -34,8 +34,8 @@
         <img border="1" name="log_pic" id="log_pic" style="margin: 0;height:240px;width:auto;vertical-align: top;display:none;"> 
     </div>     
   	
-    <button type="button"  id="captureBtn" class="btn btn-default btn-block" onclick="capture();changeButton('captureBtn');changeLogpic();">拍照认证</button>
-    <a href="../index.jsp"><button id="returnBtn" type="button" class="btn btn-default btn-block" >返回</button></a>
+    <button type="button"  id="captureBtn" class="btn btn-default btn-block" onclick="capture();changeButton('captureBtn');changeLogpic();changeState();">拍照认证</button>
+    <a href="../index.jsp"><button id="returnBtn" type="button" disabled="true" class="btn btn-default btn-block" >返回</button></a>
     
 <table class="table">
   <thead>
@@ -55,14 +55,13 @@
     <script language="JavaScript" for="stdfcectl" event="CallBackCheckLiveResult(dwResult)">
 	// 采集成功回调
 	changeButton('captureBtn');
-
+	changeButton('returnBtn',false);
 	if(0==dwResult){
 		show.innerHTML="";
 		getImage(dwResult);
 		document.getElementById("new_pic").src=dataFromCamera;
 		schoolManButtion(cap_base64);
-	}else{
-		
+	}else{		
 		alert("请调整姿势重新拍照！");
 		
 	}
