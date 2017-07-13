@@ -13,6 +13,7 @@
 					xmlhttp.onreadystatechange=function(){//根据返回数据shi'x
 						  if (xmlhttp.readyState==4 && xmlhttp.status==200)
 						    {
+							  	changeButton('capture',false);
 								result=xmlhttp.responseText;
 								var people=JSON.parse(result);
 								
@@ -174,7 +175,74 @@
 					xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 					xmlhttp.send(data);
 				}	
-			    var setNotAllowedParent=function(id){
+			    
+				
+				var getRecord=function(currPage){
+					var data="currpage="+currPage;
+					console.log(data);
+					if (window.XMLHttpRequest){
+					    //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+					    xmlhttp=new XMLHttpRequest();
+					}else{
+					    // IE6, IE5 浏览器执行代码
+					    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					xmlhttp.onreadystatechange=function(){
+					  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+					  {
+						  var result=xmlhttp.responseText;
+						  console.log("response",xmlhttp.responseText);
+						  var record=JSON.parse(result);
+						  document.getElementById("table_body").innerHTML="";
+						  record.records.forEach(setRecordTable, this);
+						  document.getElementById("page_info").innerHTML="本页为第 "+record.currpage +" 页，一共 "+record.pagecount +" 页。";
+						  currentPage=record.currpage;
+					    }else{
+					    	console.log("response","error"+xmlhttp.readyState+ xmlhttp.status);
+					    }
+					  } 
+					//将图片数据传递给getPhotoAndCard
+					xmlhttp.open("POST","../getRecord",true);
+					xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+					xmlhttp.send(data);	
+				}
+
+				var getBlackRecord=function(currPage){
+					var data="currpage="+currPage;
+					console.log(data);
+					if (window.XMLHttpRequest){
+					    //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+					    xmlhttp=new XMLHttpRequest();
+					}else{
+					    // IE6, IE5 浏览器执行代码
+					    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					xmlhttp.onreadystatechange=function(){
+					  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+					  {
+						  var result=xmlhttp.responseText;
+						  console.log("response",xmlhttp.responseText);
+						  var record=JSON.parse(result);
+						  document.getElementById("table_body").innerHTML="";
+						  record.records.forEach(setRecordTable, this);
+						  document.getElementById("page_info").innerHTML="本页为第 "+record.currpage +" 页，一共 "+record.pagecount +" 页。";
+						  currentPage=record.currpage;
+					    }else{
+					    	console.log("response","error"+xmlhttp.readyState+ xmlhttp.status);
+					    }
+					  } 
+					//将图片数据传递给getPhotoAndCard
+					xmlhttp.open("POST","../getBlackRecord",true);
+					xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+					xmlhttp.send(data);	
+				}
+				
+				var setRecordTable=function(currentValue){//tbid, id, name,identity, name_stu, teacher, status, date
+					add_data('table_body',currentValue.id,currentValue.name,currentValue.identity, currentValue.sname, currentValue.wname,currentValue.status,currentValue.time)
+				}
+				
+				
+				var setNotAllowedParent=function(id){
 					var data="id="+id;
 					if (window.XMLHttpRequest){
 					    //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码

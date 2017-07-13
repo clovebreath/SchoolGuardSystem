@@ -10,8 +10,8 @@
 <html lang=“zh-CN”>
 	<head>
 		<meta charset="UTF-8">
-	    <script type="text/javascript" src="../js/ajax.js"></script>
 	    <script type="text/javascript" src="../js/driver.js"></script>
+	    <script type="text/javascript" src="../js/ajax.js"></script>
 	    <script type="text/javascript" src="../js/operation.js"></script>
 		<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
 		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -54,14 +54,15 @@
 		</div>
 		<script language="JavaScript" for="stdfcectl" event="CallBackCheckLiveResult(dwResult)">
 			// 采集成功回调
-			changeButton('capture');
 			changeButton('back',false);
 			if(0==dwResult){
+				changeButton('capture',true);
 				getImage(dwResult);
 				document.getElementById("new_pic").src=dataFromCamera;
 				document.getElementById("staff-tips-message").innerHTML="拍照成功，正在匹配数据，请稍后......";
 				schoolManButtion(cap_base64);
 			}else{		
+				changeButton('capture');
 				document.getElementById("staff-tips-message").innerHTML="点击拍照进行认证";
 				alert("请调整姿势重新拍照！");
 			}
