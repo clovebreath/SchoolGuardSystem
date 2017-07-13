@@ -98,6 +98,7 @@ button{
 	display: inline-block;
 }
 #staff-main{
+	position: relative;
 	float: left;
 	display: inline-block;
 	margin: 5% 2% 10% 10%;
@@ -105,6 +106,7 @@ button{
 	height: 100%;
 }
 #staff-right{
+	position: relative;
 	float: left;
 	display: inline-block;
 	margin: 5% 10% 10% 2%;

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.sql.Connection,java.sql.Statement,java.util.Scanner,java.sql.*"%>
+
 <!DOCTYPE html>
 <html lang=“zh-CN”>
 <head>
@@ -31,7 +32,7 @@
 			String pgcnt = ""; //网址传递的每页最大显示数目
 			int RowAmount = 0; //数据库中总的行数
 			int PageAmount = 0; //数据库所有页面可以组成多少个页面
-			int PageSize; //每页最大显示数目
+			int PageSize=5; //每页最大显示数目
 			int PageNow;  //当前页面
 			ResultSet rs;
 			if(request.getParameter("pgno")!=null){  //获取网址从传递的数据

@@ -54,8 +54,8 @@
 		    
 		  </tbody>
 		</table>
-		<button type="button" id="notorderedval"class="btn btn-default btn-block notordered"  style="display: none" onclick="javascript:setNotAllowedParent($('#notorderedval').val());javascript:$('.notallowed').hide();	">允许通过</button>				
-		<button type="button" class="btn btn-default btn-block notordered"  style="display: none" onclick="javascript:$('.notallowed').hide();">不许通过</button>		
+		<button type="button" id="notorderedval"class="btn btn-default btn-block notordered"  style="display: none" onclick="javascript:setNotAllowedParent($('#notorderedval').val());javascript:$('.notordered').hide();	">允许通过</button>				
+		<button type="button" id="notorderedbtn" class="btn btn-default btn-block notordered"  style="display: none" onclick="javascript:$('.notordered').hide();">不许通过</button>		
       </div>      
    </div>
    <div class="row">...</div>
@@ -130,8 +130,9 @@
 		    	    	$("#child_name").text(people.details.stuName);
 		    	    	$("#order_teacher").text(people.details.teacherName);
 		    	    	if("notallowed"==people.result){
-		    	    		$(".notallowed").show();
-		    	    		$("#notorderedval").val(people.details.id);
+		    	    		$("#notorderedval").show();
+		    	    		$("#notorderedbtn").show();
+		    	    		$("#notorderedval").val(people.details.recordid);
 		    	    	}else{
 		    	    		$(".notallowed").hide();	
 		    	    	}

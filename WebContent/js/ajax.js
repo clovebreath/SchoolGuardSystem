@@ -16,34 +16,31 @@
 								result=xmlhttp.responseText;
 								var people=JSON.parse(result);
 								
-								if ("photo_error" == people.result) {
-//									document.getElementById("people_identity").innerHTML='';
-//									document.getElementById("people_id").innerHTML='';
-//									document.getElementById("people_name").innerHTML='';
-//									document.getElementById("people_canleave").innerHTML='';
-									document.getElementById("log_pic").src='../image/no28.png';
-									document.getElementById("log_pic").style.display="inline";
-									
-									alert("照片中无法识别人脸，请重新拍照");
-									
-								}else if ("not_match"==people.result){
-//									document.getElementById("people_identity").innerHTML='';
-//									document.getElementById("people_id").innerHTML='';
-//									document.getElementById("people_name").innerHTML='';
-//									document.getElementById("people_canleave").innerHTML='';
-									document.getElementById("log_pic").src='../image/no28.png';
-									document.getElementById("log_pic").style.display="inline";
-									
-									alert("无匹配数据，请重新拍照");
+								if ("photo_error" == people.result) {								
+									document.getElementById("staff-tips-message").innerHTML="照片中无法识别人脸，请重新拍照";
+									document.getElementById("new_pic").src="";
+
+								}else if ("not_match"==people.result){							
+									document.getElementById("staff-tips-message").innerHTML="无匹配数据，请重新拍照";
 									
 								}else{
 									document.getElementById("people_identity").innerHTML=people.details.identity;
 									document.getElementById("people_id").innerHTML=people.details.id;
 									document.getElementById("people_name").innerHTML=people.details.name;
-									document.getElementById("people_canleave").innerHTML=people.result;
 									document.getElementById("log_pic").style.display="inline";
 									document.getElementById("log_pic").src= 'data:image/png;base64,'+people.details.imglog;
-									
+									if(people.result=="allowed"){
+										console.log(people.result);
+										console.log('1');
+										document.getElementById("people_canleave").innerHTML="允许通过";
+										document.getElementById("staff-tips-message").innerHTML="验证通过，可以出入。";										
+									}else{
+										console.log('2');
+										console.log(people.result);
+										document.getElementById("people_canleave").innerHTML="不许通过";
+										document.getElementById("staff-tips-message").innerHTML="对不起，您没有请假，无法离开学校。";										
+									}
+
 									delete people.details.imglog;
 									delete people.details.imgnow;
 									console.log(JSON.stringify(people));
@@ -85,15 +82,12 @@
 							if("photo_error"==people.result){
 								
 								console.log(new Date(),people.result);
-								alert("照片中无法识别人脸，请重新拍照");
-								document.getElementById("new_pic").src="";
+								document.getElementById("staff-tips-message").innerHTML="照片中无法识别人脸，请重新拍照";
 								
 							}else if ("not_match"==people.result){
-								
-								
-								alert("照片与身份证不匹配，请重试！");
-								document.getElementById("new_pic").src="";
-								document.getElementById('captureBtn').disabled= true ;
+
+								document.getElementById("staff-tips-message").innerHTML="照片与身份证不匹配，请重试！";
+								document.getElementById('capture').disabled= false ;
 								
 							}else if("noresult"==people.identity){
 								
@@ -101,16 +95,24 @@
 								document.getElementById("people_id").innerHTML=people.message.id;
 								document.getElementById("people_name").innerHTML=people.message.name;
 								document.getElementById("people_canleave").innerHTML='N';
-								alert("请联系门卫进行登记注册");
-//								document.getElementById("log_pic").style.display="inline";
-//								document.getElementById("log_pic").src= 'data:image/png;base64,'+people.message.pic;
-								//window.location.href="success2.jsp"; 
+								document.getElementById("staff-tips-message").innerHTML="请联系门卫进行登记注册";
+								document.getElementById('capture').disabled= true ;
+
 							}else if("parent"==people.details.identity){
 								document.getElementById("people_identity").innerHTML=people.details.identity;
 								document.getElementById("people_id").innerHTML=people.details.id;
 								document.getElementById("people_name").innerHTML=people.details.name;
 								document.getElementById("people_canleave").innerHTML=people.result;
-								
+								document.getElementById('capture').disabled= true ;
+
+								if(people.result=="allowed"){
+									
+									document.getElementById("people_canleave").innerHTML="允许通过";
+									document.getElementById("staff-tips-message").innerHTML="验证通过，可以出入。";	
+								}else{
+									document.getElementById("people_canleave").innerHTML="不许通过";
+									document.getElementById("staff-tips-message").innerHTML="对不起，您没有预约，无法进入学校。";		
+								}
 								delete people.details.imgnow;
 								delete people.details.imglog;
 								delete people.details.imgstu;
@@ -123,7 +125,10 @@
 								document.getElementById("people_identity").innerHTML=people.details.identity;
 								document.getElementById("people_id").innerHTML=people.details.id;
 								document.getElementById("people_name").innerHTML=people.details.name;
-								document.getElementById("people_canleave").innerHTML=people.result;
+								document.getElementById('capture').disabled= true ;
+
+									document.getElementById("people_canleave").innerHTML="不许通过";
+									document.getElementById("staff-tips-message").innerHTML="对不起，您身份有问题，无法进入学校。";	
 								delete people.details.imgnow;
 								delete people.details.imglog;
 								console.log(JSON.stringify(people));
@@ -178,12 +183,12 @@
 					    // IE6, IE5 浏览器执行代码
 					    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 					}
-					xmlhttp.onreadystatechange=function(){//图片数据预处理之后，将图片数据传递给getResult
+					xmlhttp.onreadystatechange=function(){
 					  if (xmlhttp.readyState==4 && xmlhttp.status==200)
 					  {
 						  var result=xmlhttp.responseText;
 						  console.log("response",xmlhttp.responseText);
-						  
+						  document.getElementById("people_canleave_school").innerHTML='允许通过';
 					    }else{
 					    	console.log("response","error"+xmlhttp.readyState+ xmlhttp.status);
 					    }

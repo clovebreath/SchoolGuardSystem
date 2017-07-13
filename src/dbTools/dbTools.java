@@ -464,7 +464,24 @@ public class dbTools {
 						resultMap.put("newpic", rs.getString("newpic"));
 						resultMap.put("logpic", rs.getString("logpic"));
 					}
-				} else {
+				} else if (rs.getString("identity").equals("blacklist")) {
+					String sql = "SELECT record.id,record.name,record.identity,status,time,record.pic as newpic,blacklist.pic as logpic,wname FROM schoolsys.record left join blacklist on record.pid=blacklist.id left join worker on blacklist.contactid=worker.wid where pid=?;";
+					ps = conn.prepareStatement(sql);
+					ps.setString(1, pid);
+					rs = ps.executeQuery();
+					while (rs.next()) {
+						resultMap.put("id", rs.getString("id"));
+						resultMap.put("name", rs.getString("name"));
+						resultMap.put("identity", rs.getString("identity"));
+						resultMap.put("status", rs.getString("status"));
+						resultMap.put("sname", null);
+						resultMap.put("tname", null);
+						resultMap.put("contactname", rs.getString("wname"));
+						resultMap.put("date", rs.getString("time"));
+						resultMap.put("newpic", rs.getString("newpic"));
+						resultMap.put("logpic", rs.getString("logpic"));
+					}
+				}else {
 					String sql = "SELECT record.id,record.name,record.identity,status,time,record.pic as newpic,worker.wpic as logpic FROM schoolsys.record left join worker on record.pid=worker.wid where pid=?;";
 					ps = conn.prepareStatement(sql);
 					ps.setString(1,pid);
@@ -1012,12 +1029,12 @@ public class dbTools {
 
 //	 public static void main(String[] args) {
 //	 Map<String, Object> map = new HashMap<String, Object>();
-//	 map.put("id", "201400300001");
-//	 map.put("identity", "student");
-//	 map.put("imgnow", "sadsadasasf");
+//	 map.put("id", "410581199605130514");
+//	 map.put("identity", "blacklist");
+//	 map.put("imgnow", "35s34f5d4f");
 //	 Gson gson = new Gson();
 //	 String json = gson.toJson(map);
 //	 dbTools db = new dbTools();
-//	 System.out.println(db.getRecordDetailById(43));
+//	 System.out.println(db.getRecordDetailById(45));
 //	 }
 }

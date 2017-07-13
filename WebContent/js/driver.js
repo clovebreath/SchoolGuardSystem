@@ -102,12 +102,16 @@ var changeButton=function(){
 }
 //log_image_control
 var changeLogpic=function(){
-	document.getElementById("log_pic").style.display="none";
+	document.getElementById("log_pic").src="../image/000.png";
+	document.getElementById("new_pic").src="../image/888.png";
 }
 
 var changeState=function(){
-	document.getElementById("people_identity").innerHTML="";
-	document.getElementById("people_id").innerHTML="";
-	document.getElementById("people_name").innerHTML="";
-	document.getElementById("people_canleave").innerHTML="";
+	document.getElementById("staff-tips-message").innerHTML="正在拍照，请直视摄像头......";
+	if("staff"==arguments[0]){
+		document.getElementById("people_identity").innerHTML="---";
+		document.getElementById("people_id").innerHTML="---";
+		document.getElementById("people_name").innerHTML="---";
+		document.getElementById("people_canleave").innerHTML="---";
+	}
 }

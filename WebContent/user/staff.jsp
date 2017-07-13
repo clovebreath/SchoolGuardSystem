@@ -41,10 +41,10 @@
 				</table>
 			</div>
 			<div id="staff-tips">
-				<p id="staff-tips-message">正在拍照中...</p>
+				<p id="staff-tips-message">请点击拍照进行认证</p>
 			</div>
 			<div id="staff-btnarea">
-				<button id="capture" onclick="capture('new_pic');changeButton('capture');changeLogpic();changeState();">拍照</button>
+				<button id="capture" onclick="capture('new_pic');changeButton('capture');changeLogpic();changeState('staff');">拍照</button>
 				<button id="back" onclick="window.history.back(-1);">返回</button>
 			</div>
 		</div>		
@@ -59,8 +59,10 @@
 			if(0==dwResult){
 				getImage(dwResult);
 				document.getElementById("new_pic").src=dataFromCamera;
+				document.getElementById("staff-tips-message").innerHTML="拍照成功，正在匹配数据，请稍后......";
 				schoolManButtion(cap_base64);
 			}else{		
+				document.getElementById("staff-tips-message").innerHTML="点击拍照进行认证";
 				alert("请调整姿势重新拍照！");
 			}
 		</script>
@@ -92,7 +94,9 @@
         (function(){
         	if (document.readyState && document.readyState == 'complete') {
         		// doing
-        		loadParam(640, 480, 0, 0, 0, 1, 3000, 15, 0, 0, 18, 18, 18, 18, 1, 256, 15);
+        	//	loadParam(document.getElementById("staff-main").style.width, document.getElementById("staff-main").style.height, 0, 0, 0, 1, 3000, 10, 0, 0, 18, 18, 18, 18, 1, 256, 15);
+
+        		loadParam(600, 450, 0, 0, 0, 1, 3000, 10, 0, 0, 18, 18, 18, 18, 1, 256, 15);
         		openDevice();
         	} else {
         		setTimeout(arguments.callee, 10);

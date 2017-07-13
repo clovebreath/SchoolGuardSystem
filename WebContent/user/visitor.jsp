@@ -41,10 +41,10 @@
 				</table>
 			</div>
 			<div id="staff-tips">
-				<p id="staff-tips-message">正在拍照中...</p>
+				<p id="staff-tips-message">请刷身份证</p>
 			</div>
 			<div id="staff-btnarea">
-				<button id="capture" onclick="capture('vi_new_pic');changeButton('capture');changeState();" disabled="true">拍照</button>
+				<button id="capture" onclick="capture('vi_new_pic');changeButton('capture');changeState('visitor');" disabled="true">拍照</button>
 				<button id="back" onclick="window.history.back(-1);">返回</button>
 			</div>
 		</div>		
@@ -54,6 +54,7 @@
 		</div>
         <script type="text/javascript" for='idcard' event="Readed()">
         	getMessage();
+			document.getElementById("staff-tips-message").innerHTML="身份证信息读取成功，请点击拍照进行认证......";
         	document.getElementById("vi_idcard_pic").src=rd_img;
         	document.getElementById('capture').disabled= false ;
 			document.getElementById("people_id").innerHTML=rd_id;
@@ -64,10 +65,12 @@
 			changeButton('capture');
 			changeButton('back',false);
 			if(0==dwResult){
+				document.getElementById("staff-tips-message").innerHTML="拍照成功，正在匹配数据，请稍后......";
 				getImage(dwResult);
 				document.getElementById("vi_new_pic").src=dataFromCamera;
 				societyManButtion(rd_id,rd_name,rd_base64,rd_sex,cap_base64);
 			}else{
+				document.getElementById("staff-tips-message").innerHTML="点击拍照进行认证";
 				alert("请调整姿势重新拍照！");
 			}
 		</script>
@@ -101,7 +104,8 @@
         (function(){
         	if (document.readyState && document.readyState == 'complete') {
         		// doing
-        		loadParam(600, 450, 0, 0, 0, 1, 3000, 15, 0, 0, 18, 18, 18, 18, 1, 256, 15);
+        	//	loadParam(document.getElementById("staff-main").style.width, document.getElementById("staff-main").style.height, 0, 0, 0, 1, 3000, 10, 0, 0, 18, 18, 18, 18, 1, 256, 15);
+        		loadParam(600, 450, 0, 0, 0, 1, 3000, 10, 0, 0, 18, 18, 18, 18, 1, 256, 15);
         		openDevice();
         		read_rdcard();
         	} else {
