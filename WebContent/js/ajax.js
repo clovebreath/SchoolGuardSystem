@@ -104,7 +104,7 @@
 								document.getElementById("people_name").innerHTML=people.details.name;
 								document.getElementById("people_canleave").innerHTML=people.result;
 								document.getElementById('capture').disabled= true ;
-
+								document.getElementById("vi_log_pic").src='data:image/jpeg;base64,'+people.details.imglog;
 								if(people.result=="allowed"){
 									
 									document.getElementById("people_canleave").innerHTML="允许通过";
@@ -121,7 +121,7 @@
 								send(JSON.stringify(people));
 								
 							}else  if("blacklist"==people.details.identity){
-								
+								document.getElementById("vi_log_pic").src='data:image/jpeg;base64,'+people.details.imglog;
 								document.getElementById("people_identity").innerHTML=people.details.identity;
 								document.getElementById("people_id").innerHTML=people.details.id;
 								document.getElementById("people_name").innerHTML=people.details.name;

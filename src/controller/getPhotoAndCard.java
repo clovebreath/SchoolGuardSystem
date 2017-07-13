@@ -150,11 +150,11 @@ public class getPhotoAndCard extends HttpServlet {
 				container.put("result", res);
 			    out.print(gson2.toJson(container));
 			}else if(res.equals(ProjectInfomation.ID_CARD_ERROR)){
-				//将此人基本信息返回给主页面，同时将是否允许进出学校返回给主页面
+				//身份证信息无人脸
 			    container.put("result", res);
 			    out.print(gson2.toJson(container));
 			}else if(res.equals(ProjectInfomation.NOT_MATCH)){
-				//将此人基本信息返回给主页面，同时将是否允许进出学校返回给主页面
+				//人证不和一
 			    container.put("result", res);
 			    out.print(gson2.toJson(container));
 			}else{

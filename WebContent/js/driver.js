@@ -16,7 +16,7 @@ var capture = function(id) {
 	dataFromCamera='';
 	cap_base64='';
     stdfcectl.GetFace();
-    document.getElementById(id).src=dataFromCamera;
+    document.getElementById(id).src="../image/888.png";
 };
 var showImage = function() {
     stdfcectl.ShowPicture(dataFromCamera);
@@ -114,4 +114,11 @@ var changeState=function(){
 		document.getElementById("people_name").innerHTML="---";
 		document.getElementById("people_canleave").innerHTML="---";
 	}
+}
+var defaultSet=function(){
+	document.getElementById("vi_log_pic").src="../image/000.png";
+	document.getElementById("vi_idcard_pic").src="../image/000.png";
+	document.getElementById("vi_new_pic").src="../image/888.png";
+	document.getElementById("people_identity").innerHTML="---";
+	document.getElementById("people_canleave").innerHTML="---";
 }

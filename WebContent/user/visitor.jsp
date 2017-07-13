@@ -53,6 +53,7 @@
 			<p id="footer-front-text">「眼神科技」月蚀</p>
 		</div>
         <script type="text/javascript" for='idcard' event="Readed()">
+        	defaultSet();
         	getMessage();
 			document.getElementById("staff-tips-message").innerHTML="身份证信息读取成功，请点击拍照进行认证......";
         	document.getElementById("vi_idcard_pic").src=rd_img;
