@@ -10,11 +10,30 @@ var show_realtime_info = function() {
     document.getElementById("info_div").style.display="block";
 };
 var show_all_data = function() {
+	currentPage=1;
+	$("#previous").removeAttr("onclick");
+	$("#next").removeAttr("onclick");
+	$("#previous").attr("onclick","getRecord(parseInt(currentPage)-1);");
+	$("#next").attr("onclick","getRecord(parseInt(currentPage)+1);");
+//	document.getElementById("previous").onclick=null; 
+//	document.getElementById("next").onclick=null; 
+//	document.getElementById("previous").onclick=getRecord(parseInt(currentPage)-1);
+//	document.getElementById("next").onclick=getRecord(parseInt(currentPage)+1);
     document.getElementById("data_table").style.display="block";
     document.getElementById("info_div").style.display = "none";
+    document.getElementById("previous").on
     getRecord(currentPage);
 };
 var show_black_record = function() {
+	currentPage=1;
+	$("#previous").removeAttr("onclick");
+	$("#next").removeAttr("onclick");
+	$("#previous").attr("onclick","getBlackRecord(parseInt(currentPage)-1);");
+	$("#next").attr("onclick","getBlackRecord(parseInt(currentPage)+1);");
+//	document.getElementById("previous").onclick=null; 
+//	document.getElementById("next").onclick=null; 
+//	document.getElementById("previous").onclick=getBlackRecord(parseInt(currentPage)-1);
+//	document.getElementById("previous").onclick=getBlackRecord(parseInt(currentPage)+1);
     document.getElementById("data_table").style.display="block";
     document.getElementById("info_div").style.display = "none";
     getBlackRecord(currentPage);
