@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>innerpage</title>
+
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="innerOp.js"></script>
+    <script type="text/javascript" src="../js/ajax.js"></script>
+</head>
+
+<body>
+    <div id="content_bg">
+    </div>
+    <div id="wrapper">
+        <div id="menu">
+            <nav>
+                <ul>
+                    <li id="realtime_info" class="current" onclick="show_realtime_info()">
+                        <a href="#">实时信息</a>
+                    </li>
+                    <li id="all_record" onclick="show_all_data()">
+                        <a href="#">所有记录</a>
+                    </li>
+                    <li id="black_record" onclick="show_black_record()">
+                        <a href="#">黑名单记录</a>
+                  </li>
+              <!--        <li id="unreserved_record" onclick="show_unreserved_record()">
+                        <a href="#">未预约记录</a>
+                    </li>	-->
+                    <li id="settings" onclick="show_settings()">
+                        <a href="#">设置</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div id="content">
+            <div id="info_div" class="each_ctt">
+                <div id="photos">
+                    <img src="" width="400" height="300" id="cap_photo">
+                    <div id="s_photo">
+                        <img src="" width="100" height="120" id="db_photo">
+                        <img src="" width="100" height="120" id="id_photo">
+                        <div id="expr">身份：</div>
+                    </div>
+                </div>
+                <div id="text_info">
+                    <div id="name">姓名：</div>
+                    <div id="id_num">身份证号：</div>
+                    <div id="name_stu">学生姓名：</div>
+                    <div id="cls">学生班级：</div>
+                    <div id="teacher">班主任：</div>
+                    <div id="t_contact">班主任联系方式：</div>
+                </div>
+                <div id="status">
+                	通过
+                </div>
+            </div>
+            <form id="data_table" class="each_ctt" style="display: none;">
+                <div id="data_table_wrapper">
+                    <table id="data_table_id">
+                        <thead>
+                            <tr>
+                                <th class="cols" rowspan="1" colspan="1">序号</th>
+                                <th class="colsnotindex" rowspan="1" colspan="1">姓名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                <th class="colsnotindex" rowspan="1" colspan="1">身份&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                <th class="colsnotindex" rowspan="1" colspan="1">学生姓名&nbsp;&nbsp;</th>
+                                <th class="colsnotindex" rowspan="1" colspan="1">班主任&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                <th class="colsnotindex" rowspan="1" colspan="1">状态&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                <th class="colsnotindex" rowspan="1" colspan="1">时间&nbsp;&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table_body" >
+
+                        </tbody>
+                    </table>
+                    <div id="page_end">
+                        <div id="page_info"></div>
+                        <div id="page_up_down">
+                            <ul>
+                                <li id="previous" onclick="getRecord(parseInt(currentPage)-1);">
+                                    <a href="#">上一页</a>
+                                </li>
+                                <li id="next" onclick="getRecord(parseInt(currentPage)+1);">
+                                    <a href="#">下一页</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" onclick="add_data('table_body', 'NEVRE', '111111111111111111', 'flute', '18班', 'VAN', '12345678901', '', '拒绝')">add</button>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+		
+		   var websocket = null;
+		    //判断当前浏览器是否支持WebSocket
+		    if ('WebSocket' in window) {
+		        websocket = new WebSocket("ws://localhost:8080/SchoolGuardSystem/websocket");
+		    }
+		    else {
+		        alert('当前浏览器 Not support websocket')
+		    }
+
+		    //连接发生错误的回调方法
+		    websocket.onerror = function () {
+		        setMessageInnerHTML("WebSocket连接发生错误");
+		    };
+
+		    //连接成功建立的回调方法
+		    websocket.onopen = function () {
+		        //setMessageInnerHTML("WebSocket连接成功");
+		    }
+
+		    //接收到消息的回调方法
+		    websocket.onmessage = function (event) {
+		        setMessage(event.data);
+		    }
+
+		    //连接关闭的回调方法
+		    websocket.onclose = function () {
+		       // setMessageInnerHTML("WebSocket连接关闭");
+		    }
+
+		    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+		    window.onbeforeunload = function () {
+		        closeWebSocket();
+		    }
+		    
+		    //将消息显示在网页上
+			function setMessageInnerHTML(data){
+			    document.getElementById('newMessage').innerHTML += data + '<br/>';   
+			}
+		    
+		    function setMessage(data) {
+
+		    	var people=JSON.parse(data);
+		    	getPicture(people.details.recordid);
+		    	switch (people.details.identity)
+		    	{
+		    	    case "parent":
+		    	    	$(".school").hide();
+		    	    	$(".blacklist").hide();
+		    	    	$(".parent").show();
+		    	    	$("#people_identity").text(people.details.identity);
+		    	    	$("#people_id_society").text(people.details.id);
+		    	    	$("#people_name").text(people.details.name);
+		    	    	$("#people_canleave_school").text(people.result);
+		    	    	$("#people_canleave_society").text(people.result);
+		    	    	$("#child_name").text(people.details.stuName);
+		    	    	$("#order_teacher").text(people.details.teacherName);
+		    	    	if("notallowed"==people.result){
+		    	    		$("#notorderedval").show();
+		    	    		$("#notorderedbtn").show();
+		    	    		$("#notorderedval").val(people.details.recordid);
+		    	    	}else{
+		    	    		$(".notallowed").hide();	
+		    	    	}
+		    	    break;
+		    	    case "blacklist":
+		    	    	$(".school").hide();
+		    	    	$(".parent").hide();
+		    	    	$(".blacklist").show();
+		    	    	$("#people_identity").text(people.details.identity);
+		    	    	$("#people_id_society").text(people.details.id);
+		    	    	$("#people_canleave_school").text(people.result);
+		    	    	$("#people_name").text(people.details.name);
+		    	    	$("#contact_name").text(people.details.contactName+"  cell: "+people.details.contactPhone);
+		    	    	$("#note").text(people.details.note);
+		    	    break;
+		    	    case "student":
+		    	    	$(".parent").hide();
+		    	    	$(".blacklist").hide();
+		    	    	$(".school").show();
+		    	    	$("#people_identity").text(people.details.identity);
+		    	    	$("#people_id_school").text(people.details.id);
+		    	    	$("#people_name").text(people.details.name);
+		    	    	$("#people_canleave_school").text(people.result);
+			    	break;
+		    	    default:
+		    	    //worker
+		    	    	$(".parent").hide();
+	    	    		$(".blacklist").hide();
+	    	    		$(".school").show();
+		    	    	$("#people_identity").text(people.details.identity);
+		    	    	$("#people_canleave_school").text(people.result);
+		    	    	$("#people_id_school").text(people.details.id);
+		    	    	$("#people_name").text(people.details.name);
+		    	}
+		    	
+		    	
+		    }
+
+		    //关闭WebSocket连接
+		    function closeWebSocket() {
+		        websocket.close();
+		    }
+
+		    //发送消息
+		    function send() {
+		        var message = document.getElementById('text').value;
+		        websocket.send(message);
+		    }
+		    
+	</script>
+</body>
+
+</html>
