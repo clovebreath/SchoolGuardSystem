@@ -4,25 +4,39 @@ $(function() {
         $(this).addClass("current");
     })
 });
+var screen_width = $(window).width();
+$(window).resize(function() {
+    if($(window).width() <= screen_width * 0.55) {
+        $("#photos").width(206);
+        $("#info_container").width(408);
+    }
+    else {
+        $("#photos").width($("#info_div").width() * 0.3);
+        $("#info_container").width($("#info_div").width() * 0.55);
+    }
+    $("#cap_photo").height($("#cap_photo").width() * 0.75);
+
+})
 var show_realtime_info = function() {
-    document.getElementById("data_table").style = "display: none";
-    document.getElementById("info_div").style = "display: block";
+    document.getElementById("data_table").style.display = "none";
+    document.getElementById("info_div").style.display = "block";
 };
 var show_all_data = function() {
-    document.getElementById("data_table").style = "display: block";
-    document.getElementById("info_div").style = "display: none";
+    document.getElementById("data_table").style.display = "block";
+    document.getElementById("info_div").style.display = "none";
+    console.log("none");
 };
 var show_black_record = function() {
-    document.getElementById("data_table").style = "display: block";
-    document.getElementById("info_div").style = "display: none";
+    document.getElementById("data_table").style.display = "block";
+    document.getElementById("info_div").style.display = "none";
 };
 var show_unreserved_record = function() {
-    document.getElementById("data_table").style = "display: block";
-    document.getElementById("info_div").style = "display: none";
+    document.getElementById("data_table").style.display = "block";
+    document.getElementById("info_div").style.display = "none";
 };
 var show_settings = function() {
-    document.getElementById("data_table").style = "display: none";
-    document.getElementById("info_div").style = "display: none";
+    document.getElementById("data_table").style.display = "none";
+    document.getElementById("info_div").style.display = "none";
 }
 var add_data = function(tbid, name, id_num, name_stu, cls, teacher, t_contact, cap_img, status) {
     var t_body = document.getElementById(tbid);
