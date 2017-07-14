@@ -164,8 +164,8 @@
 						  var result=xmlhttp.responseText;
 						  console.log("response",xmlhttp.responseText);
 						  var pictures=JSON.parse(result);
-						  document.getElementById("log_pic").src='data:image/jpeg;base64,'+pictures.logPic;
-						  document.getElementById("new_pic").src='data:image/jpeg;base64,'+pictures.newPic;
+						  document.getElementById("db_photo").src='data:image/jpeg;base64,'+pictures.logPic;
+						  document.getElementById("cap_photo").src='data:image/jpeg;base64,'+pictures.newPic;
 					    }else{
 					    	console.log("response","error"+xmlhttp.readyState+ xmlhttp.status);
 					    }

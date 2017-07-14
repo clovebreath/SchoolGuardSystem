@@ -5,6 +5,19 @@ $(function() {
         $(this).addClass("current");
     })
 });
+var screen_width = $(window).width();
+$(window).resize(function() {
+    if($(window).width() <= screen_width * 0.55) {
+        $("#photos").width(206);
+        $("#info_container").width(408);
+    }
+    else {
+        $("#photos").width($("#info_div").width() * 0.3);
+        $("#info_container").width($("#info_div").width() * 0.55);
+    }
+    $("#cap_photo").height($("#cap_photo").width() * 0.75);
+
+})
 var show_realtime_info = function() {
     document.getElementById("data_table").style.display = "none";
     document.getElementById("info_div").style.display="block";

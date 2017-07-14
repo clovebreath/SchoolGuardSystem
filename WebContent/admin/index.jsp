@@ -51,14 +51,12 @@
 		  
 		     <tr class="blacklist" style="display: none"><td>负责人</td><td id="contact_name" ></td></tr>
 		     <tr class="blacklist" style="display: none"><td>备注</td><td id="note" ></td></tr>
-		    
 		  </tbody>
 		</table>
 		<button type="button" id="notorderedval"class="btn btn-default btn-block notordered"  style="display: none" onclick="javascript:setNotAllowedParent($('#notorderedval').val());javascript:$('.notordered').hide();	">允许通过</button>				
 		<button type="button" id="notorderedbtn" class="btn btn-default btn-block notordered"  style="display: none" onclick="javascript:$('.notordered').hide();">不许通过</button>		
       </div>      
    </div>
-   <div class="row">...</div>
 </div>
 
 

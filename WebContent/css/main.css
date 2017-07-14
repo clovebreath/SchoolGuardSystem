@@ -1,5 +1,5 @@
 body {
-	background-color: #fff;
+	background-color: #fff5ca;
 	height: 100%;
 	font-size: 28px;
 	font-family: '思源黑体 CN Light', 'Microsoft JhengHei', 'Microsoft MHei', 'Microsoft YaHei UI', sans-serif;
@@ -63,50 +63,69 @@ body {
 	margin-left: 10em;
 	margin-top: 0px;
 	font-size: 20px;
+	width: 100%;
+	height: 100%;
 }
-#content .each_ctt {
-	margin-left: 18%;
-	margin-top: 6%;
+#content #info_div {
+	margin-left: 16%;
+	margin-top: 7%;
 	margin-right: 10%;
 	margin-bottom: 25%;
+	width: 70%;
+	height: 70%;
 }
 #content #info_div #photos {
 	display: inline-block;
-	width: 30%;
+	height: 25em;
 	background-color: rgba(250, 250, 250, 0.7);
-	padding-top: 2%;
 	padding-left: 2%;
-	padding-bottom: 2%;
 	padding-right: 2%;
+	margin-right: 1%;
 }
-#content #info_div #photos img {
+#content #info_div #photos #cap_photo {
 	max-width: 100%;
+	padding-top: 5%;
 }
 #content #info_div #photos #s_photo {
 	max-width: 100%;
+	padding-top: 4%;
 }
 #content #info_div #photos #s_photo #expr{
 	display: inline-block;
+}
+#content #info_div #info_container {
+	display: inline-block;
+	width: 55.1%;
+	height: 25em;
+	background-color: rgba(250, 250, 250, 0.7);
 	vertical-align: top;
-	position: relative;
-	padding-top: 4.5em;
 }
 #content #info_div #text_info {
-	width: 50%;
-	background-color: rgba(250, 250, 250, 0.7);
-	display: inline-block;
-	margin-left: 1em;
-	padding-left: 1em;
-	vertical-align: top;
+	padding-left: 1%;
+	max-width: 100%;
+	max-height: 100%;
 }
 #content #info_div #text_info div {
 	font-size: 24px;
-	padding-top: 1em;
-	padding-bottom: 1em;
+	padding-top: 3%;
+	padding-bottom: 3%;
 }
 #content #status {
 	text-align: center;
 	background-color: rgba(250, 250, 250, 0.7);
+	width: 90.5%;
+	margin-top: 2%;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	max-width: 100%;
+}
+#content #data_table {
+	margin-left: 12%;
+	margin-top: 6%;
+	margin-right: 10%;
+	margin-bottom: 25%;
+	width: 70%;
+	height: 70%;
 }
 #content #data_table_id {
 	clear: both;
@@ -180,4 +199,7 @@ tbody {
 	display: table-row-group;
 	vertical-align: middle;
 	border-color: inherit;
+}
+img {
+	max-width: 100%;
 }
