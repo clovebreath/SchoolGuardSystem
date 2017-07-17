@@ -2,19 +2,19 @@ package entity;
 
 
 /**
- *	·ÖÒ³Entity
+ *	åˆ†é¡µEntity
  */
 public class Page {
 	
-	//×Ü¼ÇÂ¼Êı
+	//æ€»è®°å½•æ•°
 	private int total;
-	//µ±Ç°Ò³
+	//å½“å‰é¡µ
 	private int currpage;
-	//Ã¿Ò³ÏÔÊ¾¼ÇÂ¼ÊıÁ¿
+	//æ¯é¡µæ˜¾ç¤ºè®°å½•æ•°é‡
 	private int pagesize;
-	//×ÜÒ³Êı
+	//æ€»é¡µæ•°
 	private int pagecount;
-	//Ã¿Ò³Êı¾İµÄ¿ªÊ¼ÏÂ±ê
+	//æ¯é¡µæ•°æ®çš„å¼€å§‹ä¸‹æ ‡
 	private int start;
 	
 	public Page(int total, int currpage, int pagesize) {
@@ -42,11 +42,11 @@ public class Page {
 		this.pagesize = pagesize;
 	}
 	public int getPagecount() {
-		//µ÷ÓÃÉèÖÃ×ÜÒ³Êı·½·¨
+		//è°ƒç”¨è®¾ç½®æ€»é¡µæ•°æ–¹æ³•
 		this.setPagecount();
 		return pagecount;
 	}
-	//ÉèÖÃ×ÜÒ³Êı
+	//è®¾ç½®æ€»é¡µæ•°
 	public void setPagecount(){
 		this.pagecount = (total % pagesize == 0) ? total / pagesize : total / pagesize + 1;
 	}
@@ -54,11 +54,11 @@ public class Page {
 		this.pagecount = pagecount;
 	}
 	public int getStart() {
-		//µ÷ÓÃÉèÖÃĞĞºÅ·½·¨
+		//è°ƒç”¨è®¾ç½®è¡Œå·æ–¹æ³•
 		this.setStart();
 		return start;
 	}
-	//ÉèÖÃÃ¿Ò³µÄÆğÊ¼ĞĞºÅ
+	//è®¾ç½®æ¯é¡µçš„èµ·å§‹è¡Œå·
 	public void setStart(){
 		this.start = (this.getCurrpage()-1)*this.getPagesize();
 	}

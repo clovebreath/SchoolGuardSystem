@@ -1,47 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="zh-CN">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>innerpage</title>
-    
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
-
-	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
     <link rel="stylesheet" type="text/css" href="../css/main.css">
-	
-    <script type="text/javascript" src="../js/innerOp.js"></script>
-    <script type="text/javascript" src="../js/ajax.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
 </head>
-
 <body>
-    <div id="content_bg">
-    </div>
-    <div id="wrapper">
-        <div id="menu">
-            <nav>
-                <ul>
-                    <li id="realtime_info" class="current" onclick="show_realtime_info()">
-                        <a href="#">实时信息</a>
-                    </li>
-                    <li id="all_record" onclick="show_all_data()">
-                        <a href="#">所有记录</a>
-                    </li>
-                    <li id="black_record" onclick="show_black_record()">
-                        <a href="#">黑名单记录</a>
-                  </li>
-              <!--    <li id="unreserved_record" onclick="show_unreserved_record()">
-                        <a href="#">未预约记录</a>
-                    </li>	-->
-                    <li id="settings" onclick="show_settings()">
-                        <a href="#">设置</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        <div id="content">
+<%=request.getParameter("id") %>
+
             <div id="info_div" class="each_ctt">
                 <div id="photos">
                     <img src="" width="400" height="300" id="cap_photo">
@@ -67,10 +36,6 @@
                         <div class="blacklist" style="display: none">负责人联系方式：<label  id="contact_phone"></label></div>
                         <div class="blacklist" style="display: none">备注：<label id="note" ></label></div>
                     </div>
-                    
-                    <button type="button" id="notorderedval" class="notordered"  style="display: none" onclick="javascript:setNotAllowedParent($('#notorderedval').val());javascript:$('.notordered').hide();	">允许通过</button>				
-					<button type="button" id="notorderedbtn" class="notordered"  style="display: none" onclick="javascript:$('.notordered').hide();">不许通过</button>		
-  
                   </div>
                 
 
@@ -78,84 +43,10 @@
 	                	<label id="result" >结果</label>
 	              </div>     	
             </div>
-            <form id="data_table"  style="display: none;">
-                <div id="data_table_wrapper">
-                    <table id="data_table_id">
-                        <thead>
-                            <tr>
-                                <th class="cols" rowspan="1" colspan="1">序号</th>
-                                <th class="colsnotindex" rowspan="1" colspan="1">姓名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                <th class="colsnotindex" rowspan="1" colspan="1">身份&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                <th class="colsnotindex" rowspan="1" colspan="1">学生姓名&nbsp;&nbsp;</th>
-                                <th class="colsnotindex" rowspan="1" colspan="1">班主任&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                <th class="colsnotindex" rowspan="1" colspan="1">状态&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                <th class="colsnotindex" rowspan="1" colspan="1">时间&nbsp;&nbsp;</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table_body" >
-
-                        </tbody>
-                    </table>
-                    <div id="page_end">
-                        <div id="page_info"></div>
-                        <div id="page_up_down">
-                            <ul>
-                                <li id="previous" onclick="getRecord(parseInt(currentPage)-1);">
-                                    <a href="#">上一页</a>
-                                </li>
-                                <li id="next" onclick="getRecord(parseInt(currentPage)+1);">
-                                    <a href="#">下一页</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <button type="button" onclick="add_data('table_body', 'NEVRE', '111111111111111111', 'flute', '18班', 'VAN', '12345678901', '', '拒绝')">add</button>
-            </form>
-        </div>
-    </div>
-    <script type="text/javascript">
-		
-		   var websocket = null;
-		    //判断当前浏览器是否支持WebSocket
-		    if ('WebSocket' in window) {
-		        websocket = new WebSocket("ws://localhost:8080/SchoolGuardSystem/websocket");
-		    }
-		    else {
-		        alert('当前浏览器 Not support websocket')
-		    }
-
-		    //连接发生错误的回调方法
-		    websocket.onerror = function () {
-		        setMessageInnerHTML("WebSocket连接发生错误");
-		    };
-
-		    //连接成功建立的回调方法
-		    websocket.onopen = function () {
-		        //setMessageInnerHTML("WebSocket连接成功");
-		    }
-
-		    //接收到消息的回调方法
-		    websocket.onmessage = function (event) {
-		        setMessage(event.data);
-		    }
-
-		    //连接关闭的回调方法
-		    websocket.onclose = function () {
-		       // setMessageInnerHTML("WebSocket连接关闭");
-		    }
-
-		    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
-		    window.onbeforeunload = function () {
-		        closeWebSocket();
-		    }
-		    
-		    //将消息显示在网页上
-			function setMessageInnerHTML(data){
-			    document.getElementById('newMessage').innerHTML += data + '<br/>';   
-			}
-		    
-		    function setMessage(data) {
+            
+            <script type="text/javascript">
+            
+            function setMessage(data) {
 
 		    	var people=JSON.parse(data);
 		    	getPicture(people.details.recordid);
@@ -238,22 +129,7 @@
 		    	    		$("#result").text("允许通过");
 		    	    	}
 		    	}
-		    	
-		    	
-		    }
-
-		    //关闭WebSocket连接
-		    function closeWebSocket() {
-		        websocket.close();
-		    }
-
-		    //发送消息
-		    function send() {
-		        var message = document.getElementById('text').value;
-		        websocket.send(message);
-		    }
-		    
-	</script>
+            }
+            </script>
 </body>
-
 </html>

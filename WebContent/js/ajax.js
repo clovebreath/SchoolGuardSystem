@@ -256,7 +256,7 @@
 					  {
 						  var result=xmlhttp.responseText;
 						  console.log("response",xmlhttp.responseText);
-						  document.getElementById("people_canleave_school").innerHTML='允许通过';
+						  document.getElementById("result").innerHTML='允许通过';
 					    }else{
 					    	console.log("response","error"+xmlhttp.readyState+ xmlhttp.status);
 					    }

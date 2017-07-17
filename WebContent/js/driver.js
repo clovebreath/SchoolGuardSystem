@@ -10,7 +10,15 @@ var loadParam = function(width, height, rotate, flip, capidx, audio, step, time,
 
 var openDevice = function() {
     stdfcectl.InitParam(szParam);
-    stdfcectl.OpenCapture();
+    var code=stdfcectl.OpenCapture();
+    console.log("code",code);
+	if(code === 0) {
+	}
+	else {
+		alert("摄像头初始化出错，请重试");
+		window.location="../index.html";
+	}
+
 };
 var capture = function(id) {
 	dataFromCamera='';
@@ -55,6 +63,7 @@ var open_rdcard = function() {
 	}
 	else {
 		alert("身份证读取设备连接出错，请重试");
+		window.location="../index.html";
 	}
 };
 var close_rdcard = function() {

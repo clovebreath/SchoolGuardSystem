@@ -6,7 +6,10 @@ body {
 	position: relative;
 	margin: 0px;
 }
-
+a:link {color: white; text-decoration:none;}
+a:active:{color: white; }
+a:visited {color :white;text-decoration:none;} 
+a:hover {color: white; text-decoration:none;}
 #wrapper {
 	position: fixed;
 	top: 0px;

@@ -49,14 +49,14 @@ public class getBlackRecord extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//µ±Ç°Ò³
+		//å½“å‰é¡µ
 		int currpage = Integer.parseInt(request.getParameter("currpage")==null?"1":request.getParameter("currpage"));
-		//×ÜµÄ¼ÇÂ¼Êı
+		//æ€»çš„è®°å½•æ•°
 		int total = this.getResultCount();
 
-		//·ÖÒ³µ¥Î»
+		//åˆ†é¡µå•ä½
 		int pagesize = 5;
-		//PageÀà¶ÔÏó
+		//Pageç±»å¯¹è±¡
 		Page page = new Page(total,currpage,pagesize);
 		if(currpage<=1){
 			currpage=1;
@@ -65,15 +65,15 @@ public class getBlackRecord extends HttpServlet {
 			currpage=page.getPagecount();
 			page.setCurrpage(currpage);
 		}
-		//µ÷ÓÃ²éÑ¯·½·¨
+		//è°ƒç”¨æŸ¥è¯¢æ–¹æ³•
 		ResultSet rs = this.getResultSet(page.getStart(),page.getPagesize());
 	
-		//ÓÃÓÚ·µ»Ø¸øÇ°Ì¨Ò³ÃæµÄJSONÎÄµµ
+		//ç”¨äºè¿”å›ç»™å‰å°é¡µé¢çš„JSONæ–‡æ¡£
 		Map<String,Object> container=new HashMap<String,Object>();
 		try {
 			int i=0;
 		    int rows =0;
-			//Ìí¼ÓÊı¾İ¿â²éÑ¯³öÀ´µÄÊı¾İ
+			//æ·»åŠ æ•°æ®åº“æŸ¥è¯¢å‡ºæ¥çš„æ•°æ®
 	      	if (rs.last()) {  
 	      			rows=rs.getRow();
 	      			Map<String, String>[] canvas=new Map[rows];
@@ -95,17 +95,17 @@ public class getBlackRecord extends HttpServlet {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		//Ìí¼Ó·ÖÒ³ĞÅÏ¢
+		//æ·»åŠ åˆ†é¡µä¿¡æ¯
 		container.put("currpage", ""+page.getCurrpage());
 		container.put("pagecount",""+page.getPagecount());
 		
 		Gson gson2 = new GsonBuilder().enableComplexMapKeySerialization().create();
-		//µ÷ÓÃ´òÓ¡·½·¨
+		//è°ƒç”¨æ‰“å°æ–¹æ³•
 		this.print(request, response, gson2.toJson(container));
 	}
 	
 	/**
-	 * @category ´òÓ¡³öXMLDOMÎÄµµ,ÓÃÓÚÇ°Ì¨Ò³ÃæµÄ½ÓÊÕ
+	 * @category æ‰“å°å‡ºXMLDOMæ–‡æ¡£,ç”¨äºå‰å°é¡µé¢çš„æ¥æ”¶
 	 * @param request
 	 * @param response
 	 * @param JSON
@@ -120,9 +120,9 @@ public class getBlackRecord extends HttpServlet {
 	}
 	
 	/**
-	 * @category ·µ»Øµ±Ç°Ò³µÄ²éÑ¯½á¹û
-	 * @param ĞĞºÅ
-	 * @param ³¤¶È
+	 * @category è¿”å›å½“å‰é¡µçš„æŸ¥è¯¢ç»“æœ
+	 * @param è¡Œå·
+	 * @param é•¿åº¦
 	 * @return ResultSet
 	 */
 	private ResultSet getResultSet(int start,int len){
@@ -152,7 +152,7 @@ public class getBlackRecord extends HttpServlet {
 	}
 	
 	/**
-	 * @return Êı¾İ¿âÖĞ×ÜµÄ¼ÇÂ¼Êı
+	 * @return æ•°æ®åº“ä¸­æ€»çš„è®°å½•æ•°
 	 */
 	private int getResultCount(){
 		int count=0;
@@ -186,7 +186,7 @@ public class getBlackRecord extends HttpServlet {
 		return count;
 	}
 	/**
-	 * @return È¡µÃÊı¾İ¿âÁ¬½ÓÇı¶¯
+	 * @return å–å¾—æ•°æ®åº“è¿æ¥é©±åŠ¨
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */

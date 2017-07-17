@@ -1,7 +1,7 @@
 /controller/
 /dbTools/
+/entity/
 /faceRecognition/
 /servertest/
 /webSocket/
-/Entity/
-/entity/
+/sendMessage/
