@@ -1,0 +1,174 @@
+body {
+	background-color: #fdddb3;
+	height: 100%;
+	letter-spacing: 0.3em;
+	font-size: 28px;
+	font-family: '思源黑体 CN Light', 'Adobe 黑体 Std R', '黑体 Regular', 'Microsoft JhengHei', 'Microsoft MHei', 'Microsoft YaHei', sans-serif;
+	position: relative;
+	margin: 0px;
+}
+#wrapper {
+	background: url("../image/welcome_bg.jpg");
+	background-size: 100% auto;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+}
+#main {
+	margin-top: 10%;
+}
+#main #welcome_title {
+	text-align: center;
+}
+#main #welcome_title #school_title {
+	font-size: 60px;
+	letter-spacing: 0.8em;
+}
+#main #welcome_title #time_info {
+	font-size: 20px;
+	margin-top: 2%;
+}
+button{
+	color: white;
+	font-size: 1.1em;
+	letter-spacing:0.3em;
+}
+#enter_btn {
+	position: relative;
+	text-align: -webkit-center;
+}
+#enter_btn div {
+	width: 480px;
+	height: 110px;
+	margin-top: 1%;
+	margin-bottom: 2%;
+}
+#guard_btn {
+	background: url(../image/tostaff_button.png);
+	opacity: 0.7;
+}
+#visitor_btn {
+	background: url(../image/tovisitor_button.png);
+	opacity: 0.7;
+}
+
+#staff_wrapper {
+	background: url("../image/staff_bg.jpg");
+	background-size: 100% auto;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	padding-top: 9%;
+	padding-left: 10%;
+}
+#visitor_wrapper {
+	background: url("../image/visitor_bg.jpg");
+	background-size: 100% auto;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	padding-top: 9%;
+	padding-left: 10%;
+}
+#cap_main{
+	display: inline-block;
+	width: 50%;
+	vertical-align: top;
+	margin-right: 1%;
+}
+#cap_main #stdfcectl {
+	width: 100%;
+	height: 100%;
+	opacity: 0.8;
+	background-color: #A0A0A0;
+	z-index: 1;
+}
+#guard_right{
+	position: relative;
+	display: inline-block;
+	width: 30%;
+	opacity: 0.7;
+	font-size: 18px;
+}
+#message {
+	height:64%;
+	background-color: #e5e5e5;
+}
+#all_imgs {
+	padding-left: 5%;
+	padding-top: 5%;
+}
+#all_imgs img {
+	background-color: #a0a0a0;
+}
+.small_pic {
+	width: 22%;
+	margin-right: 2%;
+}
+#people_data {
+	width: 90%;
+	margin: 0 5%;
+}
+#people_data tr td {
+	padding-top: 3%;
+}
+#people_data .tb-front {
+	width: 50%;
+}
+#people_data .tb-back {
+	width: 50%;
+}
+#status_tips{
+	margin-top: 4%;
+	margin-bottom: 5%;
+	height:10%;
+	background-color: #e5e5e5;
+}
+#status_tips_message{
+  position: relative;
+  padding-left: 5%;
+  padding-top: 3%;
+  top:50%;
+  transform:translateY(-50%);
+}
+#btnarea{
+}
+#btnarea div {
+	display: inline-block;
+	width: 48%;
+	padding-top: 7%;
+	font-size: 32px;
+}
+#btnarea #capture {
+	margin-right: 1%;
+	background: url(../image/cap_button.png);
+	background-size: 100% auto;
+	text-align: center;
+}
+#btnarea #back {
+	background: url(../image/exit_button.png);
+	background-size: 100% auto;
+	text-align: center;
+}
+#vi_log_pic{
+	padding-top:10px;
+	padding-bottom: 10px;
+	width: 22%;
+	height: auto;
+}
+#vi_idcard_pic{
+	padding-top:10px ;
+	padding-bottom: 10px;
+	width: 22%;
+	height: auto;
+}
+#vi_new_pic{
+	padding-top:10px ;
+	padding-bottom: 10px;
+	width: 44%;
+	height: auto;
+}
+.glyphicon{
+	position: relative;
+   	top: 6px;
+}

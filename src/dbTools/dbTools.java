@@ -596,7 +596,7 @@ public class dbTools {
 		return json;
 	}
 
-	public String setOeder(String message) {
+	public String setOrder(String message) {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		Gson gson = new Gson();

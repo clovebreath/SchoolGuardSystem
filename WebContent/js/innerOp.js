@@ -85,8 +85,13 @@ var add_data = function(tbid, id, name,identity, name_stu, teacher, status, date
     var tbody_str = t_body.innerHTML;
     var row_count = t_body.rows.length;
     var new_row = t_body.insertRow(row_count++);
-    new_row.id=id;
-    new_row.onclick=window.open('details.jsp?id='+id);
+  //  new_row.id=id;
+
     var img_id = 'show_img_' + row_count;
-    new_row.innerHTML = "<td>" + id + "</td>" + "<td class='colsnotindex'>" + name + "</td>" + "<td class='colsnotindex'>" + identity + "</td>" + "<td class='colsnotindex'>" + name_stu + "</td>" + "<td class='colsnotindex'>" + teacher + "</td>" + "<td class='colsnotindex'>" + status + "</td>" + "<td class='colsnotindex'>" + date + "</td>";
+    new_row.innerHTML = "<td>" + id + "</td>" + "<td class='colsnotindex'>" + name + "</td>" + "<td class='colsnotindex'>" + identity + "</td>" + 
+    "<td class='colsnotindex'>" + name_stu + "</td>" + "<td class='colsnotindex'>" + teacher + "</td>" + "<td class='colsnotindex'>" + status + "</td>" + 
+    "<td class='colsnotindex'>" + date + "</td>"+ "<td class='colsnotindex'><button class='btn btn-block btn-default' id='"+id+"' >查看详细</button></td>";
+    document.getElementById(id).addEventListener('click',function(e){
+    	window.open('details.jsp?id='+e.target.id);
+    } );
 };

@@ -18,7 +18,6 @@ var openDevice = function() {
 		alert("摄像头初始化出错，请重试");
 		window.location="../index.html";
 	}
-
 };
 var capture = function(id) {
 	dataFromCamera='';
@@ -45,7 +44,6 @@ var getImage = function(dwResult) {
         }
     }
 };
-
 
 
 

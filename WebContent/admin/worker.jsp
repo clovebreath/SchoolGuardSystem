@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="java.sql.Connection,java.sql.Statement,java.util.Scanner,java.sql.*"%>
+<%@page import="java.sql.Connection,java.sql.Statement,java.util.Scanner,java.sql.*,dbTools.*"%>
 <!DOCTYPE html>
 <html lang=“zh-CN”>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
-	
+	<script type="text/javascript" src="../js/ajax.js"></script>
 	<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
@@ -25,27 +25,27 @@
 		<div class="col-md-12 column">
 			<nav class="navbar navbar-default" role="navigation">
 				<div class="navbar-header">
-					 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">Brand</a>
+					 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">后台</a>
 				</div>
 				
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
+						<li >
+							 <a href="student.jsp">学生管理</a>
+						</li>
 						<li class="active">
-							 <a href="#">学生管理</a>
+							 <a href="worker.jsp">职工管理</a>
 						</li>
 						<li>
-							 <a href="#">职工管理</a>
+							 <a href="parent.jsp">家长管理</a>
 						</li>
 						<li>
-							 <a href="#">家长管理</a>
-						</li>
-						<li>
-							 <a href="#">黑名单管理</a>
+							 <a href="blacklist.jsp">黑名单管理</a>
 						</li>
 					</ul>
-					<form class="navbar-form navbar-left" role="search">
+					<form class="navbar-form navbar-left" role="search" method="GET" action="worker.jsp">
 						<div class="form-group">
-							<input type="text" class="form-control" />
+							<input type="text" class="form-control" name="id"/>
 						</div> <button type="submit" class="btn btn-default">Submit</button>
 					</form>
 				</div>
@@ -53,13 +53,65 @@
 			</nav>
 		</div>
 	</div>
-	      <table class="table table-hover">
+	      <table class="table table-hover table-striped table-bordered">
       <thead>
-	      <tr><th class='c1'>编号</th><th class='c2'>姓名</th><th class='c3'>身份</th><th class='c4'>状态</th><th class='c5'>学生姓名</th><th class='c6'>预约老师</th><th class='c7'>时间</th></tr>
+	      <tr><th class='c1'>工号</th><th class='c2'>姓名</th><th class='c3'>职位</th><th class='c4'>联系方式</th><th class='c5'>图片</th></tr>
       </thead>
       <tbody>
         
        <%
+       if(request.getParameter("id")!=null){
+    	   ResultSet rs;
+    	 //**连接数据库**
+			try{
+			    String connectString = "jdbc:mysql://localhost:3306/schoolsys"
+			            + "?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8";
+			    String user = "root";
+			    String pwd = "123456";
+			    String sql="SELECT * FROM schoolsys.worker where wid=\"" + request.getParameter("id")+ "\"";
+			 //   String sql = "SELECT id,name,identity,status,sname,wname,time FROM schoolsys.record left join worker on record.tid=worker.wid left join student on record.sid=student.sid ORDER BY id desc";
+			    Class.forName("com.mysql.jdbc.Driver");
+			    Connection conn = DriverManager.getConnection(connectString, user, pwd);
+			
+			    Statement state = conn.createStatement();
+			    rs = state.executeQuery(sql);
+			    
+			    if(rs.next()){
+			        %>        
+       <tr>
+	        <td><%=rs.getString("wid") %></td>
+	        <td><%=rs.getString("wname") %></td>
+	        <td><%=rs.getString("position") %></td>
+	        <td><%=rs.getString("phone") %></td>
+	        <td><img style="height:100px;width: auto;" src=<%="data:image/jpeg;base64,"+rs.getString("wpic") %>/></td>
+<!--  
+
+<script type="text/javascript">
+var btnId=ss;
+document.getElementById(btnId).addEventListener('click',function(e){
+	changeCanLeave(e.target.id,e.target.value);
+} );
+</script>
+
+-->
+        </tr>
+			         <%
+			    }else{
+			    	%>
+			 <script type="text/javascript">
+				alert("输入的工号有误，请重试！");
+				window.location="worker.jsp";
+			 </script>
+			    	<%
+			    }
+
+			    rs.close();
+			    state.close();
+			    conn.close();
+			    }catch (Exception e){
+			    e.printStackTrace();
+			}
+       }else{
 			String pgno = "";  //网址中传递的页面数据
 			String pgcnt = ""; //网址传递的每页最大显示数目
 			int RowAmount = 0; //数据库中总的行数
@@ -90,7 +142,8 @@
 			            + "?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8";
 			    String user = "root";
 			    String pwd = "123456";
-			    String sql = "SELECT id,name,identity,status,sname,wname,time FROM schoolsys.record left join worker on record.tid=worker.wid left join student on record.sid=student.sid ORDER BY id desc";
+			    String sql="SELECT * FROM schoolsys.worker";
+			 //   String sql = "SELECT id,name,identity,status,sname,wname,time FROM schoolsys.record left join worker on record.tid=worker.wid left join student on record.sid=student.sid ORDER BY id desc";
 			    Class.forName("com.mysql.jdbc.Driver");
 			    Connection conn = DriverManager.getConnection(connectString, user, pwd);
 			
@@ -111,15 +164,23 @@
 			    //循环获取数据
 			    for(int i = 0 ; i < PageSize && !rs.isAfterLast(); i++){
         %>        
-        <a href="details.jsp?id=<%= rs.getString("id") %>"><tr>
-	        <th scope="row"><%=rs.getString("id") %></th>
-	        <td><%=rs.getString("name") %></td>
-	        <td><%=rs.getString("identity") %></td>
-	        <td><%=rs.getString("status") %></td>
-	        <td><%=rs.getString("sname") %></td>
+       <tr>
+	        <td><%=rs.getString("wid") %></td>
 	        <td><%=rs.getString("wname") %></td>
-	        <td><%=rs.getString("time") %></td>
-        </tr></a>
+	        <td><%=rs.getString("position") %></td>
+	        <td><%=rs.getString("phone") %></td>
+	        <td><img style="height:100px;width: auto;" src=<%="data:image/jpeg;base64,"+rs.getString("wpic") %>/></td>
+<!--  
+
+<script type="text/javascript">
+var btnId=ss;
+document.getElementById(btnId).addEventListener('click',function(e){
+	changeCanLeave(e.target.id,e.target.value);
+} );
+</script>
+
+-->
+        </tr>
         <%
 		        rs.next();
 		    }
@@ -132,15 +193,17 @@
 		%>    
 		</tbody>
 		</table>
-
-       <br/><br/>  
+		<br/><br/>  
        <div style="float:right">
-	        <a type="button" class="btn btn-default " href="setting.jsp?pgno=<%=PageNow-1 %>&pgcnt=5">
+	        <a type="button" class="btn btn-default " href="worker.jsp?pgno=<%=PageNow-1 %>&pgcnt=5">
 	                        上一页</a>    &nbsp;               
-	        <a type="button" class="btn btn-default " href="setting.jsp?pgno=<%=PageNow+1 %>&pgcnt=5">
+	        <a type="button" class="btn btn-default " href="worker.jsp?pgno=<%=PageNow+1 %>&pgcnt=5">
 	                       下一页</a>      &nbsp;   
-	       <button type="button" class="btn btn-default " onclick="location.href='index.jsp'">返回</button>
+	       <button type="button" class="btn btn-default " onclick="#">返回</button>
        </div>
+       <%} %>
 </div>
+
+	
 </body>
 </html>

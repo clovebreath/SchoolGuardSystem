@@ -67,9 +67,10 @@
                         <div class="blacklist" style="display: none">负责人联系方式：<label  id="contact_phone"></label></div>
                         <div class="blacklist" style="display: none">备注：<label id="note" ></label></div>
                     </div>
-                    
-                    <button type="button" id="notorderedval" class="notordered"  style="display: none" onclick="javascript:setNotAllowedParent($('#notorderedval').val());javascript:$('.notordered').hide();	">允许通过</button>				
-					<button type="button" id="notorderedbtn" class="notordered"  style="display: none" onclick="javascript:$('.notordered').hide();">不许通过</button>		
+                    <div>
+	                    <button type="button" id="notorderedval" class="notordered btn"  style="width:50%; display: inline-block" onclick="javascript:setNotAllowedParent($('#notorderedval').val());javascript:$('.notordered').hide();	">允许通过</button>				
+						<button type="button" id="notorderedbtn" class="notordered  btn"  style="width:50%;display: inline-block" onclick="javascript:$('.notordered').hide();">不许通过</button>		
+                    </div>
   
                   </div>
                 
@@ -90,6 +91,7 @@
                                 <th class="colsnotindex" rowspan="1" colspan="1">班主任&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                 <th class="colsnotindex" rowspan="1" colspan="1">状态&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                 <th class="colsnotindex" rowspan="1" colspan="1">时间&nbsp;&nbsp;</th>
+                                <th class="colsnotindex" rowspan="1" colspan="1">操作&nbsp;&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody id="table_body" >

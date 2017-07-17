@@ -95,7 +95,7 @@
         (function(){
         	if (document.readyState && document.readyState == 'complete') {
         		// doing
-        	//	loadParam(document.getElementById("staff-main").style.width, document.getElementById("staff-main").style.height, 0, 0, 0, 1, 3000, 10, 0, 0, 18, 18, 18, 18, 1, 256, 15);
+        		//loadParam(document.getElementById("staff-main").style.width, document.getElementById("staff-main").style.height, 0, 0, 0, 1, 3000, 10, 0, 0, 18, 18, 18, 18, 1, 256, 15);
 
         		loadParam(600, 450, 0, 0, 0, 1, 3000, 10, 0, 0, 18, 18, 18, 18, 1, 256, 15);
         		openDevice();
