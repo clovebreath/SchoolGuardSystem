@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
@@ -15,8 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -24,12 +21,11 @@ import com.google.gson.reflect.TypeToken;
 import dbTools.dbTools;
 
 /**
- * Servlet implementation class getResult
+ * Servlet implementation class makeBlacklist
  */
-@WebServlet("/changeCanLeave")
-public class changeCanLeave extends HttpServlet {
+@WebServlet("/makeBlacklist")
+public class makeBlacklist extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 	dbTools dbTool;
 	Gson gson2 ;
 	Type type  ;
@@ -37,7 +33,7 @@ public class changeCanLeave extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public changeCanLeave() {
+    public makeBlacklist() {
         super();
         // TODO Auto-generated constructor stub
 		gson2 = new GsonBuilder().enableComplexMapKeySerialization().create();
@@ -59,19 +55,15 @@ public class changeCanLeave extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		showParams(request);
-		response.setContentType("application/json;charset=UTF-8");
+		String contactId="w6578";
+		String note="无。";
+		container.put("id", request.getParameter("id"));
+		container.put("contactid",contactId);
+		container.put("note", note);
+		String res=dbTool.dParent(gson2.toJson(container));
 		PrintWriter out = response.getWriter();
-		String id=request.getParameter("id");
-		String status=request.getParameter("status");
-		Map<String,String> sending=new HashMap<>();
-		sending.put("id", id);
-		sending.put("status", status);
-		System.out.println(gson2.toJson(sending));
-		String record=dbTool.setStudentCanleave(gson2.toJson(sending));
-System.out.println(record);
-		out.println(record);	
-		
-
+		out.println(res);	
+		response.sendRedirect("parent.jsp");
 	}
 	private void showParams(HttpServletRequest request) {
         Map map = new HashMap();

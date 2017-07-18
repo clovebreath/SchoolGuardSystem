@@ -47,14 +47,38 @@
 					<form class="navbar-form navbar-left" role="search" method="GET" action="parent.jsp">
 						<div class="form-group">
 							<input type="text" class="form-control" name="id"/>
-						</div> <button type="submit" class="btn btn-default">Submit</button>
+						</div> <button type="submit" class="btn btn-default ">Submit</button>
 					</form>
 				</div>
-				
 			</nav>
 		</div>
 	</div>
-	<div id="beblack" style="position:fixed; top:50%;left:50%;display:none;"></div>
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div id="beblack" style="display:none;">
+				<form method="POST" action="../makeBlacklist">
+				  <div class="form-group">
+				    <label for="shenfenzheng">被拉黑人身份证号</label>
+				    <input type="text" class="form-control" id="shenfenzheng" name="id" disabled="false">
+				  </div>
+	<!-- 	  <div class="form-group">
+				    <label for="fuzeren">负责人工号</label>
+				    <input type="text" class="form-control" id="fuzeren" placeholder="default:w9875">
+				  </div>
+				  <div class="form-group">
+				    <label for="beizhu">拉黑原因</label>
+				    <input type="text" class="form-control" id="beizhu" placeholder="default:无。">
+				  </div>
+				   -->		
+				  <button type="submit" class="btn btn-default btn-block"  >确认拉黑</button>
+				</form>
+				<button class="btn btn-default btn-block" onclick="javascript:divDisplay();">取消</button>
+				
+			</div>
+			</div>
+	</div>
+		<div class="row clearfix">
+		<div class="col-md-12 column">
 <table class="table table-hover">
       <thead>
 	      <tr><th class='c1'>身份证号</th><th class='c2'>姓名</th><th class='c3'>照片</th><th class='c4'>孩子姓名</th><th class='c5'>班级</th>
@@ -99,7 +123,7 @@
 	        预约
 	        </button></td>	        
  			<%} %>	  
- 			<td><button class="btn btn-block btn-default"  value=’<%=rs.getString("id") %>’  id='<%="b"+rs.getString("id") %>' > 
+ 			<td><button class="btn btn-block btn-default"  value=<%=rs.getString("id") %>  id='<%="b"+rs.getString("id") %>' >
 	        拉入黑名单
 	        </button></td>	  
         </tr>
@@ -110,8 +134,9 @@ document.getElementById(btnId).addEventListener('click',function(e){
 } );
 var btnId2='<%="b"+rs.getString("id")%>';
 document.getElementById(btnId2).addEventListener('click',function(e){
-	
-	changeOrderStatus(e.target.id,e.target.value);
+	document.getElementById("shenfenzheng").placeholder=e.target.value;
+	document.getElementById("shenfenzheng").innerHTML=e.target.value;
+	document.getElementById("beblack").style.display="block";
 } );
 
 </script>    
@@ -201,14 +226,22 @@ document.getElementById(btnId2).addEventListener('click',function(e){
 	        <td><button class="btn btn-block btn-default"  value="Y"  id='<%=rs.getString("id") %>' > 
 	        预约
 	        </button></td>	        
- 			<%} %>	        
+ 			<%} %>
+ 			 <td><button class="btn btn-block btn-default"  value=<%=rs.getString("id") %>  id='<%="b"+rs.getString("id") %>' > 
+	        拉入黑名单
+	        </button></td>	  	        
         </tr>
 <script type="text/javascript">
 var btnId='<%=rs.getString("id")%>';
 document.getElementById(btnId).addEventListener('click',function(e){
 	changeOrderStatus(e.target.id,e.target.value);
 } );
-
+var btnId2='<%="b"+rs.getString("id")%>';
+document.getElementById(btnId2).addEventListener('click',function(e){
+	document.getElementById("shenfenzheng").placeholder=e.target.value;
+	document.getElementById("shenfenzheng").innerHTML=e.target.value;
+	document.getElementById("beblack").style.display="block";
+} );
 </script>        
         <%
 		        rs.next();
@@ -240,7 +273,12 @@ var changeCanLeave=function(e){
        </div>
  <%} %>
 </div>
-
-	
+<script type="text/javascript">
+var divDisplay=function(){
+	document.getElementById("beblack").style.display="none";
+}
+</script>
+			</div>
+			</div>
 </body>
 </html>

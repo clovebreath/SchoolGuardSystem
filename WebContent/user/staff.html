@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
-	    <script type="text/javascript" src="../js/driver.js"></script>
-	    <script type="text/javascript" src="../js/ajax.js"></script>
+	    <script type="text/javascript" src="../js/driver2.js"></script>
+	    <script type="text/javascript" src="../js/ajax2.js"></script>
 	    <script type="text/javascript" src="../js/operation.js"></script>
 		<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
 		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -27,10 +27,11 @@
 					  <tbody style="width: 100%;" >
 					    <tr><td class="tb-front">学工号</td><td id="people_id" class="tb-back">---</td></tr>
 					    <tr><td class="tb-front">姓名</td><td id="people_name" class="tb-back">---</td></tr>
-					    <tr><td class="tb-front">班级</td><td id="people_identity" class="tb-back">---</td></tr>
-					    <tr><td class="tb-front">请假状态</td><td id="people_canleave" class="tb-back">---</td></tr>
-					    <tr><td class="tb-front">班主任</td><td id="people_teacher" class="tb-back">---</td></tr>
-					    <tr><td class="tb-front">班主任联系方式</td><td id="people_t_contact" class="tb-back"><a href="#" onclick="alert('网络错误，拨号失败！')">---</a></td></tr>
+				<!--  	    <tr><td class="tb-front">班级</td><td id="people_class" class="tb-back">---</td></tr>  -->
+					    <tr><td class="tb-front">请假状态</td><td id="people_leavestat" class="tb-back">---</td></tr>
+						<tr><td class="tb-front">身份</td><td id="people_identity" class="tb-back">---</td></tr>
+						<tr><td class="tb-front">放行</td><td id="people_canleave" class="tb-back">---</td></tr>
+					    <tr id="teacher_index"><td class="tb-front">班主任</td><td id="people_teacher" class="tb-back"><a href="#" onclick="alert('网络错误，拨号失败！')">---</a></td></tr>
 					  </tbody>
 				</table>
 			</div>
@@ -38,8 +39,8 @@
 				<p id="status_tips_message">请点击拍照进行认证</p>
 			</div>
 			<div id="btnarea">
-				<div id="cap_btn" class="guard_btn"></div>
-				<div id="exit_btn" class="guard_btn"></div>
+				<div id="cap_btn" class="guard_btn" onclick="capture('cap_pic');changeLogpic();changeState('staff');"></div>
+				<div id="exit_btn" class="guard_btn" onclick="window.history.back(-1);"></div>
 			</div>
 		</div>		
 		<script language="JavaScript" for="stdfcectl" event="CallBackCheckLiveResult(dwResult)">
@@ -48,13 +49,15 @@
 			if(0==dwResult){
 				changeButton('cap_btn',true);
 				getImage(dwResult);
-				document.getElementById("cap_pic").src=dataFromCamera;
-				document.getElementById("status_tips_message").innerHTML="拍照成功，正在匹配数据，请稍后......";
+				document.getElementById("cap_pic").src = dataFromCamera;
+				document.getElementById("status_tips_message").innerHTML = "拍照成功，正在匹配数据，请稍后......";
 				schoolManButtion(cap_base64);
 			}else{		
 				changeButton('cap_btn');
-				document.getElementById("status_tips_message").innerHTML="点击拍照进行认证";
-				alert("请调整姿势重新拍照！");
+				document.getElementById("status_tips_message").innerHTML = "请调整姿势重新拍照！";
+				window.setTimeout(function() {
+					document.getElementById("status_tips_message").innerHTML = "请点击拍照进行认证";
+				}, 1000);
 			}
 		</script>
 	<script type="text/javascript" >
@@ -84,10 +87,10 @@
         (function(){
         	if (document.readyState && document.readyState == 'complete') {
         		// doing
-        		loadParam(document.getElementById("cap_main").style.width, document.getElementById("cap_main").style.height, 0, 0, 0, 1, 3000, 10, 0, 0, 18, 18, 18, 18, 1, 256, 15);
+        		//loadParam(document.getElementById("cap_main").style.width, document.getElementById("cap_main").style.height, 0, 0, 0, 1, 3000, 10, 0, 0, 18, 18, 18, 18, 1, 256, 15);
 
         		loadParam(600, 450, 0, 0, 0, 1, 3000, 10, 0, 0, 18, 18, 18, 18, 1, 256, 15);
-        		//openDevice();
+        		openDevice();
         	} else {
         		setTimeout(arguments.callee, 10);
         	}

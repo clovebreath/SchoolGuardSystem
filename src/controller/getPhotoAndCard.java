@@ -47,6 +47,14 @@ public class getPhotoAndCard extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
 
+    }
+
+	/**
+	 * @see Servlet#init(ServletConfig)
+	 */
+	public void init(ServletConfig config) throws ServletException {
+		// TODO Auto-generated method stub
+
 		gson2 = new GsonBuilder().enableComplexMapKeySerialization().create();
 		type = new TypeToken<Map<String, Object>>() {}.getType();  
 		dbTool=new dbTools();
@@ -59,14 +67,7 @@ public class getPhotoAndCard extends HttpServlet {
 	    
 		IdentifyModule.init(ja);
 		CompareModule.init();
-    }
-
-	/**
-	 * @see Servlet#init(ServletConfig)
-	 */
-	public void init(ServletConfig config) throws ServletException {
-		// TODO Auto-generated method stub
-
+		System.out.println("init t1 ... ");
 	}
 
 	/**

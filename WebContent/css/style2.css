@@ -43,7 +43,7 @@ button{
 	margin-top: 1%;
 	margin-bottom: 2%;
 }
-#guard_btn {
+#staff_btn {
 	background: url(../image/tostaff_button.png);
 	opacity: 0.7;
 }
@@ -75,11 +75,11 @@ button{
 	width: 50%;
 	vertical-align: top;
 	margin-right: 1%;
+	opacity: 0.8;
 }
 #cap_main #stdfcectl {
 	width: 100%;
 	height: 100%;
-	opacity: 0.8;
 	background-color: #A0A0A0;
 	z-index: 1;
 }
@@ -110,7 +110,7 @@ button{
 	margin: 0 5%;
 }
 #people_data tr td {
-	padding-top: 3%;
+	padding-top: 2%;
 }
 #people_data .tb-front {
 	width: 50%;
