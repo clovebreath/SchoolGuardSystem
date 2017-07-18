@@ -95,7 +95,7 @@
 		    	    	$("#child_name").text(people.sname);
 		    	    	$("#order_teacher").text(people.tname);
 		    	    	$("#order_teacher_con").text(people.phone);
-		    	    	if("notallowed"==people.result){
+		    	    	if("notallowed"==people.status){
 		    	    		$("#result").text("不许通过");
 		    	    	}else{
 		    	    		$("#result").text("允许通过");

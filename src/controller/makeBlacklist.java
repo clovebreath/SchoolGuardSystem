@@ -39,6 +39,7 @@ public class makeBlacklist extends HttpServlet {
 		gson2 = new GsonBuilder().enableComplexMapKeySerialization().create();
 		type = new TypeToken<Map<String, Object>>() {}.getType();  
 		dbTool=new dbTools();
+		container=new HashMap();
     }
 
 	/**
@@ -54,16 +55,16 @@ public class makeBlacklist extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		showParams(request);
+		//showParams(request);
 		String contactId="w6578";
 		String note="无。";
-		container.put("id", request.getParameter("id"));
+		container.put("id",request.getParameter("id"));
 		container.put("contactid",contactId);
 		container.put("note", note);
 		String res=dbTool.dParent(gson2.toJson(container));
 		PrintWriter out = response.getWriter();
-		out.println(res);	
-		response.sendRedirect("parent.jsp");
+		System.out.println(gson2.toJson(container));
+		System.out.println(res);
 	}
 	private void showParams(HttpServletRequest request) {
         Map map = new HashMap();

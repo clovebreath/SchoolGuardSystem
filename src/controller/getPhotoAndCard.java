@@ -179,12 +179,12 @@ public class getPhotoAndCard extends HttpServlet {
 						result=dbTool.allowedPeople(gson2.toJson(sending));
 						Map<String, Object> resultMap = gson2.fromJson(result, type); 
 						Map<String, Object> map=(Map<String, Object>) resultMap.get("details");
-						/*
+						
 						if(resultMap.get("result").toString().equals("allowed")){
 							SendMessageModule.sendMessageSMS(map.get("teacherphone").toString(), map.get("teacherName").toString(),
 									map.get("class").toString(), map.get("stuName").toString(), map.get("name").toString());
 						}
-						*/
+						
 					}
 					
 					out.print(result);

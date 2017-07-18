@@ -317,3 +317,28 @@
 					xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 					xmlhttp.send(data);
 				}
+				var makeBlacklist=function(id){
+					var data="id="+id;
+					console.log("ajax",data);
+					if (window.XMLHttpRequest){
+					    //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+					    xmlhttp=new XMLHttpRequest();
+					}else{
+					    // IE6, IE5 浏览器执行代码
+					    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					xmlhttp.onreadystatechange=function(){
+					  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+					  {
+						  var result=xmlhttp.responseText;
+						  console.log("response",xmlhttp.responseText);
+						  alert("拉黑成功！");
+						  window.location.reload(true);
+					    }else{
+					    	console.log("response","error"+xmlhttp.readyState+ xmlhttp.status);
+					    }
+					  } 
+					xmlhttp.open("POST","../makeBlacklist",true);
+					xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+					xmlhttp.send(data);
+				}	

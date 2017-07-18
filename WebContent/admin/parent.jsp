@@ -52,31 +52,7 @@
 				</div>
 			</nav>
 		</div>
-	</div>
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-			<div id="beblack" style="display:none;">
-				<form method="POST" action="../makeBlacklist">
-				  <div class="form-group">
-				    <label for="shenfenzheng">被拉黑人身份证号</label>
-				    <input type="text" class="form-control" id="shenfenzheng" name="id" disabled="false">
-				  </div>
-	<!-- 	  <div class="form-group">
-				    <label for="fuzeren">负责人工号</label>
-				    <input type="text" class="form-control" id="fuzeren" placeholder="default:w9875">
-				  </div>
-				  <div class="form-group">
-				    <label for="beizhu">拉黑原因</label>
-				    <input type="text" class="form-control" id="beizhu" placeholder="default:无。">
-				  </div>
-				   -->		
-				  <button type="submit" class="btn btn-default btn-block"  >确认拉黑</button>
-				</form>
-				<button class="btn btn-default btn-block" onclick="javascript:divDisplay();">取消</button>
-				
-			</div>
-			</div>
-	</div>
+
 		<div class="row clearfix">
 		<div class="col-md-12 column">
 <table class="table table-hover">
@@ -134,9 +110,7 @@ document.getElementById(btnId).addEventListener('click',function(e){
 } );
 var btnId2='<%="b"+rs.getString("id")%>';
 document.getElementById(btnId2).addEventListener('click',function(e){
-	document.getElementById("shenfenzheng").placeholder=e.target.value;
-	document.getElementById("shenfenzheng").innerHTML=e.target.value;
-	document.getElementById("beblack").style.display="block";
+	makeBlacklist(e.target.value);
 } );
 
 </script>    
@@ -238,9 +212,8 @@ document.getElementById(btnId).addEventListener('click',function(e){
 } );
 var btnId2='<%="b"+rs.getString("id")%>';
 document.getElementById(btnId2).addEventListener('click',function(e){
-	document.getElementById("shenfenzheng").placeholder=e.target.value;
-	document.getElementById("shenfenzheng").innerHTML=e.target.value;
-	document.getElementById("beblack").style.display="block";
+	console.log("clicked",e.target.value);
+	makeBlacklist(e.target.value);
 } );
 </script>        
         <%
@@ -272,13 +245,14 @@ var changeCanLeave=function(e){
 	       <button type="button" class="btn btn-default " onclick="location.href='index.jsp'">返回</button>
        </div>
  <%} %>
+
+
+</div>
 </div>
 <script type="text/javascript">
 var divDisplay=function(){
 	document.getElementById("beblack").style.display="none";
 }
 </script>
-			</div>
-			</div>
 </body>
 </html>
