@@ -5,6 +5,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.print.attribute.standard.PDLOverrideSupported;
+
 import com.google.gson.Gson;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -433,9 +436,10 @@ public class dbTools {
 			if (rs.next()) {
 				String pid=rs.getString("pid");
 				if (rs.getString("identity").equals("parent")) {
-					String sql = "SELECT record.id,record.name,record.identity,status,sname,wname,time,record.pic as newpic,parent.pic as logpic FROM schoolsys.record left join worker on record.tid=worker.wid left join student on record.sid=student.sid left join parent on record.pid=parent.id where pid=?;";
+					String sql = "SELECT record.id,record.name,record.identity,status,sname,wname,time,record.pic as newpic,parent.pic as logpic,record.pid,student.class,parent.isordered,worker.phone FROM schoolsys.record left join worker on record.tid=worker.wid left join student on record.sid=student.sid left join parent on record.pid=parent.id where pid=? and record.id=?;";
 					ps = conn.prepareStatement(sql);
 					ps.setString(1, pid);
+					ps.setInt(2, id);
 					rs = ps.executeQuery();
 					while (rs.next()) {
 						resultMap.put("id", rs.getString("id"));
@@ -447,11 +451,16 @@ public class dbTools {
 						resultMap.put("date", rs.getString("time"));
 						resultMap.put("newpic", rs.getString("newpic"));
 						resultMap.put("logpic", rs.getString("logpic"));
+						resultMap.put("pid", rs.getString("pid"));
+						resultMap.put("class", rs.getString("class"));
+						resultMap.put("order", rs.getString("isordered"));
+						resultMap.put("phone", rs.getString("phone"));
 					}
 				} else if (rs.getString("identity").equals("student")) {
-					String sql = "SELECT record.id,record.name,record.identity,status,time,record.pic as newpic,student.spic as logpic FROM schoolsys.record left join student on record.pid=student.sid where pid=?;";
+					String sql = "SELECT record.id,record.name,record.identity,status,time,record.pic as newpic,student.spic as logpic,student.class,student.sid,worker.phone,worker.wname FROM schoolsys.record left join student on record.pid=student.sid left join worker on student.tid=worker.wid where pid=? and record.id=?;";
 					ps = conn.prepareStatement(sql);
 					ps.setString(1, pid);
+					ps.setInt(2, id);
 					rs = ps.executeQuery();
 					while (rs.next()) {
 						resultMap.put("id", rs.getString("id"));
@@ -459,15 +468,19 @@ public class dbTools {
 						resultMap.put("identity", rs.getString("identity"));
 						resultMap.put("status", rs.getString("status"));
 						resultMap.put("sname", null);
-						resultMap.put("tname", null);
+						resultMap.put("tname", rs.getString("wname"));
 						resultMap.put("date", rs.getString("time"));
 						resultMap.put("newpic", rs.getString("newpic"));
 						resultMap.put("logpic", rs.getString("logpic"));
+						resultMap.put("pid", rs.getString("sid"));
+						resultMap.put("class", rs.getString("class"));
+						resultMap.put("phone", rs.getString("phone"));
 					}
 				} else if (rs.getString("identity").equals("blacklist")) {
-					String sql = "SELECT record.id,record.name,record.identity,status,time,record.pic as newpic,blacklist.pic as logpic,wname FROM schoolsys.record left join blacklist on record.pid=blacklist.id left join worker on blacklist.contactid=worker.wid where pid=?;";
+					String sql = "SELECT record.id,record.name,record.identity,status,time,record.pic as newpic,blacklist.pic as logpic,wname,record.pid,worker.phone,blacklist.note FROM schoolsys.record left join blacklist on record.pid=blacklist.id left join worker on blacklist.contactid=worker.wid where pid=? and record.id=?;";
 					ps = conn.prepareStatement(sql);
 					ps.setString(1, pid);
+					ps.setInt(2, id);
 					rs = ps.executeQuery();
 					while (rs.next()) {
 						resultMap.put("id", rs.getString("id"));
@@ -476,15 +489,19 @@ public class dbTools {
 						resultMap.put("status", rs.getString("status"));
 						resultMap.put("sname", null);
 						resultMap.put("tname", null);
+						resultMap.put("note", rs.getString("note"));
 						resultMap.put("contactname", rs.getString("wname"));
 						resultMap.put("date", rs.getString("time"));
 						resultMap.put("newpic", rs.getString("newpic"));
 						resultMap.put("logpic", rs.getString("logpic"));
+						resultMap.put("pid", rs.getString("pid"));
+						resultMap.put("phone", rs.getString("phone"));
 					}
 				}else {
-					String sql = "SELECT record.id,record.name,record.identity,status,time,record.pic as newpic,worker.wpic as logpic FROM schoolsys.record left join worker on record.pid=worker.wid where pid=?;";
+					String sql = "SELECT record.id,record.name,record.identity,status,time,record.pic as newpic,worker.wpic as logpic,record.pid,worker.phone,worker.position FROM schoolsys.record left join worker on record.pid=worker.wid where pid=? and record.id=?;";
 					ps = conn.prepareStatement(sql);
 					ps.setString(1,pid);
+					ps.setInt(2, id);
 					rs = ps.executeQuery();
 					while (rs.next()) {
 						resultMap.put("id", rs.getString("id"));
@@ -496,6 +513,9 @@ public class dbTools {
 						resultMap.put("date", rs.getString("time"));
 						resultMap.put("newpic", rs.getString("newpic"));
 						resultMap.put("logpic", rs.getString("logpic"));
+						resultMap.put("pid", rs.getString("pid"));
+						resultMap.put("phone", rs.getString("phone"));
+						resultMap.put("position", rs.getString("position"));
 					}
 				}
 			}
@@ -596,7 +616,7 @@ public class dbTools {
 		return json;
 	}
 
-	public String setOrder(String message) {
+	public String setOrder(String message) {//修改预约状态
 		Connection conn = null;
 		PreparedStatement ps = null;
 		Gson gson = new Gson();
@@ -645,7 +665,7 @@ public class dbTools {
 				resultMap.put("id", rs.getString("id"));
 				resultMap.put("class", rs.getString("class"));
 				resultMap.put("name", rs.getString("name"));
-				resultMap.put("teacherphone", rs.getString("phone"));
+				resultMap.put("teacherPhone", rs.getString("phone"));
 				resultMap.put("imglog", rs.getString("pic"));
 				resultMap.put("imgstu", rs.getString("spic"));
 				resultMap.put("stuName", rs.getString("sname"));
@@ -1026,15 +1046,151 @@ public class dbTools {
 			}
 		}
 	}
+	
+	public boolean makeStudentSure(String  sid) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<String> list =new ArrayList<String>();
+		try {
+			String sql = "select sid from student";
+			conn = dbTools.getConn();
+			ps = conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while (rs.next()) {
+				list.add(rs.getString("sid"));				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		dbTools.closeConn(conn);
+		if (list.contains(sid)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean makeParentSure(String  id) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<String> list =new ArrayList<String>();
+		try {
+			String sql = "select id from parent";
+			conn = dbTools.getConn();
+			ps = conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while (rs.next()) {
+				list.add(rs.getString("id"));				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		dbTools.closeConn(conn);
+		if (list.contains(id)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public String addNewParent(String message) {//家长注册方法
+		Connection conn = null;
+		PreparedStatement ps = null;
+		Gson gson = new Gson();
+		String json = "";
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		try {
+			Map<String, String> map = gson.fromJson(message, new TypeToken<HashMap<String, String>>() {
+			}.getType());
+			String sql = "insert into schoolsys.parent (id,name,pic,sid,isordered,isschool) values(?,?,?,?,'N','N')";
+			conn = dbTools.getConn();
+			ps = conn.prepareStatement(sql);
+			if (!map.get("name").equals(null)&&makeStudentSure( map.get("sid"))) {
+				ps.setString(1, map.get("id"));
+				ps.setString(2, map.get("name"));
+				ps.setString(3, map.get("pic"));
+				ps.setString(4, map.get("sid"));
+				ps.executeUpdate();
+				resultMap.put("message", "ok");
+				json = gson.toJson(resultMap);
+			} else {
+				resultMap.put("message", "fail");
+				json = gson.toJson(resultMap);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			resultMap.put("message", "fail");
+			json = gson.toJson(resultMap);
+		}
+		dbTools.closeConn(conn);
+		return json;
+	}
+	
+	public String dParent(String message) {//拉黑操作
+		Connection conn = null;
+		PreparedStatement ps = null;
+		Gson gson = new Gson();
+		String json = "";
+		ResultSet rs = null;
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		try {
+			Map<String, String> map = gson.fromJson(message, new TypeToken<HashMap<String, String>>() {
+			}.getType());
+			Map<String, String> map2=new HashMap<>();
+			String sql = "select * FROM `schoolsys`.`parent` WHERE `id`=?;";
+			String sql2 = "DELETE FROM `schoolsys`.`parent` WHERE `id`=?;";
+			String sql3 = "insert into schoolsys.blacklist (id,name,pic,contactid,note) values(?,?,?,?,?)";
+			conn = dbTools.getConn();
+			if (makeParentSure(map.get("id"))) {
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, map.get("id"));
+				rs=ps.executeQuery();
+				while (rs.next()) {
+					map2.put("id", rs.getString("id"));
+					map2.put("name", rs.getString("name"));
+					map2.put("pic", rs.getString("pic"));
+				}
+				ps = conn.prepareStatement(sql3);
+				ps.setString(1, map2.get("id"));
+				ps.setString(2, map2.get("name"));
+				ps.setString(3, map2.get("pic"));
+				ps.setString(4, map.get("contactid"));
+				ps.setString(5, map.get("note"));
+				ps.executeUpdate();
+				ps = conn.prepareStatement(sql2);
+				ps.setString(1, map.get("id"));
+				ps.executeUpdate();
+				resultMap.put("message", "ok");
+				json = gson.toJson(resultMap);
+			}else {
+				resultMap.put("message", "fail");
+				json = gson.toJson(resultMap);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			resultMap.put("message", "fail");
+			json = gson.toJson(resultMap);
+		}
+		dbTools.closeConn(conn);
+		return json;
+	}
 
 //	 public static void main(String[] args) {
 //	 Map<String, Object> map = new HashMap<String, Object>();
-//	 map.put("id", "410581199605130514");
-//	 map.put("identity", "blacklist");
-//	 map.put("imgnow", "35s34f5d4f");
+//	 Map<String, Object> map2 = new HashMap<String, Object>();
+//	 map.put("id", "789");
+//	 map.put("contactid", "001");
+//	 map.put("note", "丑拒");
+//	 map2.put("id", "789");
+//	 map2.put("name", "王五爸爸");
+//	 map2.put("pic", "saoudgauifgia");
+//	 map2.put("sid", "201400300003");
 //	 Gson gson = new Gson();
-//	 String json = gson.toJson(map);
+//	 String json = gson.toJson(map); 
+//	 String json2 = gson.toJson(map2);
 //	 dbTools db = new dbTools();
-//	 System.out.println(db.getRecordDetailById(45));
+//	 System.out.println(db.getRecordDetailById(46));
 //	 }
 }

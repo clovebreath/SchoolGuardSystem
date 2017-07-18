@@ -54,10 +54,11 @@
 			</nav>
 		</div>
 	</div>
-	      <table class="table table-hover">
+	<div id="beblack" style="position:fixed; top:50%;left:50%;display:none;"></div>
+<table class="table table-hover">
       <thead>
 	      <tr><th class='c1'>身份证号</th><th class='c2'>姓名</th><th class='c3'>照片</th><th class='c4'>孩子姓名</th><th class='c5'>班级</th>
-	      <th class='c6'>是否预约</th><th class='c7'>老师姓名</th><th class='c8'>老师联系方式</th><th class='c9'>操作</th></tr>
+	      <th class='c6'>是否预约</th><th class='c7'>老师姓名</th><th class='c8'>老师联系方式</th><th class='c9'>操作一</th><th class='c10'>操作二</th></tr>
       </thead>
       <tbody>
         
@@ -97,11 +98,19 @@
 	        <td><button class="btn btn-block btn-default"  value="Y"  id='<%=rs.getString("id") %>' > 
 	        预约
 	        </button></td>	        
- 			<%} %>	        
+ 			<%} %>	  
+ 			<td><button class="btn btn-block btn-default"  value=’<%=rs.getString("id") %>’  id='<%="b"+rs.getString("id") %>' > 
+	        拉入黑名单
+	        </button></td>	  
         </tr>
 <script type="text/javascript">
 var btnId='<%=rs.getString("id")%>';
 document.getElementById(btnId).addEventListener('click',function(e){
+	changeOrderStatus(e.target.id,e.target.value);
+} );
+var btnId2='<%="b"+rs.getString("id")%>';
+document.getElementById(btnId2).addEventListener('click',function(e){
+	
 	changeOrderStatus(e.target.id,e.target.value);
 } );
 

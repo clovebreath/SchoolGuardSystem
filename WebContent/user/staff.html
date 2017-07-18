@@ -1,11 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%	String path = request.getContextPath();
-	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-<%@ page import="java.util.* " %>
-<%@ page import="java.io.* " %>
-<%@ page import="faceRecognition.*" %>
 <!DOCTYPE html>
 <html lang=“zh-CN”>
 	<head>
@@ -92,10 +84,10 @@
         (function(){
         	if (document.readyState && document.readyState == 'complete') {
         		// doing
-        		//loadParam(document.getElementById("cap_main").style.width, document.getElementById("cap_main").style.height, 0, 0, 0, 1, 3000, 10, 0, 0, 18, 18, 18, 18, 1, 256, 15);
+        		loadParam(document.getElementById("cap_main").style.width, document.getElementById("cap_main").style.height, 0, 0, 0, 1, 3000, 10, 0, 0, 18, 18, 18, 18, 1, 256, 15);
 
         		loadParam(600, 450, 0, 0, 0, 1, 3000, 10, 0, 0, 18, 18, 18, 18, 1, 256, 15);
-        		openDevice();
+        		//openDevice();
         	} else {
         		setTimeout(arguments.callee, 10);
         	}

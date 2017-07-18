@@ -139,13 +139,13 @@ button{
 	padding-top: 7%;
 	font-size: 32px;
 }
-#btnarea #capture {
+#btnarea #cap_btn {
 	margin-right: 1%;
 	background: url(../image/cap_button.png);
 	background-size: 100% auto;
 	text-align: center;
 }
-#btnarea #back {
+#btnarea #exit_btn {
 	background: url(../image/exit_button.png);
 	background-size: 100% auto;
 	text-align: center;

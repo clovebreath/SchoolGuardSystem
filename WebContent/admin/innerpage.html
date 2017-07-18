@@ -34,10 +34,10 @@
                   </li>
               <!--    <li id="unreserved_record" onclick="show_unreserved_record()">
                         <a href="#">未预约记录</a>
-                    </li>	-->
+                    </li>	
                     <li id="settings" onclick="show_settings()">
                         <a href="#">设置</a>
-                    </li>
+                    </li>-->
                 </ul>
             </nav>
         </div>
@@ -46,8 +46,8 @@
                 <div id="photos">
                     <img src="" width="400" height="300" id="cap_photo">
                     <div id="s_photo">
-                        <img src="" width="100" height="120" id="db_photo">
-                        <img src="" width="100" height="120" id="id_photo">
+                        <img src=""  height="120" width="auto" id="db_photo">
+                        <img src=""  height="120"  width="auto" id="id_photo">
                         <div id="expr">身份：<lable id="people_identity"></lable></div>
                     </div>
                 </div>
@@ -66,11 +66,12 @@
                         <div class="blacklist" style="display: none">负责人：<label  id="contact_name"></label></div>
                         <div class="blacklist" style="display: none">负责人联系方式：<label  id="contact_phone"></label></div>
                         <div class="blacklist" style="display: none">备注：<label id="note" ></label></div>
+	                   <div id="controller_area" style="text-align:center;display: none;">
+		                    <button type="button" id="notorderedval" class="notordered btn"  style="width:45%; display: inline-block" onclick="javascript:setNotAllowedParent($('#notorderedval').val());javascript:$('.notordered').hide();	">允许通过</button>				
+							<button type="button" id="notorderedbtn" class="notordered  btn"  style="width:45%;display: inline-block" onclick="javascript:$('.notordered').hide();">不许通过</button>		
+	                    </div>
                     </div>
-                    <div>
-	                    <button type="button" id="notorderedval" class="notordered btn"  style="width:50%; display: inline-block" onclick="javascript:setNotAllowedParent($('#notorderedval').val());javascript:$('.notordered').hide();	">允许通过</button>				
-						<button type="button" id="notorderedbtn" class="notordered  btn"  style="width:50%;display: inline-block" onclick="javascript:$('.notordered').hide();">不许通过</button>		
-                    </div>
+
   
                   </div>
                 
@@ -112,7 +113,6 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" onclick="add_data('table_body', 'NEVRE', '111111111111111111', 'flute', '18班', 'VAN', '12345678901', '', '拒绝')">add</button>
             </form>
         </div>
     </div>
@@ -178,16 +178,17 @@
 		    	    	if("notallowed"==people.result){
 		    	    		$("#result").text("不许通过");
 		    	    		$("#people_canleave_society").text("未预约");
-		    	    		$("#notorderedval").show();
-		    	    		$("#notorderedbtn").show();
+		    	    		$("#controller_area").show();
 		    	    		$("#notorderedval").val(people.details.recordid);
 		    	    	}else{
 		    	    		$("#result").text("允许通过");
+		    	    		$("#controller_area").hide();
 		    	    		$("#people_canleave_society").text("已预约");
 		    	    		$(".notallowed").hide();	
 		    	    	}
 		    	    break;
 		    	    case "blacklist":
+		    	    	$("#controller_area").hide();
 		    	    	$(".student").hide();
 		    	    	$(".worker").hide();
 		    	    	$(".parent").hide();
@@ -205,6 +206,7 @@
 		    	    	}
 		    	    break;
 		    	    case "student":
+		    	    	$("#controller_area").hide();
 		    	    	$(".worker").hide();
 		    	    	$(".parent").hide();
 		    	    	$(".blacklist").hide();
@@ -225,6 +227,7 @@
 			    	break;
 		    	    default:
 		    	    //worker
+		    	    $("#controller_area").hide();
 		    	    	$(".parent").hide();
 	    	    		$(".blacklist").hide();
 	    	    		$(".student").hide();
@@ -240,8 +243,6 @@
 		    	    		$("#result").text("允许通过");
 		    	    	}
 		    	}
-		    	
-		    	
 		    }
 
 		    //关闭WebSocket连接
