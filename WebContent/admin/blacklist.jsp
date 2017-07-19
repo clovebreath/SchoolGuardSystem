@@ -53,7 +53,7 @@
 			</nav>
 		</div>
 	</div>
-	      <table class="table table-hover">
+	      <table class="table table-hover table-striped">
       <thead>
 	      <tr><th class='c1'>身份证号</th><th class='c2'>姓名</th><th class='c3'>图片</th><th class='c4'>负责人姓名</th>
 	      <th class='c5'>负责人联系方式</th><th class='c6'>备注</th></tr>

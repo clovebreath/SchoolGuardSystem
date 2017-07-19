@@ -55,7 +55,7 @@
 
 		<div class="row clearfix">
 		<div class="col-md-12 column">
-<table class="table table-hover">
+	<table class="table table-hover table-striped">
       <thead>
 	      <tr><th class='c1'>身份证号</th><th class='c2'>姓名</th><th class='c3'>照片</th><th class='c4'>孩子姓名</th><th class='c5'>班级</th>
 	      <th class='c6'>是否预约</th><th class='c7'>老师姓名</th><th class='c8'>老师联系方式</th><th class='c9'>操作一</th><th class='c10'>操作二</th></tr>

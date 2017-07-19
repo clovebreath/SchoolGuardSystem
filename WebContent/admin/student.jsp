@@ -54,7 +54,7 @@
 			</nav>
 		</div>
 	</div>
-	      <table class="table table-hover">
+	<table class="table table-hover table-striped">
       <thead>
 	      <tr><th class='c1'>学号</th><th class='c2'>姓名</th><th class='c3'>班级</th><th class='c4'>性别</th><th class='c5'>老师姓名</th><th class='c6'>图片</th><th class='c7'>是否请假</th><th class='c8'>操作</th></tr>
       </thead>
