@@ -8,7 +8,7 @@ body {
 	margin: 0px;
 }
 #wrapper {
-	background: url("../image/welcome_bg.jpg");
+	background: url("../image/finalBG.jpg");
 	background-size: 100% auto;
 	position: fixed;
 	width: 100%;
@@ -19,6 +19,8 @@ body {
 }
 #main #welcome_title {
 	text-align: center;
+	color: #fff;
+	text-shadow: 1px 3px 2px #000; 
 }
 #main #welcome_title #school_title {
 	font-size: 60px;
@@ -26,7 +28,8 @@ body {
 }
 #main #welcome_title #time_info {
 	font-size: 20px;
-	margin-top: 2%;
+	margin-top: 1.5%;
+
 }
 button{
 	color: white;
@@ -36,32 +39,34 @@ button{
 #enter_btn {
 	position: relative;
 	text-align: -webkit-center;
+	margin-top: 5%;
 }
 #enter_btn div {
 	width: 480px;
 	height: 110px;
-	margin-top: 1%;
-	margin-bottom: 2%;
-}
-#staff_btn {
-	background: url(../image/tostaff_button.png);
-	opacity: 0.7;
+	margin-top: 2%;
 }
 #staff_btn:hover {
-	background: url(../image/tostaff_button_hover.png);
-	opacity: 0.7;
+	background: url(../image/tostaff_button.png);
+	opacity: 0.6;
 }
-#visitor_btn {
-	background: url(../image/tovisitor_button.png);
-	opacity: 0.7;
+#staff_btn {
+	background: url(../image/tostaff_button_hover.png);
+	opacity: 0.6;
+	box-shadow: 0px 8px 8px;
 }
 #visitor_btn:hover {
+	background: url(../image/tovisitor_button.png);
+	opacity: 0.6;
+}
+#visitor_btn {
 	background: url(../image/tovisitor_button_hover.png);
-	opacity: 0.7;
+	opacity: 0.6;
+	box-shadow: 0px 8px 8px;
 }
 
 #staff_wrapper {
-	background: url("../image/staff_bg.jpg");
+	background: url("../image/staff_finalBG.jpg");
 	background-size: 100% auto;
 	position: fixed;
 	width: 100%;
@@ -70,7 +75,7 @@ button{
 	padding-left: 10%;
 }
 #visitor_wrapper {
-	background: url("../image/visitor_bg.jpg");
+	background: url("../image/visitor_finalBG.jpg");
 	background-size: 100% auto;
 	position: fixed;
 	width: 100%;
@@ -95,7 +100,7 @@ button{
 	position: relative;
 	display: inline-block;
 	width: 30%;
-	opacity: 0.7;
+	opacity: 0.6;
 	font-size: 18px;
 }
 #message {
