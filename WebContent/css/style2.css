@@ -47,8 +47,16 @@ button{
 	background: url(../image/tostaff_button.png);
 	opacity: 0.7;
 }
+#staff_btn:hover {
+	background: url(../image/tostaff_button_hover.png);
+	opacity: 0.7;
+}
 #visitor_btn {
 	background: url(../image/tovisitor_button.png);
+	opacity: 0.7;
+}
+#visitor_btn:hover {
+	background: url(../image/tovisitor_button_hover.png);
 	opacity: 0.7;
 }
 
@@ -145,8 +153,19 @@ button{
 	background-size: 100% auto;
 	text-align: center;
 }
+#btnarea #cap_btn.hover:hover {
+	margin-right: 1%;
+	background: url(../image/cap_button_hover.png);
+	background-size: 100% auto;
+	text-align: center;
+}
 #btnarea #exit_btn {
 	background: url(../image/exit_button.png);
+	background-size: 100% auto;
+	text-align: center;
+}
+#btnarea #exit_btn.hover:hover {
+	background: url(../image/exit_button_new_hover.png);
 	background-size: 100% auto;
 	text-align: center;
 }

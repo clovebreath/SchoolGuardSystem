@@ -94,11 +94,23 @@ var get_data = function() {
 //button_control
 var changeButton=function(){
 	if(arguments.length==1){
-		document.getElementById(arguments[0]).disabled=!document.getElementById(arguments[0]).disabled;		
+		document.getElementById(arguments[0]).disabled=!document.getElementById(arguments[0]).disabled;	
 	}else{
-		document.getElementById(arguments[0]).disabled=arguments[1];			
+		document.getElementById(arguments[0]).disabled=arguments[1];		
+	}
+	var id="#"+arguments[0];
+	console.log(id);
+	if(document.getElementById(arguments[0]).disabled!=true){
+		$(id).addClass("hover");
+		
+	}else{
+		$(id).removeClass("hover");
 	}
 }
+
+
+
+
 //log_image_control
 var changeLogpic=function(){
 	document.getElementById("log_pic").style = "background-color: #a0a0a0;";

@@ -2,6 +2,7 @@
 <html lang=“zh-CN”>
 	<head>
 		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=11" />
 		<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
 	    <script type="text/javascript" src="../js/driver2.js"></script>
 	    <script type="text/javascript" src="../js/ajax2.js"></script>
@@ -40,8 +41,8 @@
 				<p id="status_tips_message">请读卡...</p>
 			</div>
 			<div id="btnarea">
-				<div id="cap_btn" class="guard_btn" onclick="capture('cap_pic');changeLogpic();changeState('visitor');changeButton('cap_btn');" disabled="true"></div>
-				<div id="exit_btn" class="guard_btn" onclick="window.history.back(-1);"></div>
+				<div id="cap_btn" class="guard_btn" onclick="capture('cap_pic');changeLogpic();changeState('visitor');changeButton('cap_btn');changeButton('exit_btn',false);" disabled="true"></div>
+				<div id="exit_btn" class="guard_btn hover" onclick="window.history.back(-1);"></div>
 			</div>
 		</div>
 		<script type="text/javascript" for="idcard" event="Readed()">
@@ -49,21 +50,23 @@
         	getMessage();
 			document.getElementById("status_tips_message").innerHTML="身份证信息读取成功，请拍照进行认证...";
         	document.getElementById("idcard_pic").src=rd_img;
-        	document.getElementById('cap_btn').disabled= false ;
+        	changeButton("cap_btn",false);
 			document.getElementById("people_id").innerHTML=rd_id;
 			document.getElementById("people_name").innerHTML=rd_name;
 		</script>		
 		<script language="JavaScript" for="stdfcectl" event="CallBackCheckLiveResult(dwResult)">
 			// 采集成功回调
-			changeButton('cap_btn',true);
-			changeButton('exit_btn',true);
+
 			if(0==dwResult){
+				changeButton('cap_btn',true);
+				changeButton('exit_btn',true);
 				getImage(dwResult);
 				document.getElementById("cap_pic").src=dataFromCamera;
 				document.getElementById("status_tips_message").innerHTML="拍照成功，正在匹配数据，请稍后...";
 				societyManButtion(rd_id,rd_name,rd_base64,rd_sex,cap_base64);
 			}else{		
 				changeButton('cap_btn');
+				changeButton('exit_btn',false);
 				document.getElementById("status_tips_message").innerHTML = "请调整姿势重新拍照！";
 				window.setTimeout(function() {
 					document.getElementById("status_tips_message").innerHTML = "请点击拍照进行认证";

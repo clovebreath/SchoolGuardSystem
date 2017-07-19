@@ -13,8 +13,8 @@
 					xmlhttp.onreadystatechange=function(){//根据返回数据shi'x
 						  if (xmlhttp.readyState==4 && xmlhttp.status==200)
 						    {
-								document.getElementById('cap_btn').disabled= false ;
-								document.getElementById('exit_btn').disabled= false ;
+							  	changeButton("cap_btn",false);
+							  	changeButton("exit_btn",false);
 								result=xmlhttp.responseText;
 								var people=JSON.parse(result);
 								
@@ -50,6 +50,7 @@
 										document.getElementById("status_tips_message").innerHTML="对不起，您没有请假，无法离开学校。";										
 									}
 
+								
 									delete people.details.imglog;
 									delete people.details.imgnow;
 									console.log(JSON.stringify(people));
@@ -85,8 +86,8 @@
 					xmlhttp.onreadystatechange=function(){//图片数据预处理之后，将图片数据传递给getResult
 					  if (xmlhttp.readyState==4 && xmlhttp.status==200)
 					    {
-							document.getElementById('cap_btn').disabled= false ;
-							document.getElementById('exit_btn').disabled= false ;
+						  	changeButton("cap_btn",false);
+						  	changeButton("exit_btn",false);
 						  	result=xmlhttp.responseText;
 							var people=JSON.parse(result);
 							
@@ -98,7 +99,6 @@
 							}else if ("not_match"==people.result){
 
 								document.getElementById("status_tips_message").innerHTML="照片与身份证不匹配，请重试！";
-								document.getElementById('cap_btn').disabled= false ;
 								
 							}else if("noresult"==people.identity){
 								
@@ -107,8 +107,7 @@
 								document.getElementById("people_name").innerHTML=people.message.name;
 								document.getElementById("people_canleave").innerHTML='不许通过';
 								document.getElementById("status_tips_message").innerHTML="请联系门卫进行登记注册";
-								document.getElementById('cap_btn').disabled= true ;
-
+								changeButton("cap_btn",true);
 							}else if("parent"==people.details.identity){
 								document.getElementById("people_identity").innerHTML=people.details.identity;
 								document.getElementById("people_id").innerHTML=people.details.id;
@@ -116,7 +115,7 @@
 								document.getElementById("people_canleave").innerHTML=people.result;
 								document.getElementById("people_teacher").innerHTML=people.details.teacherName;
 								document.getElementById("people_stu_name").innerHTML=people.details.stuName;
-								document.getElementById('cap_btn').disabled= true ;
+								changeButton("cap_btn",true);
 								document.getElementById("log_pic").src='data:image/jpeg;base64,'+people.details.imglog;
 								if(people.result=="allowed"){
 									
@@ -138,7 +137,7 @@
 								document.getElementById("people_identity").innerHTML=people.details.identity;
 								document.getElementById("people_id").innerHTML=people.details.id;
 								document.getElementById("people_name").innerHTML=people.details.name;
-								document.getElementById('cap_btn').disabled= true ;
+								changeButton("cap_btn",true);
 
 									document.getElementById("people_canleave").innerHTML="不许通过";
 									document.getElementById("status_tips_message").innerHTML="对不起，您身份有问题，无法进入学校。";	
@@ -148,6 +147,7 @@
 								send(JSON.stringify(people));
 								
 							}else{
+								changeButton("cap_btn",true);
 								document.getElementById("people_identity").innerHTML="somethingwrong";
 							}
 							
