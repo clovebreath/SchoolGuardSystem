@@ -56,7 +56,7 @@
 	      <table class="table table-hover">
       <thead>
 	      <tr><th class='c1'>身份证号</th><th class='c2'>姓名</th><th class='c3'>图片</th><th class='c4'>负责人姓名</th>
-	      <th class='c5'>负责人联系方式</th><th class='c6'>备注</th><th class='c7'>操作</th></tr>
+	      <th class='c5'>负责人联系方式</th><th class='c6'>备注</th></tr>
       </thead>
       <tbody>
         
@@ -87,9 +87,6 @@
 	        <td><%=rs.getString("wname") %></td>
 	        <td><%=rs.getString("phone") %></td>
 	        <td><%=rs.getString("note") %></td>
-	        <td><button  id=<%=rs.getString("id") %> class="btn btn-block btn-default">
-	        操作
-	        </button></td>
         </tr>
 			         <%
 			    }else{
@@ -167,9 +164,6 @@
 	        <td><%=rs.getString("wname") %></td>
 	        <td><%=rs.getString("phone") %></td>
 	        <td><%=rs.getString("note") %></td>
-	        <td><button  id=<%=rs.getString("id") %> class="btn btn-block btn-default">
-	        操作
-	        </button></td>
         </tr>
         <%
 		        rs.next();
@@ -197,7 +191,7 @@ var changeCanLeave=function(e){
 	                        上一页</a>    &nbsp;               
 	        <a type="button" class="btn btn-default " href="blacklist.jsp?pgno=<%=PageNow+1 %>&pgcnt=5">
 	                       下一页</a>      &nbsp;   
-	       <button type="button" class="btn btn-default " onclick="location.href='index.jsp'">返回</button>
+	       <button type="button" class="btn btn-default " onclick="window.history.back(-1);">返回</button>
        </div>
 <%  } %>  
 </div>

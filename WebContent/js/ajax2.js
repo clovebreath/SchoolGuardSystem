@@ -13,7 +13,8 @@
 					xmlhttp.onreadystatechange=function(){//根据返回数据shi'x
 						  if (xmlhttp.readyState==4 && xmlhttp.status==200)
 						    {
-							  	changeButton('cap_btn',false);
+								document.getElementById('cap_btn').disabled= false ;
+								document.getElementById('exit_btn').disabled= false ;
 								result=xmlhttp.responseText;
 								var people=JSON.parse(result);
 								
@@ -84,7 +85,9 @@
 					xmlhttp.onreadystatechange=function(){//图片数据预处理之后，将图片数据传递给getResult
 					  if (xmlhttp.readyState==4 && xmlhttp.status==200)
 					    {
-							result=xmlhttp.responseText;
+							document.getElementById('cap_btn').disabled= false ;
+							document.getElementById('exit_btn').disabled= false ;
+						  	result=xmlhttp.responseText;
 							var people=JSON.parse(result);
 							
 							if("photo_error"==people.result){
@@ -121,7 +124,7 @@
 									document.getElementById("status_tips_message").innerHTML="验证通过，可以出入。";	
 								}else{
 									document.getElementById("people_canleave").innerHTML="不许通过";
-									document.getElementById("status_tips_message").innerHTML="对不起，您没有预约，无法进入学校。";		
+									document.getElementById("status_tips_message").innerHTML="对不起，您没有预约，请等待门卫通知老师。";		
 								}
 								delete people.details.imgnow;
 								delete people.details.imglog;
@@ -147,6 +150,7 @@
 							}else{
 								document.getElementById("people_identity").innerHTML="somethingwrong";
 							}
+							
 					    }else{
 					    	console.log("response","error"+xmlhttp.readyState+ xmlhttp.status);
 					    }
@@ -205,6 +209,7 @@
 						  document.getElementById("table_body").innerHTML="";
 						  record.records.forEach(setRecordTable, this);
 						  document.getElementById("page_info").innerHTML="本页为第 "+record.currpage +" 页，一共 "+record.pagecount +" 页。";
+						  
 						  currentPage=record.currpage;
 					    }else{
 					    	console.log("response","error"+xmlhttp.readyState+ xmlhttp.status);

@@ -20,7 +20,7 @@ import faceRecognition.EncodeModule;
 
 public class dbTools {
 	public static final String DRIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
-	public static final String URL = "jdbc:mysql://localhost:3306/schoolsys";
+	public static final String URL = "jdbc:mysql://121.250.222.38:3306/schoolsys";
 	public static final String USERNAME = "root";
 	public static final String PASSWORD = "123456";
 	static {

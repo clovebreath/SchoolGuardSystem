@@ -110,7 +110,10 @@ document.getElementById(btnId).addEventListener('click',function(e){
 } );
 var btnId2='<%="b"+rs.getString("id")%>';
 document.getElementById(btnId2).addEventListener('click',function(e){
-	makeBlacklist(e.target.value);
+	if(confirm("确定要拉黑他么？此操作不可撤销。")){
+		makeBlacklist(e.target.value);
+	}else{
+	}
 } );
 
 </script>    
@@ -212,8 +215,10 @@ document.getElementById(btnId).addEventListener('click',function(e){
 } );
 var btnId2='<%="b"+rs.getString("id")%>';
 document.getElementById(btnId2).addEventListener('click',function(e){
-	console.log("clicked",e.target.value);
-	makeBlacklist(e.target.value);
+	if(confirm("确定要拉黑他么？此操作不可撤销。")){
+		makeBlacklist(e.target.value);
+	}else{
+	}
 } );
 </script>        
         <%
@@ -242,7 +247,7 @@ var changeCanLeave=function(e){
 	                        上一页</a>    &nbsp;               
 	        <a type="button" class="btn btn-default " href="parent.jsp?pgno=<%=PageNow+1 %>&pgcnt=5">
 	                       下一页</a>      &nbsp;   
-	       <button type="button" class="btn btn-default " onclick="location.href='index.jsp'">返回</button>
+	       <button type="button" class="btn btn-default " onclick="window.history.back(-1);">返回</button>
        </div>
  <%} %>
 

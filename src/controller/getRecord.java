@@ -55,7 +55,7 @@ public class getRecord extends HttpServlet {
 		int total = this.getResultCount();
 
 		//分页单位
-		int pagesize = 5;
+		int pagesize = 8;
 		//Page类对象
 		Page page = new Page(total,currpage,pagesize);
 		if(currpage<=1){

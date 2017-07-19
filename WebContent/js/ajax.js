@@ -196,6 +196,12 @@
 						  document.getElementById("table_body").innerHTML="";
 						  record.records.forEach(setRecordTable, this);
 						  document.getElementById("page_info").innerHTML="本页为第 "+record.currpage +" 页，一共 "+record.pagecount +" 页。";
+						  document.getElementById("first").onclick = function() {
+							  getRecord(1);
+						  }
+						  document.getElementById("last").onclick = function() {
+							  getRecord(record.pagecount);
+						  }
 						  currentPage=record.currpage;
 					    }else{
 					    	console.log("response","error"+xmlhttp.readyState+ xmlhttp.status);
@@ -226,6 +232,12 @@
 						  document.getElementById("table_body").innerHTML="";
 						  record.records.forEach(setRecordTable, this);
 						  document.getElementById("page_info").innerHTML="本页为第 "+record.currpage +" 页，一共 "+record.pagecount +" 页。";
+						  document.getElementById("first").onclick = function() {
+							  getBlackRecord(1);
+						  }
+						  document.getElementById("last").onclick = function() {
+							  getBlackRecord(record.pagecount);
+						  }
 						  currentPage=record.currpage;
 					    }else{
 					    	console.log("response","error"+xmlhttp.readyState+ xmlhttp.status);
@@ -233,6 +245,41 @@
 					  } 
 					//将图片数据传递给getPhotoAndCard
 					xmlhttp.open("POST","../getBlackRecord",true);
+					xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+					xmlhttp.send(data);	
+				}
+				var getParentRecord=function(currPage){
+					var data="currpage="+currPage;
+					console.log(data);
+					if (window.XMLHttpRequest){
+					    //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+					    xmlhttp=new XMLHttpRequest();
+					}else{
+					    // IE6, IE5 浏览器执行代码
+					    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					xmlhttp.onreadystatechange=function(){
+					  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+					  {
+						  var result=xmlhttp.responseText;
+						  console.log("response",xmlhttp.responseText);
+						  var record=JSON.parse(result);
+						  document.getElementById("table_body").innerHTML="";
+						  record.records.forEach(setRecordTable, this);
+						  document.getElementById("page_info").innerHTML="本页为第 "+record.currpage +" 页，一共 "+record.pagecount +" 页。";
+						  document.getElementById("first").onclick = function() {
+							  getParentRecord(1);
+						  }
+						  document.getElementById("last").onclick = function() {
+							  getParentRecord(record.pagecount);
+						  }
+						  currentPage=record.currpage;
+					    }else{
+					    	console.log("response","error"+xmlhttp.readyState+ xmlhttp.status);
+					    }
+					  } 
+					//将图片数据传递给getPhotoAndCard
+					xmlhttp.open("POST","../getParentRecord",true);
 					xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 					xmlhttp.send(data);	
 				}

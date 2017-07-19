@@ -23,16 +23,16 @@ import com.google.gson.GsonBuilder;
 import entity.Page;
 
 /**
- * Servlet implementation class getBlackRecord
+ * Servlet implementation class getParentRecord
  */
-@WebServlet("/getBlackRecord")
-public class getBlackRecord extends HttpServlet {
+@WebServlet("/getParentRecord")
+public class getParentRecord extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public getBlackRecord() {
+    public getParentRecord() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -136,7 +136,7 @@ public class getBlackRecord extends HttpServlet {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-	    String sql = "SELECT id,name,identity,status,sname,wname,time FROM schoolsys.record left join worker on record.tid=worker.wid left join student on record.sid=student.sid where identity='blacklist' ORDER BY id desc limit ?,?";
+	    String sql = "SELECT id,name,identity,status,sname,wname,time FROM schoolsys.record left join worker on record.tid=worker.wid left join student on record.sid=student.sid where identity='parent' ORDER BY id desc limit ?,?";
 
 		//String sql = "select * from person order by pid limit ?,?"; 
 		
@@ -166,7 +166,7 @@ public class getBlackRecord extends HttpServlet {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		String sql = "select count(*) from schoolsys.record where identity='blacklist'";
+		String sql = "select count(*) from schoolsys.record where identity='parent'";
 		try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);

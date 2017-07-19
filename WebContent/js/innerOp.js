@@ -6,6 +6,18 @@ $(function() {
     })
 });
 var screen_width = $(window).width();
+if($(window).width() <= screen_width * 0.55) {
+    $("#photos").width(206);
+    $("#info_container").width(408);
+}
+else {
+    $("#photos").width($("#info_div").width() * 0.3);
+    $("#info_container").width($("#info_div").width() * 0.55);
+}
+$("#photos").width($("#info_div").width() * 0.3);
+$("#info_container").width($("#info_div").width() * 0.55);
+$("#cap_photo").height($("#cap_photo").width() * 0.75);
+
 $(window).resize(function() {
     if($(window).width() <= screen_width * 0.55) {
         $("#photos").width(206);
@@ -44,12 +56,19 @@ var show_black_record = function() {
     getBlackRecord(currentPage);
 };
 var show_unreserved_record = function() {
+	currentPage=1;
+	$("#previous").removeAttr("onclick");
+	$("#next").removeAttr("onclick");
+	$("#previous").attr("onclick","getParentRecord(parseInt(currentPage)-1);");
+	$("#next").attr("onclick","getParentRecord(parseInt(currentPage)+1);");
     document.getElementById("data_table").style.display = "block";
     document.getElementById("info_div").style.display = "none";
+    getParentRecord(currentPage);
 };
 var show_settings = function() {
     document.getElementById("data_table").style = "display: none";
     document.getElementById("info_div").style = "display: none";
+    
 }
 var add_data = function(tbid, id, name,identity, name_stu, teacher, status, date) {
     var t_body = document.getElementById(tbid);

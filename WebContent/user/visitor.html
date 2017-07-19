@@ -29,7 +29,7 @@
 					    <tr><td class="tb-front">姓名</td><td id="people_name" class="tb-back">---</td></tr>
 					    <tr><td class="tb-front">身份证号</td><td id="people_id" class="tb-back">---</td></tr>
 					    <tr><td class="tb-front">学生姓名</td><td id="people_stu_name" class="tb-back">---</td></tr>
-					    <tr><td class="tb-front">学生班级</td><td id="people_stu_class" class="tb-back">---</td></tr>
+					<!--     <tr><td class="tb-front">学生班级</td><td id="people_stu_class" class="tb-back">---</td></tr>--> 
 					    <tr><td class="tb-front">身份</td><td id="people_identity" class="tb-back">---</td></tr>
 						<tr><td class="tb-front">放行</td><td id="people_canleave" class="tb-back">---</td></tr>
 					    <tr><td class="tb-front">班主任</td><td id="people_teacher" class="tb-back"><a href="#" onclick="alert('网络错误，拨号失败！')">---</a></td></tr>
@@ -55,8 +55,8 @@
 		</script>		
 		<script language="JavaScript" for="stdfcectl" event="CallBackCheckLiveResult(dwResult)">
 			// 采集成功回调
-			changeButton('cap_btn');
-			changeButton('exit_btn',false);
+			changeButton('cap_btn',true);
+			changeButton('exit_btn',true);
 			if(0==dwResult){
 				getImage(dwResult);
 				document.getElementById("cap_pic").src=dataFromCamera;
@@ -74,7 +74,7 @@
 	   var websocket = null;
 	    //判断当前浏览器是否支持WebSocket
 	    if ('WebSocket' in window) {
-	        websocket = new WebSocket("ws://localhost:8080/SchoolGuardSystem/websocket");
+	        websocket = new WebSocket("ws://121.250.222.38:8080/SchoolGuardSystem/websocket");
 	    }
 	    else {
 	        alert('当前浏览器 Not support websocket')

@@ -53,7 +53,7 @@
 			</nav>
 		</div>
 	</div>
-	      <table class="table table-hover table-striped table-bordered">
+	      <table class="table table-hover table-striped">
       <thead>
 	      <tr><th class='c1'>工号</th><th class='c2'>姓名</th><th class='c3'>职位</th><th class='c4'>联系方式</th><th class='c5'>图片</th></tr>
       </thead>
@@ -199,7 +199,7 @@ document.getElementById(btnId).addEventListener('click',function(e){
 	                        上一页</a>    &nbsp;               
 	        <a type="button" class="btn btn-default " href="worker.jsp?pgno=<%=PageNow+1 %>&pgcnt=5">
 	                       下一页</a>      &nbsp;   
-	       <button type="button" class="btn btn-default " onclick="#">返回</button>
+	       <button type="button" class="btn btn-default " onclick="window.history.back(-1);">返回</button>
        </div>
        <%} %>
 </div>

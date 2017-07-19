@@ -114,12 +114,18 @@ var changeState=function(){
 		document.getElementById("people_canleave").innerHTML="---";
 		document.getElementById("people_teacher").innerHTML="---";
 		document.getElementById("people_leavestat").innerHTML = "---";
+	}else{
+		
 	}
 }
 var defaultSet=function(){
-	document.getElementById("log_pic").style = "background-color: #a0a0a0;";
-	document.getElementById("idcard_pic").style = "background-color: #a0a0a0;";
-	document.getElementById("cap_pic").style = "background-color: #a0a0a0;";
+
+
+	document.getElementById("log_pic").src = "";
+	document.getElementById("idcard_pic").src = "";
+	document.getElementById("cap_pic").src = "";
 	document.getElementById("people_identity").innerHTML="---";
 	document.getElementById("people_canleave").innerHTML="---";
+	document.getElementById("people_stu_name").innerHTML="---";
+	document.getElementById("people_teacher").innerHTML="---";
 }

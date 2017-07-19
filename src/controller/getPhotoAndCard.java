@@ -181,7 +181,7 @@ public class getPhotoAndCard extends HttpServlet {
 						Map<String, Object> map=(Map<String, Object>) resultMap.get("details");
 						
 						if(resultMap.get("result").toString().equals("allowed")){
-							SendMessageModule.sendMessageSMS(map.get("teacherphone").toString(), map.get("teacherName").toString(),
+							SendMessageModule.sendMessageSMS(map.get("teacherPhone").toString(), map.get("teacherName").toString(),
 									map.get("class").toString(), map.get("stuName").toString(), map.get("name").toString());
 						}
 						

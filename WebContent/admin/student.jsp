@@ -223,7 +223,7 @@ document.getElementById(btnId).addEventListener('click',function(e){
 	                        上一页</a>    &nbsp;               
 	        <a type="button" class="btn btn-default " href="student.jsp?pgno=<%=PageNow+1 %>&pgcnt=5">
 	                       下一页</a>      &nbsp;   
-	       <button type="button" class="btn btn-default " onclick="">返回</button>
+	       <button type="button" class="btn btn-default " onclick="window.history.back(-1);">返回</button>
        </div>
      <%  } %>  
 </div>
