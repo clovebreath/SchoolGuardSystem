@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html style="width:100%;">
 <head>
+<meta http-equiv="X-UA-Compatible" content="IE=11" />
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
      <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/main.css">
